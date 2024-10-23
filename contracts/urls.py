@@ -24,6 +24,5 @@ urlpatterns = [
     path('', views.side_barlist, name='sidebarlist'),
     path('create/', views.create_contract, name='create_contract'),
     #path('/about', views.contract_list),   اگر در اینجا روی تب ثبت قرارداد جدید اومد یا کلیک کرد یه لیست کشویی باز بشه
-    #path('/about', views.about),   اگر در اینجا روی تب مشاهد و جستجو اومد یا کلیک کرد یه لیست کشویی باز بشه
-   
+    #path('/about', views.about),   اگر در اینجا روی تب مشاهد و جستجو اومد یا کلیک کرد یه لیست کشویی باز بشه  
 ]
