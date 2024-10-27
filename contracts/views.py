@@ -4,7 +4,7 @@ from . import forms
 # Create your views here.
 
 def side_barlist(request):
-    return render(request , 'contracts/sidebaelist.html')
+    return render(request , 'contracts/1.html')
 
 def create_contract(request):
     if request.method == 'POST':
