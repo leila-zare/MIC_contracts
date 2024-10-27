@@ -14,3 +14,206 @@
     </form>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اطلاعات هویتی</title>
+    <style>
+        body {
+            font-family: B Titr, sans-serif;
+            direction: rtl;
+            text-align: right;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            background-color: #2d6b4b;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 1.5em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #b2ea60;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        td {
+            background-color: #e8e8e8;
+        }
+        input[type="text"], input[type="number"], input[type="date"], input[type="email"] {
+            width: 90%;
+            padding: 5px;
+            font-size: 1em;
+            font-family: B Titr, sans-serif;
+        }
+    </style>
+    <!-- اضافه کردن کتابخانه Jalali-Moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-jalaali/0.8.4/moment-jalaali.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>اطلاعات هویتی</h1>
+        <table>
+            <tr>
+                <th>نام و نام خانوادگی</th>
+                <th>کد ملی</th>
+                <th>شماره شناسنامه</th>
+                <th>تاریخ تولد</th>
+                <th>محل صدور</th>
+                <th>نام پدر</th>
+                <th>وضعیت تاهل</th>
+                <th>تعداد فرزند</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="fullname" placeholder="نام کامل"></td>
+                <td><input type="number" name="national_id" placeholder="کد ملی"></td>                
+                <td><input type="number" name="id_number" placeholder="شماره شناسنامه"></td>                
+                <td><input type="text" id="birth_date" placeholder="تاریخ تولد (مثال: 1400/01/01)" onfocus="convertToGregorian()"></td>                
+                <td><input type="text" name="place_of_issue" placeholder="محل صدور"></td>               
+                <td><input type="text" name="father_name" placeholder="نام پدر"></td>                
+                <td><input type="text" name="marital_status" placeholder="وضعیت تاهل"></td>                
+                <td><input type="number" name="children_count" placeholder="تعداد فرزند"></td>
+            </tr>
+            <tr>
+                <th>شماره تماس</th>
+                <th>نظام وظیفه</th>
+                <th>آدرس ایمیل</th>
+                <th>معرف</th>
+                <th>کد پستی</th>
+                <th colspan="5"></td>آدرس</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="contact_number" placeholder="شماره تماس"></td>                
+                <td><input type="text" name="military_service" placeholder="وضعیت نظام وظیفه"></td>                
+                <td><input type="email" name="email" placeholder="آدرس ایمیل"></td>                
+                <td><input type="text" name="reference" placeholder="معرف"></td>
+                <td><input type="text" name="postal_code" placeholder="کد پستی"></td>               
+                <td colspan="5"><input type="text" name="address" placeholder="آدرس" style="width: 96%;"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="container">
+        <h1>اطلاعات قرارداد</h1>
+        <table>
+            <tbody><tr>
+                <th>نوع قرارداد</th>
+                <th>شماره قرارداد</th>
+                <th>تاریخ شروع قرارداد</th>
+                <th>تاریخ پایان قرارداد</th>
+                <th>گروه کاری</th>
+                <th>سمت شغلی</th>
+                <th>نوع بیمه</th>
+                <th>حقوق ابرازی</th>
+            </tr>
+            <tbody><tr>
+                <td><input type="text" name="fullname" placeholder="نوع قرارداد"></td>               
+                <td><input type="number" name="national_id" placeholder="شماره قرارداد"></td>                
+                <td><input type="number" name="id_number" placeholder="تاریخ شروع قرارداد (مثال: 1400/01/01)" onfocus="convertToGregorian()"></td>             
+                <td><input type="text" id="birth_date" placeholder="تاریخ پایان قرارداد (مثال: 1400/01/01)" onfocus="convertToGregorian()"></td>                
+                <td><input type="text" name="place_of_issue" placeholder="گروه کاری"></td>                
+                <td><input type="text" name="father_name" placeholder="سمت شغلی"></td>                
+                <td><input type="text" name="marital_status" placeholder="نوع بیمه"></td>                
+                <td><input type="number" name="children_count" placeholder="حقوق ابرازی"></td>
+            </tr>
+            <tbody><tr>
+                <th>حقوق پایه</th>
+                <th>حق مسکن</th>
+                <th>حق خوار و بار</th>
+                <th>پایه سنوات ماهانه</th>
+                <th>حق اولاد</th>
+                <th>حق تاهل</th>
+                <th>ایاب و ذهاب</th>
+                <th>فوق العاده جذب</th>
+            </tr>
+            <tbody><tr>
+                <td><input type="text" name="fullname" placeholder="حقوق پایه"></td>                
+                <td><input type="number" name="national_id" placeholder="حق مسکن"></td>                
+                <td><input type="number" name="id_number" placeholder="حق خوار و بار"></td>                
+                <td><input type="text" id="birth_date" placeholder="پایه سنوات ماهیانه"></td>                
+                <td><input type="text" name="place_of_issue" placeholder="حق اولاد"></td>                
+                <td><input type="text" name="father_name" placeholder="حق تاهل"></td>                
+                <td><input type="text" name="marital_status" placeholder="ایاب و ذهاب"></td>               
+                <td><input type="number" name="children_count" placeholder="فوق العاده جذب"></td>
+            </tr>
+            <tr>
+                <th>حق مدیریت</th>
+                <th>دستمزد ساعتی</th>
+                <th>دستمزد ساعتی با آکورد</th>
+                <th>شماره بیمه</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="contact_number" placeholder="حق مدیریت"></td>               
+                <td><input type="text" name="military_service" placeholder="دستمزد ساعتی"></td>                
+                <td><input type="email" name="email" placeholder="دستمزد ساعتی با آکورد"></td>                
+                <td><input type="text" name="reference" placeholder="شماره بیمه"></td>
+            </tr>
+        </tbody></table>
+    </div>
+
+    <div class="container">
+        <h1>اطلاعات حساب بانکی مرتبط با شرکت</h1>
+        <table>
+            <tbody><tr>
+                <th colspan="3">نوع حساب: حقوق </th>
+                <th colspan="3">نوع حساب: تنخواه</th>
+            </tr>
+            <tbody><tr>
+                <th>نام بانک</th>
+                <th>شماره حساب</th>
+                <th>شماره شبا</th>
+                <th>نام بانک</th>
+                <th>شماره حساب</th>
+                <th>شماره شبا</th>
+                
+            </tr>
+            <tbody><tr>
+                <td><input type="text" name="national_id" placeholder="نام بانک"></td>                
+                <td><input type="text" name="id_number" placeholder="شماره حساب"></td>               
+                <td><input type="text" name="birth_date" placeholder="شماره شبا"></td>       
+                <td><input type="text" name="father_name" placeholder="نام بانک"></td>   
+                <td><input type="text" name="marital_status" placeholder="شماره حساب"></td>        
+                <td><input type="text" name="children_count" placeholder="شماره شبا"></td>
+            </tr>
+        </tbody></table>
+    </div>
+    
+    <script>
+        function convertToGregorian() {
+            const birthDateInput = document.getElementById('birth_date');
+            birthDateInput.addEventListener('blur', function() {
+                const shamsiDate = birthDateInput.value;
+                if (shamsiDate) {
+                    const gregorianDate = moment.from(shamsiDate, 'fa', 'YYYY/MM/DD').format('YYYY-MM-DD');
+                    alert('تاریخ میلادی معادل: ' + gregorianDate); // نمایش تاریخ میلادی
+                    birthDateInput.value = gregorianDate; // جایگزینی تاریخ شمسی با میلادی
+                }
+            });
+        }
+    </script>
+</body>
+</html>
