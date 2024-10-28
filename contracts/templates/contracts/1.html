@@ -1,0 +1,382 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Dashboard</title>
+    <style>
+        body {
+                    font-family: 'B Titr', sans-serif;
+                    background-color: #f5f5f5;
+                    direction: ltr;
+                    text-align: left;
+                    margin: 0;
+                    padding: 0;
+                }
+        
+                .container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: right;
+                    margin-top: 20px;
+                    padding: 5px;
+                }
+        
+                .box {
+                    background-color: #006d5b;
+                    color: white;
+                    width: 180px;
+                    height: 50px;
+                    margin: 7px;
+                    display: flex;
+                    align-items: center; /* Align items vertically centered */
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    transition: transform 0.3s, background-color 0.3s;
+                    font-size: 18px;
+                    position: relative; /* For better hover effects */
+                    justify-content: flex-start; /* Align content to the start (left) */
+                    padding: 0px; /* Add padding */
+                }
+        
+                .box:hover {
+                    transform: scale(1.05);
+                    background-color: #005b4f; /* Darker shade on hover */
+                }
+        
+                .box img {            
+                    margin-left: 10px;
+                    width: 35px;
+                    height: 35px;
+                }
+        
+                .box span {
+                    font-size: 15px;
+                    font-weight: bold;
+                    text-align: center ;
+                    margin-right: px; /* Space between icon and text */
+                }
+        
+                /* Styles for specific rows */
+                .row {
+                    display: flex;
+                    justify-content: left;
+                    width: 100%;
+                }
+        
+                @media (max-width: 600px) {
+                    .box {
+                        width: 90%; /* Full width on small screens */
+                        height: 40px; /* Slightly shorter */
+                    }
+                }
+
+        body {
+            direction: rtl;
+            font-family: 'B Titr', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* استایل کلی برای نمایش هر دو بخش کنار هم */
+        .main-container {
+            display: flex;
+            gap: 20px;
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        /* استایل‌های بخش کارت کاربری */
+        .card {
+            width: 250px;
+            text-align: center;
+            border: 2px solid #006d5b;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .name-box, .title-box {
+            background-color: #065845;
+            border-radius: 5px;
+            padding: 5px 20px;
+            color: #fdf8f8;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* استایل‌های اطلاعات هویتی و قراردادها */
+        .details-container {
+            flex: 1;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            background-color: #2d6b4b;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #b2ea60;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #e8e8e8;
+        }
+
+        input[type="text"], input[type="number"], input[type="date"], input[type="email"] {
+            width: 90%;
+            padding: 5px;
+            font-family: 'B Titr', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- کارت کاربری در سمت چپ -->
+        <div class="card">
+            <img src="{% static 'contracts/image/image.PNG' %}" alt="تصویر لیلا زارع">
+            <div class="name-box">
+                <h2>لیلا زارع</h2>
+            </div>
+            <div class="title-box">
+                <p>کارشناس منابع انسانی و نرم‌افزار</p>
+            </div>
+        </div>
+        <!-- First row -->
+        <div class="colomn">
+            <div class="box" aria-label="آیین نامه‌ها و فرآیندها">
+                <img src="{% static 'contracts/icons/processes.png' %}" alt="Process icon">
+                <span>آیین نامه‌ها و فرآیندها</span>
+            </div>
+
+            <div class="box" aria-label="روابط عمومی">
+                <img src="{% static 'contracts/icons/public_relations.png' %}" alt="Public relations icon">
+                <span>روابط عمومی</span>
+            </div>
+
+            <div class="box" aria-label="پرسنلی">
+                <img src="{% static 'contracts/icons/personnel.png' %}" alt="Personnel icon">
+                <span>پرسنلی</span>
+            </div>
+
+            <div class="box" aria-label="قراردادها">
+                <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
+                <span>قراردادها</span>
+            </div>
+
+            <div class="box" aria-label="بودجه و اعتبار">
+                <img src="{% static 'contracts/icons/budget.png' %}" alt="Budget icon">
+                <span>بودجه و اعتبار</span>
+            </div>
+
+            <div class="box" aria-label="بازرگانی">
+                <img src="{% static 'contracts/icons/commerce.png' %}" alt="Commerce icon">
+                <span>بازرگانی</span>
+            </div>
+
+            <div class="box" aria-label="داشبورد مدیریت">
+                <img src="{% static 'contracts/icons/dashboard.png' %}" alt="Dashboard icon">
+                <span>داشبورد مدیریت</span>
+            </div>
+
+            <div class="box" aria-label="کنترل محصول و انبار">
+                <img src="{% static 'contracts/icons/inventory.png' %}" alt="Inventory icon">
+                <span>کنترل محصول و انبار</span>
+            </div>
+
+            <div class="box" aria-label="دبیرخانه">
+                <img src="{% static 'contracts/icons/secretariat.png' %}" alt="Secretariat icon">
+                <span>دبیرخانه</span>
+            </div>
+
+        </div>
+        <!-- اطلاعات هویتی و قرارداد در سمت راست -->
+        <div class="details-container">
+        
+            <form method="post">
+                {% csrf_token %}
+                <!-- اطلاعات هویتی -->
+                <div class="container">
+                    <h1>اطلاعات هویتی</h1>
+                    <table>
+                        <tr>
+                            <th>نام و نام خانوادگی</th>
+                            <th>کد ملی</th>
+                            <th>شماره شناسنامه</th>
+                            <th>تاریخ تولد</th>
+                            <th>محل صدور</th>
+                            <th>نام پدر</th>
+                            <th>وضعیت تاهل</th>
+                            <th>تعداد فرزند</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="full_name" placeholder="{{ full_name }}"></td>
+                            <td><input type="text" name="national_id" placeholder="{{ national_id }}"></td>
+                            <td><input type="text" name="id_number" placeholder="{{ id_number }}"></td>
+                            <td><input type="date" name="date_of_birth" placeholder="{{ date_of_birth }}" onfocus="convertToGregorian()"></td>
+                            <td><input type="text" name="place_of_issue" placeholder="{{ place_of_issue }}"></td>
+                            <td><input type="text" name="fathers_name" placeholder="{{ fathers_name }}"></td>
+                            <td><input type="text" name="marital_status" placeholder="{{ labels.marital_status}}"></td>
+                            <td><input type="number" name="child_number" placeholder="{{ child_number }}"></td>
+                        </tr>
+                        <tr>
+                            <th>شماره تماس</th>
+                            <th>نظام وظیفه</th>
+                            <th>آدرس ایمیل </th>
+                            <th>معرف</th>
+                            <th>کدپستی</th>
+                            <th colspan="3">آدرس</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="contact_number" placeholder="{{ contact_number }}"></td>
+                            <td><input type="text" name="military_status" placeholder="{{ military_status }}"></td>
+                            <td><input type="text" name="email" placeholder="{{ email }}"></td>
+                            <td><input type="text" name="reference" placeholder="{{ reference }}"></td>
+                            <td><input type="text" name="postal_code" placeholder="{{ postal_code }}"></td>
+                            <td><input type="text" name="address" placeholder="{{ address }}"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- اطلاعات قرارداد -->
+                <div class="container">
+                    <h1>اطلاعات قرارداد</h1>
+                    <table>
+                        <tr>
+                            <th>نوع قرارداد</th>
+                            <th>شماره قرارداد</th>
+                            <th>تاریخ شروع</th>
+                            <th>تاریخ پایان</th>
+                            <th>گروه کاری</th>
+                            <th>سمت شغلی</th>
+                            <th>نوع بیمه</th>
+                            <th>حقوق ابرازی</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="contract_type" placeholder="{{ contract_type }}"></td>
+                            <td><input type="text" name="contract_number" placeholder="{{ contract_number }}"></td>
+                            <td><input type="date" placeholder="{{ contract_start_date }}" onfocus="convertToGregorian()"></td>
+                            <td><input type="date" placeholder="{{ contract_end_date }}" onfocus="convertToGregorian()"></td>
+                            <td><input type="text" name="job_group" placeholder="{{ job_group }}"></td>
+                            <td><input type="text" name="job_position" placeholder="{{ job_position }}"></td>
+                            <td><input type="text" name="insurance_type" placeholder="{{ insurance_type }}"></td>
+                            <td><input type="text" name="declared_salary" placeholder="{{ declared_salary }}"></td>
+                        </tr>
+                        <tbody><tr>
+                            <th>حقوق پایه</th>
+                            <th>حق مسکن</th>
+                            <th>حق خوار و بار</th>
+                            <th>پایه سنوات ماهانه</th>
+                            <th>حق اولاد</th>
+                            <th>حق تاهل</th>
+                            <th>ایاب و ذهاب</th>
+                            <th>فوق العاده جذب</th>
+                        </tr>
+                        <tbody><tr>
+                            <td><input type="number" name="base_salary" placeholder="{{ base_salary }}"></td>                
+                            <td><input type="number" name="housing_allowance" placeholder="{{ housing_allowance }}"></td>                
+                            <td><input type="number" name="food_allowance" placeholder="{{ food_allowance }}"></td>                
+                            <td><input type="number" name="seniority_pay" placeholder="{{ seniority_pay }}"></td>                
+                            <td><input type="number" name="child_allowance" placeholder="{{ child_allowance }}"></td>                
+                            <td><input type="number" name="marriage_allowance" placeholder="{{ marriage_allowance }}"></td>                
+                            <td><input type="number" name="transportation_allowance" placeholder="{{ transportation_allowance }}"></td>               
+                            <td><input type="number" name="attraction_bonus" placeholder="{{ attraction_bonus }}"></td>
+                        </tr>
+                        <tr>
+                            <th>حق مدیریت</th>
+                            <th>دستمزد ساعتی</th>
+                            <th>دستمزد ساعتی با آکورد</th>
+                            <th>شماره بیمه</th>
+                        </tr>
+                        <tr>
+                            <td><input type="number" name="management_allowance" placeholder="{{ management_allowance }}"></td>               
+                            <td><input type="number" name="hourly_wage" placeholder="{{ hourly_wage }}"></td>                
+                            <td><input type="number" name="hourly_wage_with_accord" placeholder="{{ hourly_wage_with_accord }}"></td>                
+                            <td><input type="text" name="insurance_number" placeholder="{{ insurance_number }}"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="container">
+                    <h1>اطلاعات حساب بانکی مرتبط با شرکت</h1>
+                    <table>
+                        <tbody><tr>
+                            <th colspan="3">نوع حساب: حقوق </th>
+                            <th colspan="3">نوع حساب: تنخواه</th>
+                        </tr>
+                        <tbody><tr>
+                            <th>نام بانک</th>
+                            <th>شماره حساب</th>
+                            <th>شماره شبا</th>
+                            <th>نام بانک</th>
+                            <th>شماره حساب</th>
+                            <th>شماره شبا</th>
+                            
+                        </tr>
+                        <tbody><tr>
+                            <td><input type="text" name="bank_name_salary" placeholder="{{ bank_name_salary }}"></td>                
+                            <td><input type="text" name="account_number_salary" placeholder="{{ account_number_salary }}"></td>               
+                            <td><input type="text" name="IBAN_salary" placeholder="{{ IBAN_salary }}"></td>       
+                            <td><input type="text" name="bank_name_petty_cash" placeholder="{{ bank_name_petty_cash }}"></td>   
+                            <td><input type="text" name="account_number_petty_cash" placeholder="{{ account_number_petty_cash }}"></td>        
+                            <td><input type="text" name="IBAN_petty_cash" placeholder="{{ IBAN_petty_cash }}"></td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function convertToGregorian() {
+            const birthDateInput = document.getElementById('date_of_birth');
+            birthDateInput.addEventListener('blur', function() {
+                const shamsiDate = birthDateInput.value;
+                if (shamsiDate) {
+                    const gregorianDate = moment.from(shamsiDate, 'fa', 'YYYY/MM/DD').format('YYYY-MM-DD');
+                    alert('تاریخ میلادی معادل: ' + gregorianDate);
+                    birthDateInput.value = gregorianDate;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
