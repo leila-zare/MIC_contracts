@@ -1,0 +1,64 @@
+body {
+    font-family: 'B Nazanin', sans-serif;
+    background-color: #f5f5f5;
+    direction: rtl;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.box {
+    background-color: #006d5b;
+    color: white;
+    width: 250px;
+    height: 100px;
+    margin: 15px;
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, background-color 0.3s;
+    font-size: 18px;
+    position: relative; /* For better hover effects */
+    justify-content: flex-start; /* Align content to the start (left) */
+    padding: 10px; /* Add padding */
+}
+
+.box:hover {
+    transform: scale(1.05);
+    background-color: #005b4f; /* Darker shade on hover */
+}
+
+.box img {
+    margin-left: 10px;
+    width: 35px;
+    height: 35px;
+}
+
+.box span {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px; /* Space between icon and text */
+}
+
+/* Styles for specific rows */
+.row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .box {
+        width: 100%; /* Full width on small screens */
+        height: 80px; /* Slightly shorter */
+    }
+}
