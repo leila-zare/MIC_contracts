@@ -1,102 +1,12 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اطلاعات قرارداد</title>
-    <style>
-        body {
-            font-family: B Titr, sans-serif;
-            direction: rtl;
-            text-align: right;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 90%;
-            margin: auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ccc;
-        }
-        th {
-            background-color: #b2ea60;
-            color: #ffffff;
-        }
-        td {
-            background-color: #e8e8e8;
-        }
-        input[type="text"], input[type="number"], input[type="date"], input[type="email"] {
-            width: 90%;
-            padding: 5px;
-            font-size: 1em;
-        }
-    </style>
+    <title>Document</title>
 </head>
 <body>
-
-<div class="container">
-    <h1>اطلاعات قرارداد</h1>
-    <form method="post">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <th>نوع قرارداد</th>
-                <th>شماره قرارداد</th>
-                <th>تاریخ شروع قرارداد</th>
-                <th>تاریخ پایان قرارداد</th>
-                <th>گروه کاری</th>
-                <th>سمت شغلی</th>
-                <th>نوع بیمه</th>
-                <th>حقوق ابرازی</th>
-            </tr>
-            <tr>
-                <td><input type="text" name="contract_type" placeholder="{{ labels.contract_type }}"></td>
-                <td><input type="number" name="contract_number" placeholder="{{ labels.contract_number }}"></td>
-                <td><input type="date" name="start_date" placeholder="{{ labels.start_date }}"></td>
-                <td><input type="date" name="end_date" placeholder="{{ labels.end_date }}"></td>
-                <td><input type="text" name="work_group" placeholder="{{ labels.work_group }}"></td>
-                <td><input type="text" name="job_position" placeholder="{{ labels.job_position }}"></td>
-                <td><input type="text" name="insurance_type" placeholder="{{ labels.insurance_type }}"></td>
-                <td><input type="number" name="declared_salary" placeholder="{{ labels.declared_salary }}"></td>
-            </tr>
-            <tr>
-                <th>حقوق پایه</th>
-                <th>حق مسکن</th>
-                <th>حق خوار و بار</th>
-                <th>پایه سنوات ماهانه</th>
-                <th>حق اولاد</th>
-                <th>حق تاهل</th>
-                <th>ایاب و ذهاب</th>
-                <th>فوق العاده جذب</th>
-            </tr>
-            <tr>
-                <td><input type="number" name="base_salary" placeholder="{{ labels.base_salary }}"></td>
-                <td><input type="number" name="housing_allowance" placeholder="{{ labels.housing_allowance }}"></td>
-                <td><input type="number" name="food_allowance" placeholder="{{ labels.food_allowance }}"></td>
-                <td><input type="number" name="monthly_experience_bonus" placeholder="{{ labels.monthly_experience_bonus }}"></td>
-                <td><input type="number" name="children_allowance" placeholder="{{ labels.children_allowance }}"></td>
-                <td><input type="number" name="marriage_allowance" placeholder="{{ labels.marriage_allowance }}"></td>
-                <td><input type="number" name="transportation_allowance" placeholder="{{ labels.transportation_allowance }}"></td>
-                <td><input type="number" name="attraction_bonus" placeholder="{{ labels.attraction_bonus }}"></td>
-            </tr>
-            <!-- اضافه کردن سایر ردیف‌ها به همین شکل تا نمایش تمام پارامترها -->
-        </table>
-        <button type="submit">ارسال</button>
-    </form>
-</div>
-
+    <h1>قرارداد شماره {{ contract.id }}</h1>
+    <p>عنوان: {{ contract.title }}</p>
 </body>
 </html>

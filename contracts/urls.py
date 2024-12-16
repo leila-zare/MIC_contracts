@@ -21,8 +21,12 @@ from . import views
 app_name = 'contracts'
 
 urlpatterns = [
-    path('', views.side_barlist, name='sidebarlist'),
-    path('create/', views.create_contract, name='create_contract'),
+    path('', views.home_sidebar , name='home_sidebar'),
+    path('create_contract/', views.create_contract, name='create_contract'),
+    path('contract_list/', views.contract_list, name="contractlist"),
+    path('delete_contract/<int:contract_id>/', views.delete_contract, name='delete_contract'),
+    path('edit_contract/<int:contract_id>/', views.edit_contract, name='edit_contract'),
+    path('pdf/<int:contract_id>/', views.generate_pdf, name='generate_pdf'),
     #path('/about', views.contract_list),   اگر در اینجا روی تب ثبت قرارداد جدید اومد یا کلیک کرد یه لیست کشویی باز بشه
     #path('/about', views.about),   اگر در اینجا روی تب مشاهد و جستجو اومد یا کلیک کرد یه لیست کشویی باز بشه  
 ]

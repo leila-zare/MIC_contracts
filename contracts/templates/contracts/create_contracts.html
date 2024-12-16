@@ -1,0 +1,801 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" locale="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تنظیم قرارداد جدید</title>
+     {{ form.media }}      <!-- بارگذاری استایل ها و جاوا اسکریپت های تقویم شمسی -->
+        <link rel="stylesheet" href="{% static '/contracts/jalali-input/jalalidatepicker.min.css' %}">
+        <script src="{% static '/contracts/jalali-input/jalalidatepicker.min.js' %}"></script>
+        <script>jalaliDatepicker.startWatch();</script>  
+        <script src="{% static '/contracts/js/inputmask.min.js' %}"></script>
+
+        <!-- jQuery Validation JS -->
+        <script src="{% static '/contracts/js/jquery-3.6.0.min.js' %}"></script>
+        <script src="{% static '/contracts/js/jquery.validate.min.js' %}"></script>
+
+    <style>
+        body {
+            font-family: 'B Titr', sans-serif;
+            background-color: #f5f5f5;
+            direction: ltr;
+            text-align: left;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            font-family: 'B Titr', sans-serif;
+            font-size: 1.5em;
+            border-color: #ffffff;
+            direction: ltr;
+            margin: 5px;
+            background-color: #84ad1d;
+            border-radius: 5px;
+            padding: 5px 20px;
+            color: #ffffff;
+            /* margin-bottom: 10px; */
+            border: #006d5b;
+            border-width: 25px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .submit_button{
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+                    
+
+        .box {
+            background-color: #006d5b;
+            color: white;
+            width: 235px;
+            height: 50px;
+            margin: 7px;
+            display: flex;
+            align-items: center; /* Align items vertically centered */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background-color 0.3s;
+            font-size: 18px;
+            position: relative; /* For better hover effects */
+            justify-content: flex-start; /* Align content to the start (left) */
+            padding: 0px; /* Add padding */
+        }
+        .box:hover {
+            transform: scale(1.05);
+            background-color: #005b4f; /* Darker shade on hover */
+        }
+        .box img {            
+            margin-left: 10px;
+            width: 35px;
+            height: 35px;
+    
+        }
+        .box span {
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center ;
+            margin-right: px; /* Space between icon and text */
+        }
+        /* Styles for specific rows */
+        .row {
+            display: flex;
+            justify-content: left;
+            width: 100%;
+        }
+        @media (max-width: 600px) {
+            .box {
+                width: 90%; /* Full width on small screens */
+                height: 40px; /* Slightly shorter */
+            }
+        }
+        /* استایل کلی برای نمایش هر دو بخش کنار هم */
+        .main-container {
+            display: flex;
+            gap: 20px;
+            width: 90%;
+            margin: 20px auto;
+        }
+        
+        /* استایل‌های بخش کارت کاربری */
+        .card {
+            width: 250px;
+            text-align: center;
+            border: 2px solid #006d5b;
+            border-radius: 10px;
+            padding: 20px;
+            /* background-color: #fff; */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        } 
+        /* تنظیمات کلی سایدبار */
+        .sidebar_card {
+            width: 50px; /* عرض پیش‌فرض */
+            height: 100vh; /* تمام ارتفاع صفحه */
+            position: fixed;
+            border-radius: 10px;
+            top: 0;
+            right: 0;
+            background-color: #f1ebeb; 
+            /* رنگ پس‌زمینه */
+            overflow: hidden; /* جلوگیری از نمایش محتوای اضافی */
+            transition: width 0.3s ease; /* انیمیشن برای تغییر عرض */
+            z-index: 1000;
+        }
+        /* محتوا داخل سایدبار */
+        .sidebar_card .card {
+            opacity: 0; /* مخفی کردن محتوا */
+            transition: opacity 0.3s ease; /* انیمیشن برای نمایش محتوا */
+            padding: 10px;
+            color: #fff;
+            height: 100%;
+            overflow-y: scroll;
+            scrollbar-width: none;
+        }
+        /* حالت Hover روی سایدبار */
+        .sidebar_card:hover {
+            width: 275px; /* عرض بازشده */
+        }
+
+        .sidebar_card:hover .card {
+            opacity: 1; /* نمایش محتوا */
+        }   
+        .card img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        .card .box img {
+            margin-left: 10px;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+        }
+        .name-box, .title-box {
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 5px 20px;
+            color: #006d5b;
+            text-align: center;
+            margin-bottom: 10px;
+            border: #006d5b;
+            border-width: 10px;
+        }
+        
+        /* استایل‌های اطلاعات هویتی و قراردادها */
+        .details-container {
+            flex: 1;
+        }
+        .container {
+            background-color: #f5f6ed;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 2px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        h1 {
+            background-color: #006d5b;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 1.5em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 20px;
+            padding: auto;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ffffff;
+            border-radius: 10px;
+        }
+        th {
+            background-color: #eeefed;
+            color:#014b41;
+            font-weight: bold;
+        }
+        td {
+            /* background-color: #f7f1f1; */
+            border: 1px solid #ffffff;
+        }
+        input[type="text"], input[type="number"], input[type="date"], input[type="email"] {
+            width: 100%;
+            font-family: 'B Titr', sans-serif;
+            border-radius: 10px;
+            background-color: #f1eded;
+            border: 1px solid #ccc;
+            /* padding: 10px; */
+            /* color:#006d5b; */
+        }
+        ul {
+            color: red;
+            font-size: 10px;
+            margin: 5px 0;
+            padding: 0;
+        }
+        .errorlist{
+            color: red;
+        }
+        li {
+            list-style: none;
+        }
+
+        .error {
+            color: red;
+            font-size: 10px;
+            display: none; /* پیش‌فرض پیام‌ها مخفی */
+        }
+
+/* 
+        input.error_message{
+            border: 2px solid red;
+        }
+        .error_message { 
+            color: red;
+            font-size: 10px;
+            display: none;
+            font-family: 'B Titr', sans-serif;
+            margin: 5px 0;
+            padding: 0;
+        } */
+        .select_form{
+            background-color: #ffffff;
+            /* padding: 10px; */
+            text-align: center;
+            border: 1px solid #ccc;
+            font-family: "B Titr";
+            width: 100%;
+            font-family: 'B Titr', sans-serif;
+            border-radius: 10px;
+            background-color: #f1eded;
+            border: 1px solid #ccc;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        {% if messages %}
+        {% for message in messages %}
+        <p style="color: green; font-family: B Nazanin; font-size: small;">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        <!-- کارت کاربری در سمت چپ -->
+        <div class="sidebar_card">
+            
+        <div class="card">
+            <img src="{% static 'contracts/image/image.PNG' %}" alt="تصویر لیلا زارع">
+            <div class="name-box">
+                <h2>لیلا زارع</h2>
+            </div>
+            <div class="title-box">
+                <p>کارشناس منابع انسانی و نرم‌افزار</p>
+            </div>
+            <div class="colomn">
+                <div class="box" aria-label="آیین نامه‌ها و فرآیندها">
+                    <img src="{% static 'contracts/icons/processes.png' %}" alt="Process icon">
+                    <span>آیین نامه‌ها و فرآیندها</span>
+                </div>
+    
+                <div class="box" aria-label="روابط عمومی">
+                    <img src="{% static 'contracts/icons/public_relations.png' %}" alt="Public relations icon">
+                    <span>روابط عمومی</span>
+                </div>
+    
+                <div class="box" aria-label="پرسنلی">
+                    <img src="{% static 'contracts/icons/personnel.png' %}" alt="Personnel icon">
+                    <span>پرسنلی</span>
+                </div>
+    
+                <div class="box" aria-label="قراردادها">
+                    <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
+                    <span>قراردادها</span>
+                </div>
+    
+                <div class="box" aria-label="بودجه و اعتبار">
+                    <img src="{% static 'contracts/icons/budget.png' %}" alt="Budget icon">
+                    <span>بودجه و اعتبار</span>
+                </div>
+    
+                <div class="box" aria-label="بازرگانی">
+                    <img src="{% static 'contracts/icons/commerce.png' %}" alt="Commerce icon">
+                    <span>بازرگانی</span>
+                </div>
+    
+                <div class="box" aria-label="داشبورد مدیریت">
+                    <img src="{% static 'contracts/icons/dashboard.png' %}" alt="Dashboard icon">
+                    <span>داشبورد مدیریت</span>
+                </div>
+    
+                <div class="box" aria-label="کنترل محصول و انبار">
+                    <img src="{% static 'contracts/icons/inventory.png' %}" alt="Inventory icon">
+                    <span>کنترل محصول و انبار</span>
+                </div>
+    
+                <div class="box" aria-label="دبیرخانه">
+                    <img src="{% static 'contracts/icons/secretariat.png' %}" alt="Secretariat icon">
+                    <span>دبیرخانه</span>
+                </div>
+    
+            </div>
+        </div>
+        </div>
+
+       
+        <!-- اطلاعات مربوط به قرارداد در سمت راست -->
+        <div class="details-container">
+            <form id="myform" action="#" method="post" >
+                {% csrf_token %}
+                <!-- {{ form.as_p }} -->
+                <!-- 
+                {% comment %}{% for field in form %}
+                                <div class="col-md-12 form-group">
+                                    {{ field.label_tag }}
+                                    {{ field }}
+                                    {{ field.errors }}
+                                </div>
+                            {% endfor %}
+
+                            <hr>{% endcomment %} -->
+
+                <!-- اطلاعات هویتی -->
+                <div class="container">
+                    <h1>اطلاعات هویتی</h1>
+                    <table>
+                        <tr>
+                            <th><label for="full_name">نام و نام خانوادگی</label></th>
+                            <th><label for="national_id">کد ملی</label></th>
+                            <th><label for="ID_number">شماره شناسنامه</label></th>
+                            <th><label for="date_of_birth">تاریخ تولد</label></th>
+                            <th><label for="place_of_issue">محل صدور</label></th>
+                            <th><label for="fathers_name">نام پدر</label></th>
+                            <th><label for="marital_status">وضعیت تاهل</label></th>
+                            <th><label for="child_number">تعداد فرزند</label></th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" class="text" name="full_name" id="full_name" placeholder="{{ full_name }}" >
+                                <div class="error" data-for="text"> وارد نام و نام خانوادگی اجباری است</div></td>                            
+                            <td><input type="text" class="text" name="national_id" id="national_id" placeholder="{{ national_id }}" >
+                                <div class="error" data-for="text"> وارد کردن کد ملی اجباری است</div></td>
+                            <td><input type="text" class="text" name="ID_number" id="ID_number" placeholder="{{ ID_number }}" >
+                                <div class="error" data-for="text"> وارد کردن شماره شناسنامه اجباری است</div></td>
+                            <td><input type="text" data-jdp-min-date="today" data-jdp style="z-index: 99999;" class="date" name="date_of_birth" id="date_of_birth" placeholder="yyyy/mm/dd" >
+                                <div class="error" data-for="date"> وارد کردن تاریخ اجباری است</div></td>
+                            <td><input type="text" class="text" name="place_of_issue" id="place_of_issue" placeholder="{{ place_of_issue }}" >
+                                <div class="error" data-for="text"> وارد کردن محل صدور اجباری است</div></td>
+                            <td><input type="text" class="text" name="fathers_name" id="fathers_name" placeholder="{{ fathers_name }}" >
+                                <div class="error" data-for="text"> وارد کردن نام پدر اجباری است</div></td>
+                            <td><select class="select_form" 
+                                name="marital_status" id="marital_status" placeholder="{{ labels.marital_status}}" >
+
+                                <option selected="" value="متأهل">متأهل</option>
+                                
+                                <option value="مجرد">مجرد</option>
+                                
+                                <!-- <option value="مطلقه">مطلقه</option>
+                                
+                                <option value="بیوه">بیوه</option> -->
+                                
+                            </select></td>
+                            <td><input type="text" class="number_input" name="child_number" id="child_number" placeholder="{{ child_number }}" >
+                                <div class="error" data-for="number_input"> وارد کردن تعداد فرزندان اجباری است</div></td> 
+
+                        </tr>
+                        <tr>
+                            <th><label for="contact_number">شماره تماس</label></th>
+                            <th><label for="email">آدرس ایمیل</label></th>
+                            <th><label for="postal_code">کد پستی </label></th>
+                            <th><label for="address"> آدرس</label></th>
+                            <th><label for="military_status">نظام وظیفه</label></th>
+                            <th><label for="reference">معرف</label></th>
+                            <th><label for="degree_of_study">مدرک تحصیلی</label></th>
+                            <th><label for="field_of_study">رشته تحصیلی</label></th>
+                            
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="text" name="contact_number" id="contact_number" placeholder="{{ contact_number }}" >
+                                <div class="error" data-for="text"> وارد کردن شماره تماس اجباری است</div></td>
+                            <td><input type="email" name="email" id="email" placeholder="{{ email }}">
+                                <div class="error" data-for="email"> لطفا یک ایمیل معتبر وارد کنید</div></td>
+                            <td><input type="text" class="text" name="postal_code" id="postal_code" placeholder="{{ postal_code }}" >
+                                <div class="error" data-for="text"> وارد کردن کد پستی اجباری است</div></td>
+                            <td><input type="text" class="text" name="address" id="address" placeholder="{{ address }}" >
+                                <div class="error" data-for="text"> وارد کردن آدرس اجباری است</div></td>
+                            <td><select class="select_form" 
+                                name="military_status" id="military_status" placeholder="{{ labels.military_status}}" >
+                                <option selected="" value="نیاز به خدمت ندارد">نیاز به خدمت ندارد</option>
+                                <option value=" معاف شده">معاف شده</option>
+                                <option value="در حال خدمت">در حال خدمت</option>
+                                <option value="پایان خدمت">پایان خدمت</option>
+                                <option value="معافیت تحصیلی">معافیت تحصیلی</option>
+                                
+                            </select></td>
+                            <td><input type="text" class="text" name="reference" id="reference" placeholder="{{ reference }}" >
+                                <div class="error" data-for="text"> وارد کردن معرف اجباری است</div></td>
+                            <td><select class="select_form" 
+                                name="degree_of_study" id="degree_of_study" placeholder="{{ labels.degree_of_study}}" >
+                                <option selected="" value="سیکل">سیکل</option>
+                                <option value="دیپلم">دیپلم</option>
+                                <option value="فوق دیپلم">فوق دیپلم</option>
+                                <option value="کارشناسی">کارشناسی</option>
+                                <option value="کارشناسی ارشد">کارشناسی ارشد</option>
+                                <option value="دکتری">دکتری</option>
+                                <option value="فوق دکتری">فوق دکتری</option>
+                                <option value="حوزوی">حوزوی</option>
+                            </select></td>
+                            <td><input type="text" class="text" name="field_of_study" id="field_of_study" placeholder="{{ field_of_study }}" >
+                                <div class="error" data-for="text"> وارد کردن رشته تحصیلی اجباری است</div></td>
+                
+                        </tr>
+                    </table>
+
+                </div>
+
+                <!-- اطلاعات قرارداد -->
+                <div class="container">
+
+                    <h1>اطلاعات قرارداد</h1>
+                    <table>
+                        <tr>
+                            <th><label for="contract_type">نوع قرارداد</label></th>
+                            <th><label for="contract_number">شماره قرارداد</label></th>
+                            <th><label for="contract_start_date">تاریخ شروع</label></th>
+                            <th><label for="contract_end_date">تاریخ پایان</label></th>
+                            <th><label for="job_group">گروه کاری</label></th>
+                            <th><label for="job_position">سمت شغلی</label></th>
+                            <th><label for="insurance_type">نوع بیمه</label></th>
+                            <th><label for="declared_salary">حقوق ابرازی</label></th>
+                        </tr>
+                        <tr>
+                            <td><select class="select_form"  
+                                name="contract_type" id="contract_type" placeholder="{{ labels.contract_type}}" >
+
+                                <option selected="" value="معین">معین</option>
+                                
+                                <option value="شبه معین">شبه معین</option>
+                                
+                                <option value="ساعتی">ساعتی</option>                        
+                                
+                            </select>
+                            <td><input type="text" class="text" name="contract_number" id="contract_number" placeholder="{{ contract_number }}" >
+                                <div class="error" data-for="text"> وارد کردن شماره قرارداد اجباری است</div></td>
+                            <td><input type="text" data-jdp-min-date="today" data-jdp style="z-index: 99999;" class="date" name="contract_start_date" id="contract_start_date" placeholder="yyyy/mm/dd" >
+                                <div class="error" data-for="date"> وارد کردن تاریخ اجباری است</div></td>
+                            <td><input type="text" data-jdp-min-date="today" data-jdp style="z-index: 99999;" class="date" name="contract_end_date" id="contract_end_date" placeholder="yyyy/mm/dd" >
+                                <div class="error" data-for="date"> وارد کردن تاریخ اجباری است</div></td>   
+                            <td><select class="select_form"
+                                name="job_group" placeholder="{{ labels.job_group}}" >
+
+                                <option selected="" value="ستاد">ستاد</option>
+                                
+                                <option value="مدیریت">مدیریت</option>
+                                
+                                <option value="فنی">فنی</option>
+                                <option value="بازرگانی">بازرگانی</option>
+                                <option value="دفتر قم">دفتر قم</option>                        
+                                
+                            </select>
+                            <!-- <input type="text" name="job_group" placeholder="{{ job_group }}"></td> -->
+                            <td><input type="text" class="text" name="job_position" id="job_position" placeholder="{{ job_position }}" >
+                                <div class="error" data-for="text"> وارد کردن گروه کاری اجباری است</div></td>
+                            <td><select  class="select_form" 
+                                name="insurance_type" id="insurance_type" placeholder="{{ labels.insurance_type}}" >
+
+                                <option selected="" value="کارفرما">کارفرما</option>
+                                
+                                <option value="کارمند">کارمند</option>
+                     
+                            </select>
+                            <!-- <input type="text" name="insurance_type" placeholder="{{ insurance_type }}"></td> -->
+                            <td><select  class="select_form" 
+                                name="declared_salary" id="declared_salary" placeholder="{{ labels.declared_salary}}" >
+
+                                <option selected="" value="پایه">پایه</option>
+                                
+                                <option value="واقعی">واقعی</option>
+                     
+                            </select>
+                            <!-- <input type="text" name="declared_salary" placeholder="{{ declared_salary }}"></td> -->
+                        </tr>
+                        <tbody><tr>
+                            <th><label for="base_salary">حق پایه</label></th>
+                            <th><label for="housing_allowance">حق مسکن</label></th>
+                            <th><label for="food_allowance">حق خوار و بار</label></th>
+                            <th><label for="seniority_pay">پایه سنوات ماهانه</label></th>
+                            <th><label for="child_allowance">حق اولاد</label></th>
+                            <th><label for="marriage_allowance">حق تاهل</label></th>
+                            <th><label for="transportation_allowance">ایاب و دهاب</label></th>
+                            <th><label for="attraction_bonus">فوق العاده جذب</label></th>
+                        </tr>
+                        <tbody><tr>
+                            <td><input type="text" inputmode="numeric" class="number_input" name="base_salary" id="base_salary" placeholder="{{ base_salary }}" >
+                                <div class="error" data-for="number_input"> وارد کردن حق پایه اجباری است</div></td>                
+                            <td><input type="text" inputmode="numeric" class="number_input" name="housing_allowance" id="housing_allowance" placeholder="{{ housing_allowance }}" >
+                                <div class="error" data-for="number_input"> وارد کردن حق مسکن اجباری است</div></td>                
+                            <td><input type="text" inputmode="numeric" class="number_input" name="food_allowance" id="food_allowance" placeholder="{{ food_allowance }}" >
+                                <div class="error" data-for="number_input"> وارد کردن حق خوار و بار اجباری است</div></td>                
+                            <td><input type="text" inputmode="numeric" class="number_input" name="seniority_pay" id="seniority_pay" placeholder="{{ seniority_pay }}" >
+                                <div class="error" data-for="number_input"> وارد کردن پایه سنوات ماهانه اجباری است</div></td>                
+                            <td><input type="text" inputmode="numeric" class="number_input" name="child_allowance" id="child_allowance" placeholder="{{ child_allowance }}" >
+                                <div class="error" data-for="number_input"> وارد کردن حق اولاد اجباری است</div></td>                
+                            <td><input type="text" inputmode="numeric" class="number_input" name="marriage_allowance" id="marriage_allowance" placeholder="{{ marriage_allowance }}" >
+                                <div class="error" data-for="number_input"> وارد کردن حق تاهل اجباری است</div></td>                
+                            <td><input type="text" inputmode="numeric" class="number_input" name="transportation_allowance" id="transportation_allowance" placeholder="{{ transportation_allowance }}" >
+                                <div class="error" data-for="number_input"> وارد کردن ایاب و ذهاب اجباری است</div></td>               
+                            <td><input type="text" inputmode="numeric" class="number_input" name="attraction_bonus" id="attraction_bonus" placeholder="{{ attraction_bonus }}" >
+                                <div class="error" data-for="number_input"> وارد کردن فوق العاده جذب اجباری است</div></td>
+                        </tr>
+                        <tr>
+                            <th><label for="management_allowance">حق مدیریت</label></th>
+                            <th><label for="hourly_wage">دستمزد ساعتی</label></th>
+                            <th><label for="hourly_wage_with_accord">درصد آکورد</label></th>
+                            <th><label for="insurance_number">شماره بیمه</label></th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" inputmode="numeric" class="number_input" name="management_allowance" id="management_allowance" placeholder="{{ management_allowance }}" >
+                                <div class="error" data-for="number_input"> وارد کردن حق مدیریت اجباری است</div></td>               
+                            <td><input type="text" inputmode="numeric" class="number_input" name="hourly_wage" id="hourly_wage" placeholder="{{ hourly_wage }}" >
+                                <div class="error" data-for="number_input"> وارد کردن دستمزد ساعتی اجباری است</div></td>                
+                            <td><input type="number" class="number_input" name="hourly_wage_with_accord" id="hourly_wage_with_accord" min="0" max="100" placeholder="{{ hourly_wage_with_accord }}" >
+                                <div class="error" data-for="number_input"> وارد کردن دستمزد ساعتی با آکورد اجباری است</div></td>                
+                            <td><input type="text" inputmode="numeric" class="text" name="insurance_number" id="insurance_number" placeholder="{{ insurance_number }}" >
+                                <div class="error" data-for="text"> وارد کردن شماره بیمه اجباری است</div></td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- اطلاعات حساب بانکی مرتبط با شرکت -->
+                <div class="container">
+                    <h1>اطلاعات حساب بانکی</h1>
+                    <table>
+                        <tbody><tr>
+                            <th><label for="bank_name_salary">نام بانک</label></th>
+                            <th><label for="account_number_salary">شماره حساب</label></th>
+                            <th><label for="IBAN_salary">شماره شبا</label></th>
+                        </tr>
+                        <tbody><tr>
+                            <td><input type="text" class="text" name="bank_name_salary" id="bank_name_salary" placeholder="{{ bank_name_salary }}" >
+                                <div class="error" data-for="text"> وارد کردن نام بانک اجباری است</div></td> 
+                            <td><input type="text" class="text" name="account_number_salary" id="account_number_salary" placeholder="{{ account_number_salary }}" >
+                                <div class="error" data-for="text"> وارد کردن شماره حساب اجباری است</div></td>               
+                            <td><input type="text" class="text" name="IBAN_salary" id="IBAN_salary" placeholder="{{ IBAN_salary }}" >
+                                <div class="error" data-for="text"> وارد کردن شماره شبا اجباری است</div></td>  
+                        </tr>
+                    </tbody></table>
+                </div>
+                <div class="submit_button">
+                    <button type="submit"> ثبت 
+                    </button>
+                    <!-- برای این قسمت حتما باید عملکردشو اضافه کنم -->
+                    <button type="submit"> لغو 
+                    </button>
+                </div>
+            </form>
+            
+            <!-- {% if form.errors %}
+            <div>
+            <p> لطفا خطاهای زیر را برطرف کنید</p>
+            <ul>{% for field,errors in form.errors.items %}
+                <li>{{ field }}: {{ errors }}</li>
+                {% endfor %}
+            </ul>
+            </div>
+            {% endif %} -->
+        </div>
+    </div>
+
+    <script src="{% static '/contracts/jalali-input/jalalidatepicker.min.js' %}"></script>
+    <script>jalaliDatepicker.startWatch();</script>
+    <script>
+            // انتخاب تمام فیلدهای ورودی عددی
+        const numberInputs = document.querySelectorAll('.number_input');
+
+        // اضافه کردن Event Listener برای هر فیلد
+        numberInputs.forEach(input => {
+        input.addEventListener('input', function (event) {
+            let value = event.target.value;
+
+            // حذف کاماها و کاراکترهای غیرعددی
+            value = value.replace(/,/g, '').replace(/\D/g, '');
+
+            // فرمت کردن عدد به صورت سه رقم جدا
+            const formattedValue = new Intl.NumberFormat('en-US').format(value);
+
+            // اعمال مقدار فرمت‌شده به فیلد
+            event.target.value = formattedValue;
+        });
+        });
+
+        // پاکسازی مقادیر قبل از ارسال فرم
+        document.getElementById('myForm').addEventListener('submit', function (event) {
+        numberInputs.forEach(input => {
+            input.value = input.value.replace(/,/g, ''); // حذف کاماها
+        });
+        });
+    </script>
+    
+    <!-- برای قسمت مربوط به درصد آکورد -->
+    <script>
+        document.getElementById('hourly_wage_with_accord').addEventListener('input', function(event){
+            const value = parseInt(event.target.value,10);
+            if (value < 0 || value > 100){
+                alert('درصد باید بین 0 تا 100 باشد');
+                event.target.value = '';
+
+            }
+        })
+    </script>
+      <!-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const inputs = document.querySelectorAll('.number_input');
+            inputs.forEach(inputs => {
+                // اعمال Inputmask برای جداکننده سه‌رقمی
+                const mask = new Inputmask({
+                                            alias: "numeric",
+                                            groupSeparator: ",",
+                                            autoGroup: true,
+                                            digits: 0,
+                                            digitsOptional: false,
+                                            clearMaskOnLostFocus: false
+                                        });
+                        mask.mask(inputs);
+
+            // حذف جداکننده‌ها قبل از ارسال فرم
+            document.getElementById('myform').addEventListener('submit', function (e) {
+                e.preventDefault()
+                inputs.forEach(inputs => {
+                    const rawValue = inputs.inputmask.unmaskedvalue(); // حذف فرمت
+                    inputs.value = rawValue; // مقدار خام را در فرم قرار می‌دهیم
+            });
+            // ارسال فرم مثلا با AJAX
+            console.log('Form Submitted')
+           });
+        });
+    });
+    </script> -->
+
+
+<script>
+    $(document).ready(function () {
+        $("#myform").submit(function (e) {
+            let isValid = true;
+
+            // بررسی فیلدهای عددی
+            $(".number_input").each(function () {
+                const value = $(this).val().trim();
+                const errorElement = $(this).next(".error[data-for='number_input']");
+                if (value === "" || isNaN(value)) {
+                    isValid = false;
+                    errorElement.show(); // نمایش پیام خطا
+                } else {
+                    errorElement.hide(); // پنهان کردن پیام خطا
+                }
+            });
+
+            // بررسی فیلدهای متنی
+            $(".text").each(function () {
+                const value = $(this).val().trim();
+                const errorElement = $(this).next(".error[data-for='text']");
+                if (value === "") {
+                    isValid = false;
+                    errorElement.show();
+                } else {
+                    errorElement.hide();
+                }
+            });
+
+            // بررسی فیلد ایمیل
+            const email = $("#email").val().trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const emailErrorElement = $("#email").next(".error[data-for='email']");
+            if (!emailRegex.test(email)) {
+                isValid = false;
+                emailErrorElement.show();
+            } else {
+                emailErrorElement.hide();
+            }
+            // بررسی فیلدهای تاریخ
+            $(".date").each(function () {
+                    const value = $(this).val().trim();
+                    const errorElement = $(this).next(".error[data-for='date']");
+                    if (value === "") {
+                        isValid = false;
+                        errorElement.show();
+                    } else {
+                        errorElement.hide();
+                    }
+                });
+
+                // جلوگیری از ارسال فرم در صورت وجود خطا
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+
+
+<!-- 
+    <script>
+        $(document).ready(function () {
+            $("#myform").submit(function (e) {
+                let isValid = true;
+                let errorMessages = [];
+                
+                // پیام‌های خطای عمومی
+                const errorText = "لطفاً این فیلد را پر کنید.";
+                const errorNumber = "لطفاً یک عدد معتبر وارد کنید.";
+                const errorEmail = "لطفاً یک ایمیل معتبر وارد کنید.";
+                const errorDate = "لطفاً یک تاریخ معتبر وارد کنید.";
+
+                // اعتبارسنجی عدد
+                $(".number_input").each(function () {
+                    const value = $(this).val().trim();
+                    if (value === "" || isNaN(value)) {
+                        isValid = false;
+                        if (!errorMessages.includes(errorNumber)) {
+                            errorMessages.push(errorNumber);
+                        }
+                    }
+                });
+
+                // اعتبارسنجی متن
+                $(".text").each(function () {
+                    const value = $(this).val().trim();
+                    if (value === "") {
+                        isValid = false;
+                        if (!errorMessages.includes(errorText)) {
+                            errorMessages.push(errorText);
+                        }
+                    }
+                });
+
+                // اعتبارسنجی ایمیل
+                const email = $("#email").val().trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    isValid = false;
+                    if (!errorMessages.includes(errorEmail)) {
+                        errorMessages.push(errorEmail);
+                    }
+                }
+
+                // اعتبارسنجی تاریخ
+                $(".date").each(function () {
+                    const value = $(this).val().trim();
+                    if (value === "") {
+                        isValid = false;
+                        if (!errorMessages.includes(errorDate)) {
+                            errorMessages.push(errorDate);
+                        }
+                    }
+                });
+                // نمایش پیام‌های خطا
+                if (!isValid) {
+                    e.preventDefault();
+                    $("#errorSummary")
+                        .html("<ul><li>" + errorMessages.join("</li><li>") + "</li></ul>")
+                        .show();
+                } else {
+                    $("#errorSummary").hide();
+                }
+            });
+        });
+    </script>
+    -->
+</body>
+</html>

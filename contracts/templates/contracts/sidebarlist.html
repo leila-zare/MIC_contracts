@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد</title>
+    <style> 
+        body {
+                font-family: 'B Titr', sans-serif;
+                background-color: #f5f5f5;
+                direction: ltr;
+                text-align: left;
+                margin: 0;
+                padding: 0;
+        }
+
+
+        .card {
+            /* position: absolute; */
+            top: 50%;
+            right: 0;
+            width: 210px;
+            text-align: right;
+            font-family: B Titr, sans-serif;
+            border: 2px solid #006d5b;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-left: auto;
+        }
+
+        .card img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 25px;
+        }
+
+        .name-box {
+            background-color: #006d5b;
+            border: 2px solid #006d5b;
+            border-radius: 10px;
+            display: inline-block;
+            padding: 5px 20px;
+            margin-bottom: 10px;
+        }
+
+        .name-box h2 {
+            margin: 0;
+            font-size: 16px;
+            color: #fdf8f8;
+        }
+
+        .title-box {
+            background-color: #006d5b;
+            border: 2px solid #006d5b;
+            border-radius: 10px;
+            display: inline-block;
+            padding: 5px 20px;
+        }
+
+        .title-box p {
+            margin: 0;
+            font-size: 14px;
+            color: #f1eaea;
+        }
+       
+    
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: right;
+            margin-top: 20px;
+            padding: 5px;
+        }
+
+        .box {
+            background-color: #006d5b;
+            color: white;
+            width: 200px;
+            height: 50px;
+            margin: 7px;
+            display: flex;
+            align-items: center; /* Align items vertically centered */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background-color 0.3s;
+            font-size: 18px;
+            position: relative; /* For better hover effects */
+            justify-content: flex-start; /* Align content to the start (left) */
+            padding: 0px; /* Add padding */
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            background-color: #005b4f; /* Darker shade on hover */
+        }
+
+        .box img {            
+            margin-left: 10px;
+            width: 35px;
+            height: 35px;
+        }
+
+        .box span {
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center ;
+            margin-right: px; /* Space between icon and text */
+        }
+
+        /* Styles for specific rows */
+        .row {
+            display: flex;
+            justify-content: left;
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .box {
+                width: 90%; /* Full width on small screens */
+                height: 40px; /* Slightly shorter */
+            }
+        }
+
+    
+    
+    </style>
+</head>
+<body>
+<div class="card">
+    <img src="{% static 'contracts/image/image.PNG' %}" alt="تصویر لیلا زارع">
+    
+    <!-- نام داخل مستطیل -->
+    <div class="name-box">
+        <h2>لیلا زارع</h2>
+    </div>
+    
+    <!-- عنوان شغلی داخل مستطیل -->
+    <div class="title-box">
+        <p>کارشناس منابع انسانی و نرم‌افزار</p>
+    </div>
+</div>
+<div class="container">
+    <!-- First row -->
+    <div class="colomn">
+        <div class="box" aria-label="آیین نامه‌ها و فرآیندها">
+            <img src="{% static 'contracts/icons/processes.png' %}" alt="Process icon">
+            <span>آیین نامه‌ها و فرآیندها</span>
+        </div>
+
+        <div class="box" aria-label="روابط عمومی">
+            <img src="{% static 'contracts/icons/public_relations.png' %}" alt="Public relations icon">
+            <span>روابط عمومی</span>
+        </div>
+
+        <div class="box" aria-label="پرسنلی">
+            <img src="{% static 'contracts/icons/personnel.png' %}" alt="Personnel icon">
+            <span>پرسنلی</span>
+        </div>
+
+        <div class="box" aria-label="قراردادها">
+            <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
+            <span>قراردادها</span>
+        </div>
+
+        <div class="box" aria-label="بودجه و اعتبار">
+            <img src="{% static 'contracts/icons/budget.png' %}" alt="Budget icon">
+            <span>بودجه و اعتبار</span>
+        </div>
+
+        <div class="box" aria-label="بازرگانی">
+            <img src="{% static 'contracts/icons/commerce.png' %}" alt="Commerce icon">
+            <span>بازرگانی</span>
+        </div>
+
+        <div class="box" aria-label="داشبورد مدیریت">
+            <img src="{% static 'contracts/icons/dashboard.png' %}" alt="Dashboard icon">
+            <span>داشبورد مدیریت</span>
+        </div>
+
+        <div class="box" aria-label="کنترل محصول و انبار">
+            <img src="{% static 'contracts/icons/inventory.png' %}" alt="Inventory icon">
+            <span>کنترل محصول و انبار</span>
+        </div>
+
+        <div class="box" aria-label="دبیرخانه">
+            <img src="{% static 'contracts/icons/secretariat.png' %}" alt="Secretariat icon">
+            <span>دبیرخانه</span>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+

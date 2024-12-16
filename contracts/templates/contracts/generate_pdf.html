@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: "BNazanin", sans-serif;
+            line-height: 1.8;
+            direction: rtl;
+            text-align: justify;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        .contract {
+            margin: 20px;
+        }
+        .signature {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature div {
+            text-align: center;
+        }
+        @font-face {
+            font-family: 'BNazanin';
+            src: url('/static/contracts/fonts/BNazanin.ttf')
+            format('truetype');
+        }
+    </style>
+</head>
+<body>
+    <div class="contract">
+        <h1>قرارداد همکاری</h1>
+        <p>این قرارداد به شماره <b>{{ contract.id }}</b> فی‌مابین شرکت <b>{{ contract.company_name }}</b>
+        به نمایندگی <b>{{ contract.representative }}</b> و آقا/خانم <b>{{ contract.employee.name }}</b>
+        منعقد گردید.</p>
+
+        <p>مدت قرارداد از تاریخ <b>{{ contract.start_date }}</b> تا تاریخ <b>{{ contract.end_date }}</b> می‌باشد.</p>
+
+        <p>مبلغ قرارداد برابر با <b>{{ contract.amount }}</b> ریال است.</p>
+
+        <p>این قرارداد مطابق با قوانین جمهوری اسلامی ایران تنظیم و برای طرفین الزام‌آور است.</p>
+
+        <div class="signature">
+            <div>
+                <p>امضای کارفرما</p>
+            </div>
+            <div>
+                <p>امضای کارمند</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
