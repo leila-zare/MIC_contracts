@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from .forms import ContractForm
 from django.contrib import messages

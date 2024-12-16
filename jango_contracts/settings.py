@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 """
 Django settings for jango_contracts project.
 
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'jango_contracts.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -162,5 +162,4 @@ JALALI_DATE_DEFAULTS = {
         }
     },
 }
-=======
->>>>>>> 820504fc5e96175e479d964d55ad5dc5058431a3
+
