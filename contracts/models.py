@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.db import models
 from django_jalali.db import models as jmodels
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -103,3 +104,5 @@ class Contract(models.Model):
     def __str__(self):
         return self.full_name
     
+=======
+>>>>>>> 820504fc5e96175e479d964d55ad5dc5058431a3

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 Django settings for jango_contracts project.
 
@@ -161,3 +162,5 @@ JALALI_DATE_DEFAULTS = {
         }
     },
 }
+=======
+>>>>>>> 820504fc5e96175e479d964d55ad5dc5058431a3
