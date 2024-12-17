@@ -30,4 +30,8 @@ urlpatterns = [
     path('pdf/<int:contract_id>/', views.generate_pdf, name='generate_pdf'),
     #path('/about', views.contract_list),   اگر در اینجا روی تب ثبت قرارداد جدید اومد یا کلیک کرد یه لیست کشویی باز بشه
     #path('/about', views.about),   اگر در اینجا روی تب مشاهد و جستجو اومد یا کلیک کرد یه لیست کشویی باز بشه  
+    path('contract_list/personnel/', views.personnel_view, name='personel'),
+    path('contract_list/outstanding/', views.outstanding_view, name='outstanding'),
+    path('contract_list/nda/', views.nda_view, name='nda'),
+    path('contract_list/partnership/', views.partnership_view, name='partnership'),
 ]

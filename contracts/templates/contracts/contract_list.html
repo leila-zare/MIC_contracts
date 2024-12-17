@@ -390,10 +390,10 @@
                 <ul>
                     <li><a href="#">نوع قرارداد</a>
                         <ul class="options">
-                            <li><a href="#">پرسنلی</a></li>
-                            <li><a href="#">برونسپاری و مشاوره</a></li>
-                            <li><a href="#">عدم افشای اطلاعات</a></li>
-                            <li><a href="#">مشارکت</a></li>
+                            <li><a href="{% url 'contracts:personel' %}">پرسنلی</a></li>
+                            <li><a href="{% url 'contracts:outstanding' %}">برونسپاری و مشاوره</a></li>
+                            <li><a href="{% url 'contracts:nda' %}">عدم افشای اطلاعات</a></li>
+                            <li><a href="{% url 'contracts:partnership' %}">مشارکت</a></li>
                         </ul></li>
                 </ul>
             </div>

@@ -34,8 +34,6 @@ def contract_list(request):
     field_lables_selected_1 = {field.name:field.verbose_name for field in Contract._meta.get_fields() if field.name in selected_fields_1}
 
 
-    # print("Contracts:", contracts)
-    # print("Field lables:", field_lables)
 
     return render(request, 'contracts/contract_list.html', {
                                                             'contracts_table_1': contracts_table_1,
@@ -43,7 +41,6 @@ def contract_list(request):
                                                             'field_lables': field_lables,
                                                             'field_lables_selected_1':field_lables_selected_1,
                                                             'query': query})
-    # return render(request, "contracts/contract_list.html", {'contracts': contracts})
 
 def create_contract(request):
     if request.method == 'POST':
@@ -86,90 +83,10 @@ def edit_contract(request, contract_id):
 
     return render(request, 'contracts/edit_contract.html', {'form': form}) 
 
-# def generate_pdf(request, contract_id):
-#     contract = get_object_or_404(Contract, id = contract_id)
-#     html_contract = render_to_string('contracts/pdf_tamplate.html',{'contract':contract})
-#     pdf = HTML(string=html_contract).write_pdf()
-#     response = HttpResponse(pdf,contract_type = 'application/pdf')
-#     response['Contract_disposition'] = f"attachment;filename='contract_{contract_id}.pdf'"
-#     return response
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
-from reportlab.platypus import paragraph
-from reportlab.lib.styles import getSampleStyleSheet
+
+
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
-import arabic_reshaper 
-from bidi.algorithm import get_display
-# # مرتب سازی راست چین
-# def process_farsi_text(text):
-#      reshaped_text = arabic_reshaper.reshape(text)
-#      bidi_text = get_display(reshaped_text)
-#      return bidi_text
-
-# def generate_pdf(request, contract_id):
-
-#     # دریافت اطلاعات قرارداد و کارمند از دیتابیس
-#     contract = Contract.objects.get(id=contract_id)
-#     # employee = contract.employee  # فرض: اطلاعات کارمند مرتبط با قرارداد است
-
-#     # ایجاد پاسخ HTTP
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = f'attachment; filename="contract-{contract_id}.pdf"'
-
-    # # ایجاد PDF
-    # p = canvas.Canvas(response, pagesize=A4)
-    # width, height = A4  # عرض و ارتفاع صفحه
-    # pdfmetrics.registerFont(TTFont('BNazanin', 'contracts/static/contracts/fonts/BNazanin.ttf'))
-    # p.setFont("BNazanin", 12)
-    # # نوشتن اطلاعات ثابت و پویا در PDF
-
-    # عنوان قرارداد
-    # p.drawCentredString(width / 2, height - 50, "قرارداد همکاری معین")
-    # p.line(50, height - 60, width - 50, height - 60)
-
-    # اطلاعات کارفرما و کارمند
-    # p.drawRightString(300, height - 100, f"نام و نام خانوادگی: {contract.full_name}")
-    # p.drawRightString(300, height - 120, f"کد ملی: {contract.national_id}")
-    # p.drawRightString(300, height - 140, f"تاریخ تولد: {contract.date_of_birth}")
-    # p.drawRightString(300, height - 160, f"محل سکونت: {contract.address }")
-
-    # # اطلاعات قرارداد
-    # p.drawString(300, height - 200, f"شماره قرارداد: {contract.contact_number}")
-    # p.drawString(300, height - 220, f"تاریخ شروع: {contract.contract_start_date}")
-    # p.drawString(300, height - 240, f"تاریخ پایان: {contract.contract_end_date}")
-    # p.drawString(300, height - 260, f"مبلغ قرارداد: {contract.declared_salary} ریال")
-
-    # متن اصلی قرارداد
-    # contract_text = f"""
-    # این قرارداد به شماره {contract.contact_number} فی‌مابین شرکت برهان رایان متین 
-    # و آقا/خانم {contract.full_name} منعقد گردید. 
-    # مدت این قرارداد از تاریخ {contract.contract_start_date} تا {contract.contract_end_date} می‌باشد.
-    # مبلغ قرارداد برابر با {contract.declared_salary} ریال است.
-    # """
-    # contract_text = process_farsi_text(contract_text)
-
-    
-    # text_object = p.beginText(width - 200 ,height - 400)
-    # # شروع از راست بالا
-    # text_object.setFont("BNazanin", 10)
-    # text_object.setTextOrigin(width - 200 ,height - 400)
-    # # text_object.setTextAlign('')
-    # for line in contract_text.split('\n'):
-    #     text_object.textLine(line)
-    # p.drawText(text_object)
-
-    # # امضای کارفرما و کارمند
-    # p.drawString(50, 100, "امضای کارفرما:")
-    # p.drawString(300, 100, "امضای کارمند:")
-
-    # # پایان
-    # p.showPage()
-    # p.save()
-
-    # return response
-
-
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from xhtml2pdf import pisa
@@ -194,8 +111,17 @@ def success_view(request):
     return render(request, 'contracts/sidebarlist.html')
 
      
+def personnel_view(request):
+    return render(request, 'contracts/personel.html')
 
+def outstanding_view(request):
+    return render(request, 'contracts/outstanding.html')
 
+def nda_view(request):
+    return render(request, 'contracts/nda.html')
+
+def partnership_view(request):
+    return render(request, 'contracts/partnership.html')
 
 
 
