@@ -391,7 +391,7 @@
                                 <option value="بیوه">بیوه</option> -->
                                 
                             </select></td>
-                            <td><input type="text" class="number_input" name="child_number" id="child_number" placeholder="{{ child_number }}" >
+                            <td><input type="number" class="number_input" name="child_number" id="child_number" placeholder="{{ child_number }}" >
                                 <div class="error" data-for="number_input"> وارد کردن تعداد فرزندان اجباری است</div></td> 
 
                         </tr>
@@ -523,7 +523,7 @@
                             <th><label for="attraction_bonus">فوق العاده جذب</label></th>
                         </tr>
                         <tbody><tr>
-                            <td><input type="text" inputmode="numeric" class="number_input" name="base_salary" id="base_salary" placeholder="{{ base_salary }}" >
+                            <td><input type="text" inputmode="numeric" class="number_input" name="base_salary" id="base_salary">
                                 <div class="error" data-for="number_input"> وارد کردن حق پایه اجباری است</div></td>                
                             <td><input type="text" inputmode="numeric" class="number_input" name="housing_allowance" id="housing_allowance" placeholder="{{ housing_allowance }}" >
                                 <div class="error" data-for="number_input"> وارد کردن حق مسکن اجباری است</div></td>                
@@ -585,16 +585,7 @@
                     </button>
                 </div>
             </form>
-            
-            <!-- {% if form.errors %}
-            <div>
-            <p> لطفا خطاهای زیر را برطرف کنید</p>
-            <ul>{% for field,errors in form.errors.items %}
-                <li>{{ field }}: {{ errors }}</li>
-                {% endfor %}
-            </ul>
-            </div>
-            {% endif %} -->
+          
         </div>
     </div>
 
@@ -639,34 +630,17 @@
             }
         })
     </script>
-      <!-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const inputs = document.querySelectorAll('.number_input');
-            inputs.forEach(inputs => {
-                // اعمال Inputmask برای جداکننده سه‌رقمی
-                const mask = new Inputmask({
-                                            alias: "numeric",
-                                            groupSeparator: ",",
-                                            autoGroup: true,
-                                            digits: 0,
-                                            digitsOptional: false,
-                                            clearMaskOnLostFocus: false
-                                        });
-                        mask.mask(inputs);
+    <script>
+        document.getElementById('child_number').addEventListener('input', function(event){
+            const value = parseInt(event.target.value,10);
+            if (value < 0 || value > 6){
+                alert('تعداد فرزندان باید عددی صحییح بین 0 تا 6 باشد');
+                event.target.value = '';
 
-            // حذف جداکننده‌ها قبل از ارسال فرم
-            document.getElementById('myform').addEventListener('submit', function (e) {
-                e.preventDefault()
-                inputs.forEach(inputs => {
-                    const rawValue = inputs.inputmask.unmaskedvalue(); // حذف فرمت
-                    inputs.value = rawValue; // مقدار خام را در فرم قرار می‌دهیم
-            });
-            // ارسال فرم مثلا با AJAX
-            console.log('Form Submitted')
-           });
-        });
-    });
-    </script> -->
+            }
+        })
+    </script>
+    
 
 
 <script>
@@ -676,9 +650,11 @@
 
             // بررسی فیلدهای عددی
             $(".number_input").each(function () {
-                const value = $(this).val().trim();
+                
+                let value = $(this).val().trim();
                 const errorElement = $(this).next(".error[data-for='number_input']");
-                if (value === "" || isNaN(value)) {
+                let numericValue = value.replace(/,/g,'').replace(/\s/g, '');
+                if (numericValue === "" || isNaN(numericValue)) {
                     isValid = false;
                     errorElement.show(); // نمایش پیام خطا
                 } else {
@@ -727,75 +703,5 @@
             });
         });
     </script>
-
-
-<!-- 
-    <script>
-        $(document).ready(function () {
-            $("#myform").submit(function (e) {
-                let isValid = true;
-                let errorMessages = [];
-                
-                // پیام‌های خطای عمومی
-                const errorText = "لطفاً این فیلد را پر کنید.";
-                const errorNumber = "لطفاً یک عدد معتبر وارد کنید.";
-                const errorEmail = "لطفاً یک ایمیل معتبر وارد کنید.";
-                const errorDate = "لطفاً یک تاریخ معتبر وارد کنید.";
-
-                // اعتبارسنجی عدد
-                $(".number_input").each(function () {
-                    const value = $(this).val().trim();
-                    if (value === "" || isNaN(value)) {
-                        isValid = false;
-                        if (!errorMessages.includes(errorNumber)) {
-                            errorMessages.push(errorNumber);
-                        }
-                    }
-                });
-
-                // اعتبارسنجی متن
-                $(".text").each(function () {
-                    const value = $(this).val().trim();
-                    if (value === "") {
-                        isValid = false;
-                        if (!errorMessages.includes(errorText)) {
-                            errorMessages.push(errorText);
-                        }
-                    }
-                });
-
-                // اعتبارسنجی ایمیل
-                const email = $("#email").val().trim();
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    isValid = false;
-                    if (!errorMessages.includes(errorEmail)) {
-                        errorMessages.push(errorEmail);
-                    }
-                }
-
-                // اعتبارسنجی تاریخ
-                $(".date").each(function () {
-                    const value = $(this).val().trim();
-                    if (value === "") {
-                        isValid = false;
-                        if (!errorMessages.includes(errorDate)) {
-                            errorMessages.push(errorDate);
-                        }
-                    }
-                });
-                // نمایش پیام‌های خطا
-                if (!isValid) {
-                    e.preventDefault();
-                    $("#errorSummary")
-                        .html("<ul><li>" + errorMessages.join("</li><li>") + "</li></ul>")
-                        .show();
-                } else {
-                    $("#errorSummary").hide();
-                }
-            });
-        });
-    </script>
-    -->
 </body>
 </html>
