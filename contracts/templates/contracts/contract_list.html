@@ -163,30 +163,34 @@
 
         /* استایل برای کانتینر اصلی */
         .container_list {
-            /* font-family: Arial, sans-serif; */
             max-width: 200px;
-            /* margin: 20px auto; */
             padding-top: 20px;
             padding-bottom: 40px;
             padding-right: 40px;
-            margin-bottom: 200px;
-            /* display: inline; */
+            /* margin-bottom: 200px; */
             float: right;
             min-width: 200px; 
+            /* display: flex; */
         }
 
         /* استایل برای منوی اصلی */
         .list_bar ul {
             list-style: none;
+            display: flex;
             margin: 0;
             padding: 0;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        .list_bar ul li{
+            flex: 1;
         }
 
         /* آیتم‌های اصلی */
         .list_bar ul > li > a {
             display: block;
-            padding: 12px 16px;
-            background-color: #97be0c;
+            padding: 12px 30px;
+            background-color: rgba(151, 190, 12, 0.5);
             color: white;
             text-decoration: none;
             font-size: 16px;
@@ -199,12 +203,14 @@
         .list_bar ul > li > a:hover {
             background-color: #718e09;
         }
+        .list_bar ul > li > a:active, a.selected {
+            background-color: #718e09;
+        }
 
         /* زیرمنو (مخفی به‌صورت پیش‌فرض) */
-        .options {
+        /* .options {
             display: none;
             position: absolute;
-            /* background-color: none; */
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             border-radius: 15px;
             list-style: none;
@@ -212,35 +218,33 @@
             left: 0;
             top: 100%;
             min-width: 100%;
-        }
+        } */
 
         /* آیتم‌های زیرمنو */
-        .options li a {
+        /* .options li a {
             display: block;
             padding: 10px 16px;
             background-color: #333;
             border-radius: 15px;
             text-decoration: none;
             transition: background-color 0.3s ease, color 0.3s ease;
-        }
+        } */
 
-        .options li a:hover {
+        /* .options li a:hover {
             background-color: #97be0c;
             color: white;
-        }
+        } */
 
         /* نمایش زیرمنو هنگام هاور */
-        .list_bar ul > li:hover .options {
+        /* .list_bar ul > li:hover .options {
             display: block;
             border-radius: 15px;
-        }
+        } */
 
         /* تنظیمات کلی برای چیدمان */
-        .list_bar {
+        /* .list_bar {
             position: relative;
-            /* margin: 1px; */
-            /* padding: 1px; */
-        }
+        } */
 
 
 
@@ -387,15 +391,12 @@
 
         <div class="container_list">
             <div class="list_bar">
-                <ul>
-                    <li><a href="#">نوع قرارداد</a>
                         <ul class="options">
                             <li><a href="{% url 'contracts:personel' %}">پرسنلی</a></li>
                             <li><a href="{% url 'contracts:outstanding' %}">برونسپاری و مشاوره</a></li>
                             <li><a href="{% url 'contracts:nda' %}">عدم افشای اطلاعات</a></li>
                             <li><a href="{% url 'contracts:partnership' %}">مشارکت</a></li>
-                        </ul></li>
-                </ul>
+                        </ul>
             </div>
         </div>
 

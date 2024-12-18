@@ -85,34 +85,95 @@ def edit_contract(request, contract_id):
 
 
 
+# from reportlab.pdfbase.ttfonts import TTFont
+# from reportlab.pdfbase import pdfmetrics
+# from django.template.loader import render_to_string
+# from django.http import HttpResponse
+# from xhtml2pdf import pisa
+# def generate_pdf(request, contract_id):
+#     # دریافت اطلاعات قرارداد و کارمند
+#     contract = Contract.objects.get(id=contract_id)
+#     pdfmetrics.registerFont(TTFont('Vazir', 'contracts/static/contracts/fonts/BNazanin.ttf'))
+#     # رندر قالب HTML با داده‌ها
+#     html = render_to_string('contracts/generate_pdf.html', {'contract': contract})
+
+#     # تبدیل HTML به PDF
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = f'attachment; filename="contract-{contract_id}.pdf"'
+#     pisa_status = pisa.CreatePDF(html, dest=response)
+
+#     # بررسی موفقیت‌آمیز بودن تولید PDF
+#     if pisa_status.err:
+#         return HttpResponse('خطا در تولید PDF', status=500)
+#     return response
+
+
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
-from django.template.loader import render_to_string
-from django.http import HttpResponse
-from xhtml2pdf import pisa
+
 def generate_pdf(request, contract_id):
     # دریافت اطلاعات قرارداد و کارمند
     contract = Contract.objects.get(id=contract_id)
-    pdfmetrics.registerFont(TTFont('Vazir', 'contracts/static/contracts/fonts/BNazanin.ttf'))
+    # ثبت فونت فارسی
+    pdfmetrics.registerFont(TTFont('Vazir', 'contracts/static/contracts/fonts/Vazir-FD.ttf'))
     # رندر قالب HTML با داده‌ها
-    html = render_to_string('contracts/generate_pdf.html', {'contract': contract})
+    # html = render_to_string('contracts/generate_pdf.html', {'contract': contract})
 
     # تبدیل HTML به PDF
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="contract-{contract_id}.pdf"'
-    pisa_status = pisa.CreatePDF(html, dest=response)
-
+    # pisa_status = pisa.CreatePDF(html, dest=response)
+    c = canvas.Canvas(response,pagesize=A4)
+    c.setFont('Vazir', 12)
+    c.drawString(100, 750, f'نام و نام خانوادگی: {contract.full_name}')
+    c.drawString(100, 730, f'کد ملی : {contract.national_id}')
+    c.drawString(100, 710, f'تاریخ شروع قرارداد: {contract.contract_start_date}')
     # بررسی موفقیت‌آمیز بودن تولید PDF
-    if pisa_status.err:
-        return HttpResponse('خطا در تولید PDF', status=500)
+    # if pisa_status.err:
+    #     return HttpResponse('خطا در تولید PDF', status=500)
+    c.showPage()
+    c.save()
+
     return response
+
+    import WeasyPrint
+
+
+
 
 def success_view(request):
     return render(request, 'contracts/sidebarlist.html')
 
      
+# def personnel_view(request):
+#     return render(request, 'contracts/personel.html')
+
 def personnel_view(request):
-    return render(request, 'contracts/personel.html')
+    contracts_table_2 = Contract.objects.all()  # دریافت تمام قراردادها
+    field_lables = {field.name:field.verbose_name for field in Contract._meta.get_fields() if field.concrete}  # استخراج نام فیلدها
+    
+    
+    query = request.GET.get('q','')
+    contracts_table_1 = Contract.objects.all()
+    if query: 
+        contracts_table_1 = contracts_table_1.filter(full_name = query)
+        contracts_table_1 = contracts_table_1[:4]
+
+    # contracts_table_2 = Contract.objects.all()    
+    selected_fields_1 = [ "full_name","national_id", "date_of_birth","contact_number",
+                            "contract_type", "contract_number","bank_name_salary","IBAN_salary"]
+    field_lables_selected_1 = {field.name:field.verbose_name for field in Contract._meta.get_fields() if field.name in selected_fields_1}
+
+
+
+    return render(request, 'contracts/personel.html', {
+                                                            'contracts_table_1': contracts_table_1,
+                                                            'contracts_table_2': contracts_table_2,
+                                                            'field_lables': field_lables,
+                                                            'field_lables_selected_1':field_lables_selected_1,
+                                                            'query': query})
 
 def outstanding_view(request):
     return render(request, 'contracts/outstanding.html')

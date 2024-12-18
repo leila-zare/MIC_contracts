@@ -103,3 +103,11 @@ class Contract(models.Model):
     def __str__(self):
         return self.full_name
 
+class Outstanding_Contract(models.Model):
+    pass
+
+class NDA_Contract(models.Model):
+    pass
+
+class Partnership_Contract(models.Model):
+    pass
