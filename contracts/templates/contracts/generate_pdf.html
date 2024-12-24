@@ -1,58 +1,150 @@
+
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قرارداد</title>
+    <title>قرارداد همکاری</title>
     <style>
         body {
-            font-family: "BNazanin", sans-serif;
-            line-height: 1.8;
+            font-family: Tahoma, sans-serif;
             direction: rtl;
-            text-align: justify;
             margin: 40px;
-
+            background-color: #f4f4f4;
         }
-        h1, h2, h3 {
+        .header {
             text-align: center;
+            margin-bottom: 30px;
         }
-        .contract {
-            margin: 20px;
+        .header img {
+            width: 150px;
+            height: auto;
+        }
+        .contract-text {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .contract-text p {
+            line-height: 1.6;
+        }
+        .contract-section {
+            margin-bottom: 20px;
+        }
+        .contract-section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .contract-section p {
+            font-size: 1.1em;
         }
         .signature {
             margin-top: 50px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .signature div {
             text-align: center;
         }
-        @font-face {
-            font-family: 'BNazanin';
-            src: url('/static/contracts/fonts/BNazanin.ttf')
-            format('truetype');
+        .signature div {
+            display: inline-block;
+            width: 45%;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="contract">
-        <h1>قرارداد همکاری</h1>
-        <p>این قرارداد به شماره <b>{{ contract.id }}</b> فی‌مابین شرکت <b>{{ contract.company_name }}</b>
-        به نمایندگی <b>{{ contract.representative }}</b> و آقا/خانم <b>{{ contract.employee.name }}</b>
-        منعقد گردید.</p>
 
-        <p>مدت قرارداد از تاریخ <b>{{ contract.start_date }}</b> تا تاریخ <b>{{ contract.end_date }}</b> می‌باشد.</p>
+    <!-- سربرگ شرکت -->
+    <div class="header">
+        <img src="[لینک لوگوی شرکت]" alt="لوگوی شرکت">
+        <h2>[نام شرکت]</h2>
+        <p>[آدرس شرکت]</p>
+        <p>[شماره تماس]</p>
+    </div>
 
-        <p>مبلغ قرارداد برابر با <b>{{ contract.amount }}</b> ریال است.</p>
+    <!-- متن قرارداد -->
+    <div class="contract-text">
+        <h2>قرارداد همکاری</h2>
+        <p>این قرارداد در تاریخ <strong>[تاریخ]</strong> میان طرفین زیر منعقد می‌شود:</p>
+        
+        <!-- بخش اول قرارداد -->
+        <div class="contract-section">
+            <h3>طرف اول</h3>
+            <p><strong>نام:</strong> [نام شرکت یا شخص اول]</p>
+            <p><strong>آدرس:</strong> [آدرس شرکت یا شخص اول]</p>
+            <p><strong>نماینده قانونی:</strong> [نام نماینده]</p>
+        </div>
 
-        <p>این قرارداد مطابق با قوانین جمهوری اسلامی ایران تنظیم و برای طرفین الزام‌آور است.</p>
+        <!-- بخش دوم قرارداد -->
+        <div class="contract-section">
+            <h3>طرف دوم</h3>
+            <p><strong>نام:</strong> [نام شرکت یا شخص دوم]</p>
+            <p><strong>آدرس:</strong> [آدرس شرکت یا شخص دوم]</p>
+            <p><strong>نماینده قانونی:</strong> [نام نماینده]</p>
+        </div>
 
+        <!-- ماده 1: موضوع قرارداد -->
+        <div class="contract-section">
+            <h3>ماده 1: موضوع قرارداد</h3>
+            <p>موضوع این قرارداد عبارت است از: <strong>[توضیح درباره موضوع قرارداد]</strong></p>
+        </div>
+
+        <!-- ماده 2: مدت زمان قرارداد -->
+        <div class="contract-section">
+            <h3>ماده 2: مدت زمان قرارداد</h3>
+            <p>مدت زمان این قرارداد از تاریخ <strong>[تاریخ شروع]</strong> تا تاریخ <strong>[تاریخ پایان]</strong> می‌باشد.</p>
+        </div>
+
+        <!-- ماده 3: مبلغ قرارداد -->
+        <div class="contract-section">
+            <h3>ماده 3: مبلغ قرارداد</h3>
+            <p>طرف دوم متعهد می‌شود که مبلغ <strong>[مبلغ]</strong> ریال به عنوان هزینه قرارداد به طرف اول پرداخت نماید. جزئیات پرداخت به شرح زیر است:</p>
+            <ul>
+                <li>پیش پرداخت: <strong>[مبلغ پیش پرداخت]</strong></li>
+                <li>مابقی مبلغ: <strong>[مبلغ باقی‌مانده]</strong> که در تاریخ <strong>[تاریخ پرداخت]</strong> باید پرداخت شود.</li>
+            </ul>
+        </div>
+
+        <!-- ماده 4: مسئولیت‌ها و تعهدات طرفین -->
+        <div class="contract-section">
+            <h3>ماده 4: مسئولیت‌ها و تعهدات طرفین</h3>
+            <p><strong>طرف اول:</strong> [تعهدات طرف اول]</p>
+            <p><strong>طرف دوم:</strong> [تعهدات طرف دوم]</p>
+        </div>
+
+        <!-- ماده 5: شرایط فسخ قرارداد -->
+        <div class="contract-section">
+            <h3>ماده 5: شرایط فسخ قرارداد</h3>
+            <p>در صورتی که یکی از طرفین به تعهدات خود عمل نکند، طرف دیگر می‌تواند این قرارداد را فسخ کند. شرایط فسخ عبارت است از:</p>
+            <ul>
+                <li>[شرایط فسخ قرارداد]</li>
+                <li>[مدت زمان اطلاع قبلی برای فسخ]</li>
+            </ul>
+        </div>
+
+<!-- ماده 6: محرمانگی اطلاعات -->
+        <div class="contract-section">
+            <h3>ماده 6: محرمانگی اطلاعات</h3>
+            <p>طرفین توافق می‌کنند که تمامی اطلاعات مربوط به قرارداد و موضوع آن محرمانه باقی بماند و به هیچ‌وجه به شخص ثالثی منتقل نخواهد شد، مگر با توافق کتبی طرفین.</p>
+        </div>
+
+        <!-- ماده 7: حل اختلاف -->
+        <div class="contract-section">
+            <h3>ماده 7: حل اختلاف</h3>
+            <p>در صورت بروز هرگونه اختلاف میان طرفین، موضوع به <strong>[نام مرکز داوری]</strong> ارجاع داده می‌شود و تصمیمات آن مرکز قطعی و لازم‌الاجرا خواهد بود.</p>
+        </div>
+
+        <!-- امضاء طرفین -->
         <div class="signature">
             <div>
-                <p>امضای کارفرما</p>
+                <p><strong>طرف اول:</strong></p>
+                <p>نام: [نام طرف اول]</p>
+                <p>امضاء: __________________</p>
+                <p>تاریخ: [تاریخ امضاء]</p>
             </div>
             <div>
-                <p>امضای کارمند</p>
+                <p><strong>طرف دوم:</strong></p>
+                <p>نام: [نام طرف دوم]</p>
+                <p>امضاء: __________________</p>
+                <p>تاریخ: [تاریخ امضاء]</p>
             </div>
         </div>
     </div>

@@ -34,15 +34,16 @@
             border-color: #ffffff;
             direction: ltr;
             margin: 5px;
-            background-color: #84ad1d;
-            border-radius: 5px;
+            background-color: #006d5b;
+            border-radius: 10px;
             padding: 5px 20px;
             color: #ffffff;
-            /* margin-bottom: 10px; */
-            border: #006d5b;
-            border-width: 25px;
+            /* border-width: 25px; */
             text-align: center;
             cursor: pointer;
+        }
+        button:hover{
+            background-color: #025345;
         }
         .submit_button{
             display: flex;
@@ -104,52 +105,88 @@
         }
         
         /* استایل‌های بخش کارت کاربری */
-        .card {
+        /* .card {
             width: 250px;
             text-align: center;
             border: 2px solid #006d5b;
             border-radius: 10px;
             padding: 20px;
-            /* background-color: #fff; */
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        } 
+        }  */
         /* تنظیمات کلی سایدبار */
-        .sidebar_card {
+        /* .sidebar_card {
             width: 50px; /* عرض پیش‌فرض */
-            height: 100vh; /* تمام ارتفاع صفحه */
-            position: fixed;
-            border-radius: 10px;
-            top: 0;
-            right: 0;
-            background-color: #f1ebeb; 
+            /* height: 100vh; تمام ارتفاع صفحه */
+            /* position: fixed; */
+            /* border-radius: 10px; */
+            /* top: 0; */
+            /* right: 0; */
+            /* background-color: #f1ebeb;  */
             /* رنگ پس‌زمینه */
-            overflow: hidden; /* جلوگیری از نمایش محتوای اضافی */
-            transition: width 0.3s ease; /* انیمیشن برای تغییر عرض */
-            z-index: 1000;
-        }
+            /* overflow: hidden; جلوگیری از نمایش محتوای اضافی */
+            /* transition: width 0.3s ease; انیمیشن برای تغییر عرض */
+            /* z-index: 1000; */
+        /* } */ */
         /* محتوا داخل سایدبار */
-        .sidebar_card .card {
-            opacity: 0; /* مخفی کردن محتوا */
-            transition: opacity 0.3s ease; /* انیمیشن برای نمایش محتوا */
+        /* .sidebar_card .card {
+            opacity: 0; /* مخفی کردن محتوا 
+            transition: opacity 0.3s ease;  انیمیشن برای نمایش محتوا 
             padding: 10px;
             color: #fff;
             height: 100%;
             overflow-y: scroll;
             scrollbar-width: none;
-        }
+        } */
         /* حالت Hover روی سایدبار */
-        .sidebar_card:hover {
-            width: 275px; /* عرض بازشده */
-        }
+        /* .sidebar_card:hover {
+            width: 275px;  عرض بازشده 
+        } */
 
-        .sidebar_card:hover .card {
-            opacity: 1; /* نمایش محتوا */
-        }   
-        .card img {
+        /* .sidebar_card:hover .card {
+            opacity: 1; نمایش محتوا
+        }    */
+        /* .card img {
             width: 250px;
             height: 250px;
             border-radius: 50%;
             margin-bottom: 15px;
+        } */
+        /* .card .box img {
+            margin-left: 10px;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+        } */
+        /* .name-box, .title-box {
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 5px 20px;
+            color: #006d5b;
+            text-align: center;
+            margin-bottom: 10px;
+            border: #006d5b;
+            border-width: 10px;
+        } */
+
+
+
+
+
+        
+        /* استایل قسمت ساید بار */
+        .card {width: 250px;
+            text-align: center;
+            /* border: 2px solid #006d5b; */
+            border-radius: 10px;
+            padding: 10px;
+            /* background-color: #fff; */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }        
+        .card img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            /* margin-bottom: 15px; */
         }
         .card .box img {
             margin-left: 10px;
@@ -159,15 +196,55 @@
         }
         .name-box, .title-box {
             background-color: #ffffff;
-            border-radius: 5px;
-            padding: 5px 20px;
+            border-radius: 15px;
+            /* border: #006d5b; */
+            /* padding: 0.01%; */
             color: #006d5b;
             text-align: center;
-            margin-bottom: 10px;
-            border: #006d5b;
+            margin-bottom: 5px;
+            /* border: #006d5b; */
             border-width: 10px;
         }
-        
+        h2{
+            font-size: medium;
+        }
+
+
+
+        /* استایل مربوط به آیکون های سمت راست */
+        .box {
+                    background-color: #006d5b;
+                    color: white;
+                    width: 235px;
+                    height: 50px;
+                    margin: 7px;
+                    display: flex;
+                    align-items: center; /* Align items vertically centered */
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    transition: transform 0.3s, background-color 0.3s;
+                    font-size: 18px;
+                    position: relative; /* For better hover effects */
+                    justify-content: flex-start; /* Align content to the start (left) */
+                    padding: 0px; /* Add padding */
+                }        
+        .box:hover {
+            transform: scale(1.05);
+            background-color: #005b4f; /* Darker shade on hover */
+        }        
+        .box img {            
+            margin-left: 10px;
+            width: 35px;
+            height: 35px;
+    
+        }
+        .box span {
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center ;
+            margin-right: px; /* Space between icon and text */
+        }
+       /* /////////////////////////////////////////////////////////////////////////////////  */
         /* استایل‌های اطلاعات هویتی و قراردادها */
         .details-container {
             flex: 1;
@@ -180,14 +257,21 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
             justify-content: center;
+            text-align: center;
+            display: flex;
         }
         h1 {
-            background-color: #006d5b;
+            background-color: #8eb10e;
             color: #fff;
-            padding: 10px;
-            text-align: center;
+            padding: 5px;
             border-radius: 10px;
             font-size: 1.5em;
+            /* size: small; */
+            width: 50vh;
+            /* height: 35px; */
+            display:flex;
+            justify-content: center;
+            align-items: center;
         }
         table {
             width: 100%;
@@ -301,7 +385,7 @@
                     <span>پرسنلی</span>
                 </div>
     
-                <div class="box" aria-label="قراردادها">
+                <div class="box" style="transform: scale(1.05); background-color: #005b4f;"aria-label="قراردادها">
                     <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
                     <span>قراردادها</span>
                 </div>
@@ -390,10 +474,10 @@
                             <th><label for="postal_code">کد پستی </label></th>
                             <th><label for="address"> آدرس</label></th>
                             <th><label for="military_status">نظام وظیفه</label></th>
-                            <th><label for="reference">معرف</label></th>
                             <th><label for="degree_of_study">مدرک تحصیلی</label></th>
                             <th><label for="field_of_study">رشته تحصیلی</label></th>
-                            
+                            <th><label for="reference">معرف</label></th>
+
                         </tr>
 
                         <tr>
@@ -414,8 +498,6 @@
                                 <option value="معافیت تحصیلی">معافیت تحصیلی</option>
                                 
                             </select></td>
-                            <td><input type="text" class="text" name="reference" id="reference" placeholder="{{ reference }}" >
-                                <div class="error" data-for="text"> وارد کردن معرف اجباری است</div></td>
                             <td><select class="select_form" 
                                 name="degree_of_study" id="degree_of_study" placeholder="{{ labels.degree_of_study}}" >
                                 <option selected="" value="سیکل">سیکل</option>
@@ -429,6 +511,8 @@
                             </select></td>
                             <td><input type="text" class="text" name="field_of_study" id="field_of_study" placeholder="{{ field_of_study }}" >
                                 <div class="error" data-for="text"> وارد کردن رشته تحصیلی اجباری است</div></td>
+                            <td><input type="text" class="text" name="reference" id="reference" placeholder="{{ reference }}" >
+                                <div class="error" data-for="text"> وارد کردن معرف اجباری است</div></td>
                 
                         </tr>
                     </table>
@@ -570,8 +654,10 @@
                     <button type="submit"> ثبت 
                     </button>
                     <!-- برای این قسمت حتما باید عملکردشو اضافه کنم -->
-                    <button type="submit"> لغو 
-                    </button>
+                     <a href="{% url 'contracts:contractlist' %}">
+                        <button type="button" > لغو 
+                        </button>
+                    </a>
                 </div>
             </form>
           
@@ -601,7 +687,7 @@
         });
 
         // پاکسازی مقادیر قبل از ارسال فرم
-        document.getElementById('myForm').addEventListener('submit', function (event) {
+        document.getElementById('myform').addEventListener('submit', function (event) {
         numberInputs.forEach(input => {
             input.value = input.value.replace(/,/g, ''); // حذف کاماها
         });
