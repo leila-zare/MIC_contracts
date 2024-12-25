@@ -5,7 +5,6 @@ from django.contrib import messages
 from .models import Contract
 from django.db.models import Q
 # from django.
-from jalali_date import datetime2jalali, date2jalali
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.forms.models import model_to_dict
