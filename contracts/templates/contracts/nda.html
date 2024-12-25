@@ -19,8 +19,6 @@
     <link rel="stylesheet" href="{% static 'contracts/js/dataTables.fixedHeader.min.js' %}">
     <!-- FixedHeader JS -->
     <script src=" {% static 'contracts/js/dataTables.fixedHeader.min.js' %} "></script>
-
-
     <style>
         body {
             font-family: 'B Titr', sans-serif;
@@ -51,7 +49,8 @@
         /* Global font and alignment */
         .left_part{
             /* display: flex; */
-            width: 90%;
+            width: 100%;
+            /* display: block; */
             max-width: 1450px;
             /* max-height: 1800px; */
         }
@@ -59,7 +58,7 @@
             width: 100%;
              /*  عرض محدود برای نمایش هشت ستون*/
             max-width: 1300px;
-            max-height: 500px;
+            max-height: 1000px;
             overflow-x: auto; 
             overflow-y: auto;
             display: flex;
@@ -194,13 +193,16 @@
             color: white;
             text-decoration: none;
             font-size: 16px;
-            border-radius: 15px;
+            border-radius: 10px;
             transition: background-color 0.3s ease;
             text-align: center;
             margin: 1px;
         }
 
         .list_bar ul > li > a:hover {
+            background-color: #718e09;
+        }
+        .list_bar ul > li > a:active, a.selected {
             background-color: #718e09;
         }
 
@@ -249,7 +251,8 @@
         
 
         /* استایل قسمت ساید بار */
-        .card {width: 250px;
+        .card {
+            width: 250px;
             text-align: center;
             /* border: 2px solid #006d5b; */
             border-radius: 10px;
@@ -284,7 +287,6 @@
             font-size: medium;
         }
 
-        /* دکمه جستجو */
 
 
         /* استایل مربوط به آیکون های سمت راست */
@@ -321,6 +323,29 @@
             margin-right: px; /* Space between icon and text */
         }
 
+        button {
+            font-family: 'B Titr', sans-serif;
+            font-size: 1.5em;
+            border-color: #ffffff;
+            direction: ltr;
+            margin: 5px;
+            background-color: #006d5b;
+            border-radius: 10px;
+            padding: 5px 20px;
+            color: #ffffff;
+            /* border-width: 25px; */
+            text-align: center;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #025345;
+        }
+        .submit_button{
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+
     </style>
 </head>
 <body>
@@ -350,7 +375,7 @@
                 <span>پرسنلی</span>
             </div>
 
-            <div class="box" aria-label="قراردادها">
+            <div class="box"style="transform: scale(1.05); background-color: #005b4f;" aria-label="قراردادها">
                 <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
                 <span>قراردادها</span>
             </div>
@@ -391,7 +416,7 @@
                         <ul class="options">
                             <li><a href="{% url 'contracts:personel' %}">پرسنلی</a></li>
                             <li><a href="{% url 'contracts:outstanding' %}">برونسپاری و مشاوره</a></li>
-                            <li><a style="background-color: #718e09;" href="{% url 'contracts:nda' %}">عدم افشای اطلاعات</a></li>
+                            <li><a style="background-color: #718e09; transform: scale(1.05);" href="{% url 'contracts:nda' %}">عدم افشای اطلاعات</a></li>
                             <li><a href="{% url 'contracts:partnership' %}">مشارکت</a></li>
                         </ul>
             </div>
@@ -427,6 +452,13 @@
                             {% endfor %}
                         </tbody>
                     </table>
+        </div>
+
+        <div>
+            <a href="{% url 'contracts:create_contract' %}">
+                <button type="submit">  ثبت قرارداد جدید 
+                </button>
+            </a>
         </div>
     </div>
     
