@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 """
 Django settings for jango_contracts project.
 
@@ -28,7 +28,12 @@ SECRET_KEY = 'django-insecure-9@jqj(604qoobvg801^867qqgqkrzyn18kbvd21$o4bg-opmil
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = [] اینجا قبلا برای زمانی بود که نیاز نبود به آی پی خاصی وصل بشم.
+ALLOWED_HOSTS = [
+    '192.168.140.11',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -60,7 +65,7 @@ ROOT_URLCONF = 'jango_contracts.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,8 +86,14 @@ WSGI_APPLICATION = 'jango_contracts.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'Kknbuxtr-1371',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -162,5 +173,4 @@ JALALI_DATE_DEFAULTS = {
         }
     },
 }
-=======
->>>>>>> 820504fc5e96175e479d964d55ad5dc5058431a3
+

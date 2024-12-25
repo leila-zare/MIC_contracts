@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.db import models
 from django_jalali.db import models as jmodels
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -80,7 +79,7 @@ class Contract(models.Model):
         # ('Basic', 'پایه'),
         # ('Real', 'واقعی'),
     ], verbose_name="حقوق ابرازی")
-    base_salary = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="حقوق پایه")
+    base_salary = models.DecimalField(max_digits=20, decimal_places=2, validators=[MinValueValidator(1000),MaxValueValidator(10000000)], verbose_name="حقوق پایه")
     housing_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="حق مسکن")
     food_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="حق خوار و بار")
     seniority_pay = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="پایه سنوات")
@@ -103,6 +102,12 @@ class Contract(models.Model):
     
     def __str__(self):
         return self.full_name
-    
-=======
->>>>>>> 820504fc5e96175e479d964d55ad5dc5058431a3
+
+class Outstanding_Contract(models.Model):
+    pass
+
+class NDA_Contract(models.Model):
+    pass
+
+class Partnership_Contract(models.Model):
+    pass

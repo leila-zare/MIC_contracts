@@ -34,15 +34,16 @@
             border-color: #ffffff;
             direction: ltr;
             margin: 5px;
-            background-color: #84ad1d;
-            border-radius: 5px;
+            background-color: #006d5b;
+            border-radius: 10px;
             padding: 5px 20px;
             color: #ffffff;
-            /* margin-bottom: 10px; */
-            border: #006d5b;
-            border-width: 25px;
+            /* border-width: 25px; */
             text-align: center;
             cursor: pointer;
+        }
+        button:hover{
+            background-color: #025345;
         }
         .submit_button{
             display: flex;
@@ -104,52 +105,88 @@
         }
         
         /* استایل‌های بخش کارت کاربری */
-        .card {
+        /* .card {
             width: 250px;
             text-align: center;
             border: 2px solid #006d5b;
             border-radius: 10px;
             padding: 20px;
-            /* background-color: #fff; */
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        } 
+        }  */
         /* تنظیمات کلی سایدبار */
-        .sidebar_card {
+        /* .sidebar_card {
             width: 50px; /* عرض پیش‌فرض */
-            height: 100vh; /* تمام ارتفاع صفحه */
-            position: fixed;
-            border-radius: 10px;
-            top: 0;
-            right: 0;
-            background-color: #f1ebeb; 
+            /* height: 100vh; تمام ارتفاع صفحه */
+            /* position: fixed; */
+            /* border-radius: 10px; */
+            /* top: 0; */
+            /* right: 0; */
+            /* background-color: #f1ebeb;  */
             /* رنگ پس‌زمینه */
-            overflow: hidden; /* جلوگیری از نمایش محتوای اضافی */
-            transition: width 0.3s ease; /* انیمیشن برای تغییر عرض */
-            z-index: 1000;
-        }
+            /* overflow: hidden; جلوگیری از نمایش محتوای اضافی */
+            /* transition: width 0.3s ease; انیمیشن برای تغییر عرض */
+            /* z-index: 1000; */
+        /* } */ */
         /* محتوا داخل سایدبار */
-        .sidebar_card .card {
-            opacity: 0; /* مخفی کردن محتوا */
-            transition: opacity 0.3s ease; /* انیمیشن برای نمایش محتوا */
+        /* .sidebar_card .card {
+            opacity: 0; /* مخفی کردن محتوا 
+            transition: opacity 0.3s ease;  انیمیشن برای نمایش محتوا 
             padding: 10px;
             color: #fff;
             height: 100%;
             overflow-y: scroll;
             scrollbar-width: none;
-        }
+        } */
         /* حالت Hover روی سایدبار */
-        .sidebar_card:hover {
-            width: 275px; /* عرض بازشده */
-        }
+        /* .sidebar_card:hover {
+            width: 275px;  عرض بازشده 
+        } */
 
-        .sidebar_card:hover .card {
-            opacity: 1; /* نمایش محتوا */
-        }   
-        .card img {
+        /* .sidebar_card:hover .card {
+            opacity: 1; نمایش محتوا
+        }    */
+        /* .card img {
             width: 250px;
             height: 250px;
             border-radius: 50%;
             margin-bottom: 15px;
+        } */
+        /* .card .box img {
+            margin-left: 10px;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+        } */
+        /* .name-box, .title-box {
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 5px 20px;
+            color: #006d5b;
+            text-align: center;
+            margin-bottom: 10px;
+            border: #006d5b;
+            border-width: 10px;
+        } */
+
+
+
+
+
+        
+        /* استایل قسمت ساید بار */
+        .card {width: 250px;
+            text-align: center;
+            /* border: 2px solid #006d5b; */
+            border-radius: 10px;
+            padding: 10px;
+            /* background-color: #fff; */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }        
+        .card img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            /* margin-bottom: 15px; */
         }
         .card .box img {
             margin-left: 10px;
@@ -159,15 +196,55 @@
         }
         .name-box, .title-box {
             background-color: #ffffff;
-            border-radius: 5px;
-            padding: 5px 20px;
+            border-radius: 15px;
+            /* border: #006d5b; */
+            /* padding: 0.01%; */
             color: #006d5b;
             text-align: center;
-            margin-bottom: 10px;
-            border: #006d5b;
+            margin-bottom: 5px;
+            /* border: #006d5b; */
             border-width: 10px;
         }
-        
+        h2{
+            font-size: medium;
+        }
+
+
+
+        /* استایل مربوط به آیکون های سمت راست */
+        .box {
+                    background-color: #006d5b;
+                    color: white;
+                    width: 235px;
+                    height: 50px;
+                    margin: 7px;
+                    display: flex;
+                    align-items: center; /* Align items vertically centered */
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    transition: transform 0.3s, background-color 0.3s;
+                    font-size: 18px;
+                    position: relative; /* For better hover effects */
+                    justify-content: flex-start; /* Align content to the start (left) */
+                    padding: 0px; /* Add padding */
+                }        
+        .box:hover {
+            transform: scale(1.05);
+            background-color: #005b4f; /* Darker shade on hover */
+        }        
+        .box img {            
+            margin-left: 10px;
+            width: 35px;
+            height: 35px;
+    
+        }
+        .box span {
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center ;
+            margin-right: px; /* Space between icon and text */
+        }
+       /* /////////////////////////////////////////////////////////////////////////////////  */
         /* استایل‌های اطلاعات هویتی و قراردادها */
         .details-container {
             flex: 1;
@@ -180,14 +257,21 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
             justify-content: center;
+            text-align: center;
+            display: flex;
         }
         h1 {
-            background-color: #006d5b;
+            background-color: #8eb10e;
             color: #fff;
-            padding: 10px;
-            text-align: center;
+            padding: 5px;
             border-radius: 10px;
             font-size: 1.5em;
+            /* size: small; */
+            width: 50vh;
+            /* height: 35px; */
+            display:flex;
+            justify-content: center;
+            align-items: center;
         }
         table {
             width: 100%;
@@ -301,7 +385,7 @@
                     <span>پرسنلی</span>
                 </div>
     
-                <div class="box" aria-label="قراردادها">
+                <div class="box" style="transform: scale(1.05); background-color: #005b4f;"aria-label="قراردادها">
                     <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
                     <span>قراردادها</span>
                 </div>
@@ -340,17 +424,6 @@
         <div class="details-container">
             <form id="myform" action="#" method="post" >
                 {% csrf_token %}
-                <!-- {{ form.as_p }} -->
-                <!-- 
-                {% comment %}{% for field in form %}
-                                <div class="col-md-12 form-group">
-                                    {{ field.label_tag }}
-                                    {{ field }}
-                                    {{ field.errors }}
-                                </div>
-                            {% endfor %}
-
-                            <hr>{% endcomment %} -->
 
                 <!-- اطلاعات هویتی -->
                 <div class="container">
@@ -391,7 +464,7 @@
                                 <option value="بیوه">بیوه</option> -->
                                 
                             </select></td>
-                            <td><input type="text" class="number_input" name="child_number" id="child_number" placeholder="{{ child_number }}" >
+                            <td><input type="number" class="number_input" name="child_number" id="child_number" placeholder="{{ child_number }}" >
                                 <div class="error" data-for="number_input"> وارد کردن تعداد فرزندان اجباری است</div></td> 
 
                         </tr>
@@ -401,10 +474,10 @@
                             <th><label for="postal_code">کد پستی </label></th>
                             <th><label for="address"> آدرس</label></th>
                             <th><label for="military_status">نظام وظیفه</label></th>
-                            <th><label for="reference">معرف</label></th>
                             <th><label for="degree_of_study">مدرک تحصیلی</label></th>
                             <th><label for="field_of_study">رشته تحصیلی</label></th>
-                            
+                            <th><label for="reference">معرف</label></th>
+
                         </tr>
 
                         <tr>
@@ -425,8 +498,6 @@
                                 <option value="معافیت تحصیلی">معافیت تحصیلی</option>
                                 
                             </select></td>
-                            <td><input type="text" class="text" name="reference" id="reference" placeholder="{{ reference }}" >
-                                <div class="error" data-for="text"> وارد کردن معرف اجباری است</div></td>
                             <td><select class="select_form" 
                                 name="degree_of_study" id="degree_of_study" placeholder="{{ labels.degree_of_study}}" >
                                 <option selected="" value="سیکل">سیکل</option>
@@ -440,6 +511,8 @@
                             </select></td>
                             <td><input type="text" class="text" name="field_of_study" id="field_of_study" placeholder="{{ field_of_study }}" >
                                 <div class="error" data-for="text"> وارد کردن رشته تحصیلی اجباری است</div></td>
+                            <td><input type="text" class="text" name="reference" id="reference" placeholder="{{ reference }}" >
+                                <div class="error" data-for="text"> وارد کردن معرف اجباری است</div></td>
                 
                         </tr>
                     </table>
@@ -523,7 +596,7 @@
                             <th><label for="attraction_bonus">فوق العاده جذب</label></th>
                         </tr>
                         <tbody><tr>
-                            <td><input type="text" inputmode="numeric" class="number_input" name="base_salary" id="base_salary" placeholder="{{ base_salary }}" >
+                            <td><input type="text" inputmode="numeric" class="number_input" name="base_salary" id="base_salary">
                                 <div class="error" data-for="number_input"> وارد کردن حق پایه اجباری است</div></td>                
                             <td><input type="text" inputmode="numeric" class="number_input" name="housing_allowance" id="housing_allowance" placeholder="{{ housing_allowance }}" >
                                 <div class="error" data-for="number_input"> وارد کردن حق مسکن اجباری است</div></td>                
@@ -581,20 +654,13 @@
                     <button type="submit"> ثبت 
                     </button>
                     <!-- برای این قسمت حتما باید عملکردشو اضافه کنم -->
-                    <button type="submit"> لغو 
-                    </button>
+                     <a href="{% url 'contracts:contractlist' %}">
+                        <button type="button" > لغو 
+                        </button>
+                    </a>
                 </div>
             </form>
-            
-            <!-- {% if form.errors %}
-            <div>
-            <p> لطفا خطاهای زیر را برطرف کنید</p>
-            <ul>{% for field,errors in form.errors.items %}
-                <li>{{ field }}: {{ errors }}</li>
-                {% endfor %}
-            </ul>
-            </div>
-            {% endif %} -->
+          
         </div>
     </div>
 
@@ -621,7 +687,7 @@
         });
 
         // پاکسازی مقادیر قبل از ارسال فرم
-        document.getElementById('myForm').addEventListener('submit', function (event) {
+        document.getElementById('myform').addEventListener('submit', function (event) {
         numberInputs.forEach(input => {
             input.value = input.value.replace(/,/g, ''); // حذف کاماها
         });
@@ -639,34 +705,17 @@
             }
         })
     </script>
-      <!-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const inputs = document.querySelectorAll('.number_input');
-            inputs.forEach(inputs => {
-                // اعمال Inputmask برای جداکننده سه‌رقمی
-                const mask = new Inputmask({
-                                            alias: "numeric",
-                                            groupSeparator: ",",
-                                            autoGroup: true,
-                                            digits: 0,
-                                            digitsOptional: false,
-                                            clearMaskOnLostFocus: false
-                                        });
-                        mask.mask(inputs);
+    <script>
+        document.getElementById('child_number').addEventListener('input', function(event){
+            const value = parseInt(event.target.value,10);
+            if (value < 0 || value > 6){
+                alert('تعداد فرزندان باید عددی صحییح بین 0 تا 6 باشد');
+                event.target.value = '';
 
-            // حذف جداکننده‌ها قبل از ارسال فرم
-            document.getElementById('myform').addEventListener('submit', function (e) {
-                e.preventDefault()
-                inputs.forEach(inputs => {
-                    const rawValue = inputs.inputmask.unmaskedvalue(); // حذف فرمت
-                    inputs.value = rawValue; // مقدار خام را در فرم قرار می‌دهیم
-            });
-            // ارسال فرم مثلا با AJAX
-            console.log('Form Submitted')
-           });
-        });
-    });
-    </script> -->
+            }
+        })
+    </script>
+    
 
 
 <script>
@@ -676,9 +725,11 @@
 
             // بررسی فیلدهای عددی
             $(".number_input").each(function () {
-                const value = $(this).val().trim();
+                
+                let value = $(this).val().trim();
                 const errorElement = $(this).next(".error[data-for='number_input']");
-                if (value === "" || isNaN(value)) {
+                let numericValue = value.replace(/,/g,'').replace(/\s/g, '');
+                if (numericValue === "" || isNaN(numericValue)) {
                     isValid = false;
                     errorElement.show(); // نمایش پیام خطا
                 } else {
@@ -727,75 +778,5 @@
             });
         });
     </script>
-
-
-<!-- 
-    <script>
-        $(document).ready(function () {
-            $("#myform").submit(function (e) {
-                let isValid = true;
-                let errorMessages = [];
-                
-                // پیام‌های خطای عمومی
-                const errorText = "لطفاً این فیلد را پر کنید.";
-                const errorNumber = "لطفاً یک عدد معتبر وارد کنید.";
-                const errorEmail = "لطفاً یک ایمیل معتبر وارد کنید.";
-                const errorDate = "لطفاً یک تاریخ معتبر وارد کنید.";
-
-                // اعتبارسنجی عدد
-                $(".number_input").each(function () {
-                    const value = $(this).val().trim();
-                    if (value === "" || isNaN(value)) {
-                        isValid = false;
-                        if (!errorMessages.includes(errorNumber)) {
-                            errorMessages.push(errorNumber);
-                        }
-                    }
-                });
-
-                // اعتبارسنجی متن
-                $(".text").each(function () {
-                    const value = $(this).val().trim();
-                    if (value === "") {
-                        isValid = false;
-                        if (!errorMessages.includes(errorText)) {
-                            errorMessages.push(errorText);
-                        }
-                    }
-                });
-
-                // اعتبارسنجی ایمیل
-                const email = $("#email").val().trim();
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    isValid = false;
-                    if (!errorMessages.includes(errorEmail)) {
-                        errorMessages.push(errorEmail);
-                    }
-                }
-
-                // اعتبارسنجی تاریخ
-                $(".date").each(function () {
-                    const value = $(this).val().trim();
-                    if (value === "") {
-                        isValid = false;
-                        if (!errorMessages.includes(errorDate)) {
-                            errorMessages.push(errorDate);
-                        }
-                    }
-                });
-                // نمایش پیام‌های خطا
-                if (!isValid) {
-                    e.preventDefault();
-                    $("#errorSummary")
-                        .html("<ul><li>" + errorMessages.join("</li><li>") + "</li></ul>")
-                        .show();
-                } else {
-                    $("#errorSummary").hide();
-                }
-            });
-        });
-    </script>
-    -->
 </body>
 </html>

@@ -22,8 +22,12 @@
 
 
     <style>
+        @font-face {
+            font-family: 'B Titr'; /*a name to be used later*/
+    src: url('{% static "contracts/static/contracts/fonts/BTitrBold_0.ttf" %}'); /*URL to font*/
+}
         body {
-            font-family: 'B Titr', sans-serif;
+            font-family: 'B Titr'!important;
             background-color: #f5f5f5;
             direction: ltr;
             text-align: left;
@@ -31,7 +35,7 @@
             padding: 0;
             overflow-x: hidden;
             direction: rtl;
-            font-family: 'B Titr', sans-serif;
+            /* font-family: 'B Titr', sans-serif; */
             background-color: #f4f4f9;
             margin: 0;
             padding: 0;
@@ -51,7 +55,8 @@
         /* Global font and alignment */
         .left_part{
             /* display: flex; */
-            width: 90%;
+            width: 100%;
+            /* display: block; */
             max-width: 1450px;
             /* max-height: 1800px; */
         }
@@ -59,7 +64,7 @@
             width: 100%;
              /*  عرض محدود برای نمایش هشت ستون*/
             max-width: 1300px;
-            max-height: 500px;
+            max-height: 1000px;
             overflow-x: auto; 
             overflow-y: auto;
             display: flex;
@@ -93,13 +98,15 @@
             overflow-y: auto;
         }
         thead {
-            background-color: #065546;
+            background-color: #006d5b;
+            border-radius: 10px;
         }
         thead th{
             position: sticky;
             top: 0;
+            border-radius: 10px;
             z-index: 1;
-            background-color: #065546;
+            background-color: #006d5b;
             border-bottom: 2px solid #ddd;
         }
         th, td {
@@ -124,13 +131,14 @@
             background-color: #ddd;
         }
         tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #f9f8f8;
         }
         tbody tr:hover {
-            background-color: #b5dbd7;
+            background-color: #63c9bf;
         }
         tbody tr td {
             color: #000000;
+            border-radius: 10px;
         }
         th:first-child, td:first-child {
             width: 50px;
@@ -158,137 +166,111 @@
             display: flex;
         }
 
+        /* استایل برای کانتینر اصلی */
+        .container_list {
+            max-width: 200px;
+            padding-top: 20px;
+            padding-bottom: 40px;
+            padding-right: 40px;
+            /* margin-bottom: 200px; */
+            float: right;
+            min-width: 200px; 
+            /* display: flex; */
+        }
 
+        /* استایل برای منوی اصلی */
+        .list_bar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        .list_bar ul li{
+            flex: 1;
+        }
+
+        /* آیتم‌های اصلی */
+        .list_bar ul > li > a {
+            display: block;
+            padding: 12px 30px;
+            background-color: rgba(151, 190, 12, 0.5);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            margin: 1px;
+        }
+
+        .list_bar ul > li > a:hover {
+            background-color: #718e09;
+        }
+        .list_bar ul > li > a:active, a.selected {
+            background-color: #718e09;
+        }
+
+        /* زیرمنو (مخفی به‌صورت پیش‌فرض) */
+        /* .options {
+            display: none;
+            position: absolute;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            list-style: none;
+            z-index: 1000;
+            left: 0;
+            top: 100%;
+            min-width: 100%;
+        } */
+
+        /* آیتم‌های زیرمنو */
+        /* .options li a {
+            display: block;
+            padding: 10px 16px;
+            background-color: #333;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        } */
+
+        /* .options li a:hover {
+            background-color: #97be0c;
+            color: white;
+        } */
+
+        /* نمایش زیرمنو هنگام هاور */
+        /* .list_bar ul > li:hover .options {
+            display: block;
+            border-radius: 15px;
+        } */
+
+        /* تنظیمات کلی برای چیدمان */
+        /* .list_bar {
+            position: relative;
+        } */
 
 
 
         /*  استایل منو های کشویی*/
-        .container_list {
-            /* background-color: #fff; */
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 2px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            text-align: center;
-            display: flex;
-        }
-        div .list_bar {
-            padding: 5px;
-            margin: 0px;
-            display: flex;
-        }
-        div .list_bar:hovor a{
-            display: flex;
-            /* padding: 5px;
-            margin: 0px; */
-            /* display: table-cell; */            
-        }
-        div ul ul {
-            display: none;
-            margin: 10px;
-        }
-        div ul li:hover > ul {
-            display: table-cell;
-            transform: scale(1.10);
-            padding:none;
-
-        }
-        div ul {
-            background: #a4db3f;
-            box-shadow: 0px 0px 0px #8ebd37;
-            padding: 0px;
-            border-radius: 10px;
-            list-style:none;
-            /* position:relative; */
-            display: flex;
-            margin: 0px;
-        }
-        div ul:after {
-            content: "";
-            clear: both;
-            display: flex;
-            border-radius: 0px;
-            padding: 15px 32px;
-        }
-        div ul li {
-            float: right;
-            position: relative;
-            font-weight: bold;
-            border-radius: 10px;
-            margin: 0px;
-            
-        }
-        div ul li:hover {
-            background: #90be33;
-        }
-        div ul li:hover a {
-            color: #fff;
-        }
-        div ul li1 {
-            white-space: nowrap ;
-            float: right;
-            position: relative;
-            font-weight: bold;
-            font-size: small;
-            border-radius: 10px;
-            margin: 0px;
-            padding: auto;
-        }
-        div ul li1:hover {
-            background: #90be33;
-        }
-        div ul li a {
-            /* display: block; */
-            padding: 15px 32px;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 10px;
-            /* display: table-cell; */
-            display: inline-block;
-        }
-        div ul ul {
-            background: #a3d63c;
-            border-radius: 10px;
-            padding: 0;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            width: 150px;
-            color: #f4f4f9;
-        }
-        div ul ul li {
-            float: none;
-            border-top: 0px solid #ebe8e8;
-            border-bottom: 0px solid #ebe8e8;
-            position: relative;
-        }
-        div ul ul li a {
-            white-space: nowrap ;
-            flex-wrap: wrap;
-            /* padding: none; */
-            padding: 15px 32px;
-            /* color: #a4db3f; */
-        }	
-        div ul ul li:hover {
-            background: #a2e84d;
-        }
+        
 
         /* استایل قسمت ساید بار */
-        .card {width: 250px;
+        .card {
+            width: 250px;
             text-align: center;
-            border: 2px solid #006d5b;
+            /* border: 2px solid #006d5b; */
             border-radius: 10px;
-            padding: 20px;
-            background-color: #fff;
+            padding: 10px;
+            /* background-color: #fff; */
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }        
         .card img {
             width: 250px;
             height: 250px;
             border-radius: 50%;
-            margin-bottom: 15px;
+            /* margin-bottom: 15px; */
         }
         .card .box img {
             margin-left: 10px;
@@ -298,16 +280,19 @@
         }
         .name-box, .title-box {
             background-color: #ffffff;
-            border-radius: 5px;
-            padding: 5px 20px;
+            border-radius: 15px;
+            /* border: #006d5b; */
+            /* padding: 0.01%; */
             color: #006d5b;
             text-align: center;
-            margin-bottom: 10px;
-            border: #006d5b;
+            margin-bottom: 5px;
+            /* border: #006d5b; */
             border-width: 10px;
         }
+        h2{
+            font-size: medium;
+        }
 
-        /* دکمه جستجو */
 
 
         /* استایل مربوط به آیکون های سمت راست */
@@ -343,6 +328,30 @@
             text-align: center ;
             margin-right: px; /* Space between icon and text */
         }
+
+        button {
+            font-family: 'B Titr', sans-serif;
+            font-size: 1.5em;
+            border-color: #ffffff;
+            direction: ltr;
+            margin: 5px;
+            background-color: #006d5b;
+            border-radius: 10px;
+            padding: 5px 20px;
+            color: #ffffff;
+            /* border-width: 25px; */
+            text-align: center;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #025345;
+        }
+        .submit_button{
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+
     </style>
 </head>
 <body>
@@ -372,7 +381,7 @@
                 <span>پرسنلی</span>
             </div>
 
-            <div class="box" aria-label="قراردادها">
+            <div class="box" style="transform: scale(1.05); background-color: #005b4f;" aria-label="قراردادها">
                 <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
                 <span>قراردادها</span>
             </div>
@@ -410,46 +419,15 @@
 
         <div class="container_list">
             <div class="list_bar">
-                <ul>
-                    <li><a href="#">نوع قرارداد</a>
                         <ul class="options">
-                            <li1><a href="#">پرسنلی</a></li1>
-                            <li1><a href="#">برونسپاری و مشاوره</a></li1>
-                            <li1><a href="#">عدم افشای اطلاعات</a></li1>
-                            <li1><a href="#">مشارکت</a></li1>
-                        </ul1></li>
-                </ul>
+                            <li><a href="{% url 'contracts:personel' %}">پرسنلی</a></li>
+                            <li><a href="{% url 'contracts:outstanding' %}">برونسپاری و مشاوره</a></li>
+                            <li><a href="{% url 'contracts:nda' %}">عدم افشای اطلاعات</a></li>
+                            <li><a href="{% url 'contracts:partnership' %}">مشارکت</a></li>
+                        </ul>
             </div>
         </div>
-        <!-- اطلاعات مربوط ب جدول ها اینجا قرار میگیره -->
 
-<!--          
-        <div class="search_tables">
-            
-            <table>
-                <thead>
-                    <tr>
-                        {% for field_name,lable in field_lables_selected_1.items %}
-                            <th>{{ lable }}</th>
-                        {% endfor %}
-                            <th> عملیات</th> -->
-                    <!-- </tr> -->
-                <!-- </thead> -->
-                <!-- <tbody> -->
-                    <!-- {% for contract in contracts_table_1 %} -->
-                        <!-- <tr> -->
-                            <!-- {% for field_name, lable_selected in field_lables_selected_1.items %} -->
-                                <!-- <td>{{ contract|get_field:field_name }}</td> -->
-                            <!-- {% endfor %} -->
-                               
-                        <!-- </tr> -->
-                    <!-- {% endfor %} -->
-                <!-- </tbody> -->
-            <!-- </table> -->
-
-        <!-- </div> -->
-        
-        <h2>جدول قراردادها</h2>
         <div class="detail_tables">
                 
                     <table id="total">
@@ -480,6 +458,14 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    
+        </div>
+        <div class="submit_button">
+            <a href="{% url 'contracts:create_contract' %}">
+                <button type="submit">  ثبت قرارداد جدید 
+                </button>
+            </a>
+            <!-- برای این قسمت حتما باید عملکردشو اضافه کنم -->
         </div>
     </div>
     
