@@ -1,0 +1,488 @@
+{% load custom_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول قراردادها</title>
+    
+    <link rel="stylesheet" href="{% static '/contracts/css/all.min.css' %}" >
+
+    <!-- لینک مربوط کادر جستجو -->
+    <link rel="stylesheet" href="{% static '/contracts/css/jquery.dataTables.min.css' %}">
+    <script src="{% static 'contracts/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'contracts/js/jquery.dataTables.min.js' %}"></script>
+
+
+    <!-- FixedHeader CSS -->
+    <link rel="stylesheet" href="{% static 'contracts/js/dataTables.fixedHeader.min.js' %}">
+    <!-- FixedHeader JS -->
+    <script src=" {% static 'contracts/js/dataTables.fixedHeader.min.js' %} "></script>
+
+
+       <style>
+        body {
+            font-family: 'B Titr', sans-serif;
+            background-color: #f5f5f5;
+            direction: ltr;
+            text-align: left;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            direction: rtl;
+            font-family: 'B Titr', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .main-container {
+            overflow-x: auto;
+            display: flex;
+            gap: 20px;
+            margin: 20px auto;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* استایل جدول ها */
+
+        /* Global font and alignment */
+        .left_part{
+            /* display: flex; */
+            width: 100%;
+            /* display: block; */
+            max-width: 1450px;
+            /* max-height: 1800px; */
+        }
+        .detail_tables{
+            width: 100%;
+             /*  عرض محدود برای نمایش هشت ستون*/
+            max-width: 1300px;
+            max-height: 1000px;
+            overflow-x: auto; 
+            overflow-y: auto;
+            display: flex;
+            gap: 20px;
+            margin: 20px auto;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .search_tables{
+            display: flex;
+            width: 90%;
+            gap: 20px;
+            margin: 20px auto;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            /* overflow-x: auto; */
+        }
+        h2{
+            /* position: relative;
+            display: flex; */
+            text-align: center;
+        }
+
+        table {
+            width: 2000px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            min-width: 1000px;
+            box-shadow: 0 2px 8px #ffffff;
+            overflow-x: auto;
+            overflow-y: auto;
+        }
+        thead {
+            background-color: #006d5b;
+            border-radius: 10px;
+        }
+        thead th{
+            position: sticky;
+            top: 0;
+            border-radius: 10px;
+            z-index: 1;
+            background-color: #006d5b;
+            border-bottom: 2px solid #ddd;
+        }
+        th, td {
+            padding: 10px 15px;
+            text-align: center;
+            border: 1px solid #fcf9f9;
+            white-space: nowrap ;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        td{
+            color: #ffffff;
+        }
+        th {
+            font-weight: bold;
+            color: #ffffff;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+        th :hover{
+            background-color: #ddd;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f8f8;
+        }
+        tbody tr:hover {
+            background-color: #63c9bf;
+        }
+        tbody tr td {
+            color: #000000;
+            border-radius: 10px;
+        }
+        th:first-child, td:first-child {
+            width: 50px;
+        }
+        th:nth-child(2), td:nth-child(2) {
+            width: 150px;
+        }
+        tbody{
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+
+        div.dataTables_length {
+            float: right; /* نمایش تعداد رکوردها در سمت چپ */
+            margin-right: 20px; /* فاصله از جستجو */
+        }
+        
+        div.dataTables_filter {
+            float: right; /* نمایش جستجو در سمت راست */
+        }
+        .bottom{
+            display: flex;
+        }
+        .total-filter {
+            display: flex;
+        }
+
+        /* استایل برای کانتینر اصلی */
+        .container_list {
+            max-width: 200px;
+            padding-top: 20px;
+            padding-bottom: 40px;
+            padding-right: 40px;
+            /* margin-bottom: 200px; */
+            float: right;
+            min-width: 200px; 
+            /* display: flex; */
+        }
+
+        /* استایل برای منوی اصلی */
+        .list_bar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        .list_bar ul li{
+            flex: 1;
+        }
+
+        /* آیتم‌های اصلی */
+        .list_bar ul > li > a {
+            display: block;
+            padding: 12px 30px;
+            background-color: rgba(151, 190, 12, 0.5);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            margin: 1px;
+        }
+
+        .list_bar ul > li > a:hover {
+            background-color: #718e09;
+        }
+        .list_bar ul > li > a:active, a.selected {
+            background-color: #718e09;
+        }
+
+        /* زیرمنو (مخفی به‌صورت پیش‌فرض) */
+        /* .options {
+            display: none;
+            position: absolute;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            list-style: none;
+            z-index: 1000;
+            left: 0;
+            top: 100%;
+            min-width: 100%;
+        } */
+
+        /* آیتم‌های زیرمنو */
+        /* .options li a {
+            display: block;
+            padding: 10px 16px;
+            background-color: #333;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        } */
+
+        /* .options li a:hover {
+            background-color: #97be0c;
+            color: white;
+        } */
+
+        /* نمایش زیرمنو هنگام هاور */
+        /* .list_bar ul > li:hover .options {
+            display: block;
+            border-radius: 15px;
+        } */
+
+        /* تنظیمات کلی برای چیدمان */
+        /* .list_bar {
+            position: relative;
+        } */
+
+
+
+        /*  استایل منو های کشویی*/
+        
+
+        /* استایل قسمت ساید بار */
+        .card {
+            width: 250px;
+            text-align: center;
+            /* border: 2px solid #006d5b; */
+            border-radius: 10px;
+            padding: 10px;
+            /* background-color: #fff; */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }        
+        .card img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            /* margin-bottom: 15px; */
+        }
+        .card .box img {
+            margin-left: 10px;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+        }
+        .name-box, .title-box {
+            background-color: #ffffff;
+            border-radius: 15px;
+            /* border: #006d5b; */
+            /* padding: 0.01%; */
+            color: #006d5b;
+            text-align: center;
+            margin-bottom: 5px;
+            /* border: #006d5b; */
+            border-width: 10px;
+        }
+        h2{
+            font-size: medium;
+        }
+
+
+
+        /* استایل مربوط به آیکون های سمت راست */
+        .box {
+                    background-color: #006d5b;
+                    color: white;
+                    width: 235px;
+                    height: 50px;
+                    margin: 7px;
+                    display: flex;
+                    align-items: center; /* Align items vertically centered */
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    transition: transform 0.3s, background-color 0.3s;
+                    font-size: 18px;
+                    position: relative; /* For better hover effects */
+                    justify-content: flex-start; /* Align content to the start (left) */
+                    padding: 0px; /* Add padding */
+                }        
+        .box:hover {
+            transform: scale(1.05);
+            background-color: #005b4f; /* Darker shade on hover */
+        }        
+        .box img {            
+            margin-left: 10px;
+            width: 35px;
+            height: 35px;
+    
+        }
+        .box span {
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center ;
+            margin-right: px; /* Space between icon and text */
+        }
+
+        button {
+            font-family: 'B Titr', sans-serif;
+            font-size: 1.5em;
+            border-color: #ffffff;
+            direction: ltr;
+            margin: 5px;
+            background-color: #006d5b;
+            border-radius: 10px;
+            padding: 5px 20px;
+            color: #ffffff;
+            /* border-width: 25px; */
+            text-align: center;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #025345;
+        }
+        .submit_button{
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <div class="card">
+        <!-- محتوای مربوط به سایدبار اینجا قرار می گیره -->
+        <img src="{% static 'contracts/image/image.PNG' %}" alt="تصویر لیلا زارع">
+        <div class="name-box">
+            <h2>لیلا زارع</h2>
+        </div>
+        <div class="title-box">
+            <p>کارشناس منابع انسانی و نرم‌افزار</p>
+        </div>
+        <div class="colomn">
+            <div class="box" aria-label="آیین نامه‌ها و فرآیندها">
+                <img src="{% static 'contracts/icons/processes.png' %}" alt="Process icon">
+                <span>آیین نامه‌ها و فرآیندها</span>
+            </div>
+
+            <div class="box" aria-label="روابط عمومی">
+                <img src="{% static 'contracts/icons/public_relations.png' %}" alt="Public relations icon">
+                <span>روابط عمومی</span>
+            </div>
+
+            <div class="box" aria-label="پرسنلی">
+                <img src="{% static 'contracts/icons/personnel.png' %}" alt="Personnel icon">
+                <span>پرسنلی</span>
+            </div>
+
+            <div class="box"style="transform: scale(1.05); background-color: #005b4f;" aria-label="قراردادها">
+                <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
+                <span>قراردادها</span>
+            </div>
+
+            <div class="box" aria-label="بودجه و اعتبار">
+                <img src="{% static 'contracts/icons/budget.png' %}" alt="Budget icon">
+                <span>بودجه و اعتبار</span>
+            </div>
+
+            <div class="box" aria-label="بازرگانی">
+                <img src="{% static 'contracts/icons/commerce.png' %}" alt="Commerce icon">
+                <span>بازرگانی</span>
+            </div>
+
+            <div class="box" aria-label="داشبورد مدیریت">
+                <img src="{% static 'contracts/icons/dashboard.png' %}" alt="Dashboard icon">
+                <span>داشبورد مدیریت</span>
+            </div>
+
+            <div class="box" aria-label="کنترل محصول و انبار">
+                <img src="{% static 'contracts/icons/inventory.png' %}" alt="Inventory icon">
+                <span>کنترل محصول و انبار</span>
+            </div>
+
+            <div class="box" aria-label="دبیرخانه">
+                <img src="{% static 'contracts/icons/secretariat.png' %}" alt="Secretariat icon">
+                <span>دبیرخانه</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="left_part">
+        <!-- دکمه های ثبت قرارداد جدید و ورود و جستجو -->
+
+        <div class="container_list">
+            <div class="list_bar">
+                        <ul class="options">
+                            <li><a style="background-color: #718e09; transform: scale(1.05);" href="{% url 'contracts:personel' %}">پرسنلی</a></li>
+                            <li><a href="{% url 'contracts:outstanding' %}">برونسپاری و مشاوره</a></li>
+                            <li><a href="{% url 'contracts:nda' %}">عدم افشای اطلاعات</a></li>
+                            <li><a href="{% url 'contracts:partnership' %}">مشارکت</a></li>
+                        </ul>
+            </div>
+        </div>
+
+        <div class="detail_tables">
+                
+                    <table id="total">
+                        <thead>
+                            <tr>
+                                {% for field_name,lable in field_lables.items %}
+                                    <th>{{ lable }}</th>
+                                {% endfor %}
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contract in contracts_table_2 %}
+                                <tr>
+                                    {% for field_name in field_lables %}
+                                        <td>{{ contract|get_field:field_name }}</td>
+                                    {% endfor %}
+                                    <td>
+                                        <a style="display: inline;padding: 10px;" href="{% url 'contracts:edit_contract' contract.id %}" title="ویرایش">
+                                            <i>✎</i>
+                                        </a>
+                                        <a style="display: inline; padding: 10px;"  href="{% url 'contracts:delete_contract' contract.id %}" onclick="return confirm('آیا مطمین هستید؟ ')" title="حذف">
+                                            <i>🗑️</i>
+                                        </a>
+                                        <a href="{% url 'contracts:generate_pdf' contract.id %}" class="btn btn-primary">📄 دانلود PDF</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+        </div>
+        <div>
+            <a href="{% url 'contracts:create_contract' %}">
+                <button type="submit">  ثبت قرارداد جدید 
+                </button>
+            </a>
+        </div>
+    </div>
+    
+</div>
+<script>
+    $(document).ready(function () {
+        var table = $('#total').DataTable({
+        // "dom":'<"top"fi>rt<"bottom"lp><"clear">',
+        "dom":'<"top d-flex justify-content-between"fi>rt<"bottom"lp><"clear">',
+        searching: true, // قابلیت جستجو
+        paging: true, // قابلیت صفحه‌بندی
+        ordering: true, // قابلیت مرتب‌سازی
+        
+        language: {
+        url: "{% static 'contracts/json/fa.json' %}" ,
+        // پشتیبانی از زبان فارسی
+        info: "کل رکوردها _TOTAL_",
+        }
+    });
+    //برای جدول FixedHeader  فعال کردن 
+    new $.fn.DataTable.FixedHeader(table);
+    });
+</script>
+
+</body>
+</html>
