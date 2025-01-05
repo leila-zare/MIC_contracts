@@ -4,7 +4,6 @@ from .forms import ContractForm
 from django.contrib import messages
 from .models import Contract
 from django.db.models import Q
-# from django.
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.forms.models import model_to_dict
@@ -81,31 +80,6 @@ def edit_contract(request, contract_id):
         form = ContractForm(instance=contract)
 
     return render(request, 'contracts/edit_contract.html', {'form': form}) 
-
-
-
-# from reportlab.pdfbase.ttfonts import TTFont
-# from reportlab.pdfbase import pdfmetrics
-# from django.template.loader import render_to_string
-# from django.http import HttpResponse
-# from xhtml2pdf import pisa
-# def generate_pdf(request, contract_id):
-#     # دریافت اطلاعات قرارداد و کارمند
-#     contract = Contract.objects.get(id=contract_id)
-#     pdfmetrics.registerFont(TTFont('Vazir', 'contracts/static/contracts/fonts/BNazanin.ttf'))
-#     # رندر قالب HTML با داده‌ها
-#     html = render_to_string('contracts/generate_pdf.html', {'contract': contract})
-
-#     # تبدیل HTML به PDF
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = f'attachment; filename="contract-{contract_id}.pdf"'
-#     pisa_status = pisa.CreatePDF(html, dest=response)
-
-#     # بررسی موفقیت‌آمیز بودن تولید PDF
-#     if pisa_status.err:
-#         return HttpResponse('خطا در تولید PDF', status=500)
-#     return response
-
 
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
