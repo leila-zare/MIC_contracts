@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>جدول قراردادها</title>
+    {{ form.media }} 
     
     <link rel="stylesheet" href="{% static '/contracts/css/all.min.css' %}" >
 
@@ -420,7 +421,7 @@
         <div class="container_list">
             <div class="list_bar">
                         <ul class="options">
-                            <li><a href="{% url 'contracts:personel' %}">پرسنلی</a></li>
+                            <li><a style="background-color: #718e09; transform: scale(1.05);" href="{% url 'contracts:personel' %}">پرسنلی</a></li>
                             <li><a href="{% url 'contracts:outstanding' %}">برونسپاری و مشاوره</a></li>
                             <li><a href="{% url 'contracts:nda' %}">عدم افشای اطلاعات</a></li>
                             <li><a href="{% url 'contracts:partnership' %}">مشارکت</a></li>
@@ -475,10 +476,10 @@
         // پیمایش تمام ستون های جدول
         $('tbody tr').each(function(){
             $(this).find('td').each(function(){
-                // بررسی اینکه اگر مقدار عددی است
+                // بررسی اینکه اگر مقدار عدد اعشاری است
                 let value = $(this).text().trim();
-                if (! isNaN(value) && value !== '' && value.includes('.')){
-                    // فرمت کردن عدد به صورت سه رقم سه رقم
+                if (!isNaN(value) && value !== '' && value.includes('.')){
+                    // فرمت کردن عدد اعشاری به صورت سه رقم سه رقم
                     let formattedValue = parseFloat(value).toLocaleString();
                     $(this).text(formattedValue);
                 }

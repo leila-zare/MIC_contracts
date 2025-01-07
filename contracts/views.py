@@ -36,7 +36,6 @@ def contract_list(request):
                                                             'field_lables': field_lables,
                                                             'field_lables_selected_1':field_lables_selected_1,
                                                             'query': query})
-
 def create_contract(request):
     if request.method == 'POST':
         form = ContractForm(request.POST)
@@ -70,15 +69,17 @@ def edit_contract(request, contract_id):
 
     if request.method == 'POST':
         # اگر درخواست POST بود، داده‌های جدید را پردازش کن
+        print(request.POST)
         form = ContractForm(request.POST, instance=contract)
         if form.is_valid():
             form.save()  # ذخیره تغییرات در دیتابیس
+            # messages.success(request, "قرارداد با موفقیت ویرایش شد")
             return redirect('contracts:contractlist')  # بازگشت به صفحه لیست قراردادها
     else:
         # اگر درخواست GET بود، فرم را با داده‌های رکورد پر کن
         form = ContractForm(instance=contract)
 
-    return render(request, 'contracts/edit_contract.html', {'form': form}) 
+    return render(request, 'contracts/edit_contract.html', {'form': form , 'contract': contract}) 
 
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
