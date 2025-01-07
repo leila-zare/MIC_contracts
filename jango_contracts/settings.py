@@ -138,6 +138,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ('en','English'),
+    ('fa','Persian'),
+]
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -147,6 +152,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'assets'),
     os.path.join(BASE_DIR,'contracts/static'),
+    # BASE_DIR / 'static'
 )
 
 # Default primary key field type

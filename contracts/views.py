@@ -9,9 +9,6 @@ from xhtml2pdf import pisa
 from django.forms.models import model_to_dict
 
 
-# Create your views here.
-# class ContractView(View)
-
 def home_sidebar(request):
     return render(request , 'contracts/sidebarlist.html')
 
@@ -43,7 +40,9 @@ def contract_list(request):
 def create_contract(request):
     if request.method == 'POST':
         form = ContractForm(request.POST)
+
         if form.is_valid():
+
             form.save()
             print(form.data)
             messages.success(request, "قرارداد با موفقیت ثبت شد")

@@ -2,8 +2,8 @@ from django import forms
 from contracts.models import Contract
 from django_jalali.forms import jDateField as jalaliDateField
 from django_jalali.admin.widgets import AdminjDateWidget
-from jalali_date.fields import JalaliDateField, SplitJalaliDateTimeField
-from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
+# from jalali_date.fields import JalaliDateField, SplitJalaliDateTimeField
+# from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 
 class ContractForm(forms.ModelForm):
     date_of_birth = jalaliDateField(widget = AdminjDateWidget)
@@ -11,7 +11,7 @@ class ContractForm(forms.ModelForm):
     contract_end_date = jalaliDateField(widget = AdminjDateWidget)
     class Meta:
         model = Contract
-        fields = '__all__' 
+        fields = '__all__'
         # fields = [
         #         "full_name",
         #         "contract_type",
@@ -179,16 +179,16 @@ class ContractForm(forms.ModelForm):
                 "bank_name_petty_cash":{'required': 'وارد کردن این فیلد اجباری است', 'invalid':'مقدار وارد شده معتبر نیست'},
             }
         
-        def __init__(self, *args, **kwargs):
-            super(ContractForm, self).__init__(*args, **kwargs)
-            self.fields['date'] = JalaliDateField(label=('date'), # date format is  "yyyy-mm-dd"
-            widget=AdminJalaliDateWidget # optional, to use default datepicker
-            )
+        # def __init__(self, *args, **kwargs):
+        #     super(ContractForm, self).__init__(*args, **kwargs)
+        #     self.fields['date'] = JalaliDateField(label=('date'), # date format is  "yyyy-mm-dd"
+        #     widget=AdminJalaliDateWidget # optional, to use default datepicker
+        #     )
 
-            # you can added a "class" to this field for use your datepicker!
-            # self.fields['date'].widget.attrs.update({'class': 'jalali_date-date'})
+        #     # you can added a "class" to this field for use your datepicker!
+        #     # self.fields['date'].widget.attrs.update({'class': 'jalali_date-date'})
 
-            self.fields['date_time'] = SplitJalaliDateTimeField(label=('date time'), 
-            widget=AdminSplitJalaliDateTime # required, for decompress DatetimeField to JalaliDateField and JalaliTimeField
-            )
+        #     self.fields['date_time'] = SplitJalaliDateTimeField(label=('date time'), 
+        #     widget=AdminSplitJalaliDateTime # required, for decompress DatetimeField to JalaliDateField and JalaliTimeField
+        #     )
         

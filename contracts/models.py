@@ -83,7 +83,6 @@ class Contract(models.Model):
     housing_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="حق مسکن")
     food_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="حق خوار و بار")
     seniority_pay = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="پایه سنوات")
-    # monthly = models.BooleanField(default=True, verbose_name="ماهانه")
     child_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="حق اولاد")
     marriage_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="حق تاهل")
     transportation_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="ایاب و ذهاب")
