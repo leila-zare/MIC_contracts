@@ -471,6 +471,22 @@
     
 </div>
 <script>
+    $(document).ready(function(){
+        // پیمایش تمام ستون های جدول
+        $('tbody tr').each(function(){
+            $(this).find('td').each(function(){
+                // بررسی اینکه اگر مقدار عددی است
+                let value = $(this).text().trim();
+                if (! isNaN(value) && value !== '' && value.includes('.')){
+                    // فرمت کردن عدد به صورت سه رقم سه رقم
+                    let formattedValue = parseFloat(value).toLocaleString();
+                    $(this).text(formattedValue);
+                }
+            })
+        })
+    })
+</script>
+<script>
     $(document).ready(function () {
         var table = $('#total').DataTable({
         // "dom":'<"top"fi>rt<"bottom"lp><"clear">',
