@@ -480,13 +480,11 @@
                                 <div class="error" data-for="text"> وارد کردن محل صدور اجباری است</div></td>
                             <td><input type="text" class="text" name="fathers_name" id="fathers_name"value="{{contract.fathers_name}}">
                                 <div class="error" data-for="text"> وارد کردن نام پدر اجباری است</div></td>
-                            <td><select class="select_form" 
-                                name="marital_status" id="marital_status" value="{{contract.marital_status}}">
-                                <option selected="" value="متأهل">متأهل</option>
-                                <option value="مجرد">مجرد</option>
-                                <!-- <option value="مطلقه">مطلقه</option>
-                                <option value="بیوه">بیوه</option> -->
-                            </select></td>
+                            <td><select class='select_form' name="marital_status" id="marital_status">
+                                <option value="متأهل" {% if contract.marital_status == "متأهل" %}selected{% endif %}>متأهل</option>
+                                <option value="مجرد" {% if contract.marital_status == "مجرد" %}selected{% endif %}>مجرد</option>
+                            </select>
+                            </td>
                             <td><input type="number" class="number_input" name="child_number" id="child_number" value="{{contract.child_number}}">
                                 <div class="error" data-for="number_input"> وارد کردن تعداد فرزندان اجباری است</div></td> 
                         </tr>
@@ -509,26 +507,25 @@
                                 <div class="error" data-for="text"> وارد کردن کد پستی اجباری است</div></td>
                             <td><input type="text" class="text" name="address" id="address" value="{{contract.address}}">
                                 <div class="error" data-for="text"> وارد کردن آدرس اجباری است</div></td>
-                            <td><select class="select_form" 
-                                name="military_status" id="military_status" value="{{contract.military_status}}">
-                                <option selected="" value="نیاز به خدمت ندارد">نیاز به خدمت ندارد</option>
-                                <option value=" معاف شده">معاف شده</option>
-                                <option value="در حال خدمت">در حال خدمت</option>
-                                <option value="پایان خدمت">پایان خدمت</option>
-                                <option value="معافیت تحصیلی">معافیت تحصیلی</option>
-                                
-                            </select></td>
-                            <td><select class="select_form" 
-                                name="degree_of_study" id="degree_of_study" value="{{contract.degree_of_study}}">
-                                <option selected="" value="سیکل">سیکل</option>
-                                <option value="دیپلم">دیپلم</option>
-                                <option value="فوق دیپلم">فوق دیپلم</option>
-                                <option value="کارشناسی">کارشناسی</option>
-                                <option value="کارشناسی ارشد">کارشناسی ارشد</option>
-                                <option value="دکتری">دکتری</option>
-                                <option value="فوق دکتری">فوق دکتری</option>
-                                <option value="حوزوی">حوزوی</option>
-                            </select></td>
+                            <td><select class='select_form' name="military_status" id="military_status">
+                                <option value="نیاز به خدمت ندارد" {% if contract.military_status == "نیاز به خدمت ندارد" %}selected{% endif %}>نیاز به خدمت ندارد</option>
+                                <option value="معاف شده" {% if contract.military_status == "معاف شده" %}selected{% endif %}>معاف شده</option>
+                                <option value="در حال خدمت" {% if contract.military_status == "در حال خدمت" %}selected{% endif %}>در حال خدمت</option>
+                                <option value="پایان خدمت" {% if contract.military_status == "پایان خدمت" %}selected{% endif %}>پایان خدمت</option>
+                                <option value="معافیت تحصیلی" {% if contract.military_status == "معافیت تحصیلی" %}selected{% endif %}>معافیت تحصیلی</option>
+                            </select>
+                            </td>
+                            <td><select class='select_form' name="degree_of_study" id="degree_of_study">
+                                <option value="سیکل" {% if contract.degree_of_study == "سیکل" %}selected{% endif %}>سیکل</option>
+                                <option value="دیپلم" {% if contract.degree_of_study == "دیپلم" %}selected{% endif %}>دیپلم</option>
+                                <option value="فوق دیپلم" {% if contract.degree_of_study == "فوق دیپلم" %}selected{% endif %}>فوق دیپلم</option>
+                                <option value="کارشناسی" {% if contract.degree_of_study == "کارشناسی" %}selected{% endif %}>کارشناسی</option>
+                                <option value="کارشناسی ارشد" {% if contract.degree_of_study == "کارشناسی ارشد" %}selected{% endif %}>کارشناسی ارشد</option>
+                                <option value="دکتری" {% if contract.degree_of_study == "دکتری" %}selected{% endif %}>دکتری</option>
+                                <option value="فوق دکتری" {% if contract.degree_of_study == "فوق دکتری" %}selected{% endif %}>فوق دکتری</option>
+                                <option value="حوزوی" {% if contract.degree_of_study == "حوزوی" %}selected{% endif %}>حوزوی</option>
+                            </select>
+                            </td>
                             <td><input type="text" class="text" name="field_of_study" id="field_of_study" value="{{contract.field_of_study}}">
                                 <div class="error" data-for="text"> وارد کردن رشته تحصیلی اجباری است</div></td>
                             <td><input type="text" class="text" name="reference" id="reference" value="{{contract.reference}}">
@@ -554,11 +551,16 @@
                             <th><label for="declared_salary">حقوق ابرازی</label></th>
                         </tr>
                         <tr>
-                            <td><select class="select_form"  
+                            <!-- <td><select class="select_form"  
                                 name="contract_type" id="contract_type" value="{{contract.contract_type}}">
-                                <option selected="" value="معین">معین</option>
+                                <option value="معین" {% if contract.contract_type == "معین" %} selected {% endif %} >معین</option>
                                 <option value="شبه معین">شبه معین</option>
                                 <option value="ساعتی">ساعتی</option>                        
+                            </select> -->
+                            <td><select class='select_form' name="contract_type" id="contract_type">
+                                <option value="معین" {% if contract.contract_type == "معین" %}selected{% endif %}>معین</option>
+                                <option value="شبه معین" {% if contract.contract_type == "شبه معین" %}selected{% endif %}>شبه معین</option>
+                                <option value="ساعتی" {% if contract.contract_type == "ساعتی" %}selected{% endif %}>ساعتی</option>
                             </select>
                             <td><input type="text" class="text" name="contract_number" id="contract_number" value="{{contract.contract_number}}">
                                 <div class="error" data-for="text"> وارد کردن شماره قرارداد اجباری است</div></td>
@@ -566,30 +568,23 @@
                                 <div class="error" data-for="date"> وارد کردن تاریخ اجباری است</div></td>
                             <td><input type="text" onchange="setEndDate(this)" data-jdp-min-date="today" data-jdp style="z-index: 99999;" class="date" name="contract_end_date_txt" id="contract_end_date_txt" placeholder="yyyy/mm/dd" value="{{contract.contract_end_date}}">
                                 <div class="error" data-for="date"> وارد کردن تاریخ اجباری است</div></td>   
-                            <td><select class="select_form"
-                                name="job_group">
-                                <option selected="" value="ستاد">ستاد</option>
-                                <option value="مدیریت">مدیریت</option>
-                                <option value="فنی">فنی</option>
-                                <option value="بازرگانی">بازرگانی</option>
-                                <option value="دفتر قم">دفتر قم</option>                        
-                                
+                            <td><select class='select_form' name="job_group" id="job_group">
+                                <option value="ستاد" {% if contract.job_group == "ستاد" %}selected{% endif %}>ستاد</option>
+                                <option value="مدیریت" {% if contract.job_group == "مدیریت" %}selected{% endif %}>مدیریت</option>
+                                <option value="فنی" {% if contract.job_group == "فنی" %}selected{% endif %}>فنی</option>
+                                <option value="بازرگانی" {% if contract.job_group == "بازرگانی" %}selected{% endif %}>بازرگانی</option>
+                                <option value="دفتر قم" {% if contract.job_group == "دفتر قم" %}selected{% endif %}>دفتر قم</option>
                             </select>
-                            <!-- <input type="text" name="job_group" placeholder="{{ job_group }}"></td> -->
                             <td><input type="text" class="text" name="job_position" id="job_position" value="{{contract.job_position}}">
                                 <div class="error" data-for="text"> وارد کردن گروه کاری اجباری است</div></td>
-                            <td><select  class="select_form" 
-                                name="insurance_type" id="insurance_type" value="{{contract.insurance_type}}">
-                                <option selected="" value="کارفرما">کارفرما</option>
-                                <option value="کارمند">کارمند</option>
+                            <td><select class='select_form' name="insurance_type" id="insurance_type">
+                                <option value="کارفرما" {% if contract.insurance_type == "کارفرما" %}selected{% endif %}>کارفرما</option>
+                                <option value="کارمند" {% if contract.insurance_type == "کارمند" %}selected{% endif %}>کارمند</option>
                             </select>
-                            <!-- <input type="text" name="insurance_type" placeholder="{{ insurance_type }}"></td> -->
-                            <td><select  class="select_form" 
-                                name="declared_salary" id="declared_salary" value="{{contract.declared_salary}}">
-                                <option selected="" value="پایه">پایه</option>
-                                <option value="واقعی">واقعی</option>
+                            <td><select class='select_form' name="declared_salary" id="declared_salary">
+                                <option value="پایه" {% if contract.declared_salary == "پایه" %}selected{% endif %}>پایه</option>
+                                <option value="واقعی" {% if contract.declared_salary == "واقعی" %}selected{% endif %}>واقعی</option>
                             </select>
-                            <!-- <input type="text" name="declared_salary" placeholder="{{ declared_salary }}"></td> -->
                         </tr>
                         <tbody><tr>
                             <th><label for="base_salary">حق پایه</label></th>
