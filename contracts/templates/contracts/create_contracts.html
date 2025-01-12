@@ -360,11 +360,7 @@
 </head>
 <body>
     <div class="main-container">
-        {% if messages %}
-        {% for message in messages %}
-        <p style="color: green; font-family: B Nazanin; font-size: small;">{{ message }}</p>
-        {% endfor %}
-        {% endif %}
+        
         <!-- کارت کاربری در سمت چپ -->
         <div class="sidebar_card">
             
@@ -429,6 +425,15 @@
         <div class="details-container">
             <form id="myform" action="{% url 'contracts:create_contract' %}" method="post" >
                 {% csrf_token %}
+
+                {% if messages %}
+                {% for message in messages %}
+                <div>
+                    <p style="color: rgb(5, 126, 27); font-family: B Titr; font-size:medium;">{{ message }}</p>
+                </div>
+                
+                {% endfor %}
+                {% endif %}
                 
                 <!-- اطلاعات هویتی -->
                 <div class="container">
@@ -452,7 +457,7 @@
                         </tr>
                         <tr>
                             <td><input type="text" class="text" name="full_name" id="full_name">
-                                <div class="error" data-for="text"> وارد نام و نام خانوادگی اجباری است</div></td>                            
+                                <div class="error" data-for="text"> وارد کردن نام و نام خانوادگی اجباری است</div></td>                            
                             <td><input type="text" class="text" name="national_id" id="national_id">
                                 <div class="error" data-for="text"> وارد کردن کد ملی اجباری است</div></td>
                             <td><input type="text" class="text" name="ID_number" id="ID_number">
@@ -614,7 +619,7 @@
                             <td><input type="text" inputmode="numeric" class="number_input" name="hourly_wage" id="hourly_wage">
                                 <div class="error" data-for="number_input"> وارد کردن دستمزد ساعتی اجباری است</div></td>                
                             <td><input type="number" class="number_input" name="hourly_wage_with_accord" id="hourly_wage_with_accord" min="0" max="100">
-                                <div class="error" data-for="number_input"> وارد کردن دستمزد ساعتی با آکورد اجباری است</div></td>                
+                                <div class="error" data-for="number_input"> وارد کردن درصد آکورد اجباری است</div></td>                
                             <td><input type="text" inputmode="numeric" class="text" name="insurance_number" id="insurance_number">
                                 <div class="error" data-for="text"> وارد کردن شماره بیمه اجباری است</div></td>
                         </tr>

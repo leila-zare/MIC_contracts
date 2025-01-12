@@ -66,6 +66,12 @@ def delete_contract(request, contract_id):
 def edit_contract(request, contract_id):
     # گرفتن رکورد از دیتابیس
     contract = get_object_or_404(Contract, id=contract_id)
+    if contract.date_of_birth:
+        contract.date_of_birth = contract.date_of_birth.strftime('%Y/%m/%d')
+    if contract.contract_start_date:
+        contract.contract_start_date = contract.contract_start_date.strftime('%Y/%m/%d')
+    if contract.contract_end_date:
+        contract.contract_end_date = contract.contract_end_date.strftime('%Y/%m/%d')
 
     if request.method == 'POST':
         # اگر درخواست POST بود، داده‌های جدید را پردازش کن
@@ -85,33 +91,15 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
+# import weasyprint
+
+# برای تست اینکه میخوام از داده های دستابیس استفاده کنم
 
 def generate_pdf(request, contract_id):
-    # دریافت اطلاعات قرارداد و کارمند
-    contract = Contract.objects.get(id=contract_id)
-    # ثبت فونت فارسی
-    pdfmetrics.registerFont(TTFont('Vazir', 'contracts/static/contracts/fonts/Vazir-FD.ttf'))
-    # رندر قالب HTML با داده‌ها
-    # html = render_to_string('contracts/generate_pdf.html', {'contract': contract})
+    contract = Contract.objects.get(id=contract_id)  
+    return render(request, 'contracts/generate_pdf.html', {'contract': contract})
 
-    # تبدیل HTML به PDF
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="contract-{contract_id}.pdf"'
-    # pisa_status = pisa.CreatePDF(html, dest=response)
-    c = canvas.Canvas(response,pagesize=A4)
-    c.setFont('Vazir', 12)
-    c.drawString(100, 750, f'نام و نام خانوادگی: {contract.full_name}')
-    c.drawString(100, 730, f'کد ملی : {contract.national_id}')
-    c.drawString(100, 710, f'تاریخ شروع قرارداد: {contract.contract_start_date}')
-    # بررسی موفقیت‌آمیز بودن تولید PDF
-    # if pisa_status.err:
-    #     return HttpResponse('خطا در تولید PDF', status=500)
-    c.showPage()
-    c.save()
-
-    return response
-
-    import WeasyPrint
+    
 
 
 
