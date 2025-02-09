@@ -39,9 +39,7 @@ def contract_list(request):
 def create_contract(request):
     if request.method == 'POST':
         form = ContractForm(request.POST)
-
         if form.is_valid():
-
             form.save()
             print(form.data)
             messages.success(request, "قرارداد با موفقیت ثبت شد")
@@ -49,7 +47,6 @@ def create_contract(request):
         # else:
         #     messages.error(request, "اطلاعات ثبت نشد، لطفا دویاره تلاش کنید")
         #     return redirect('contracts:create_contract')
-
     elif request.method == "GET":
         # messages.error(request, "اطلاعات ثبت نشد، لطفا دویاره تلاش کنید")
         # print(form.errors)
@@ -66,13 +63,7 @@ def delete_contract(request, contract_id):
 def edit_contract(request, contract_id):
     # گرفتن رکورد از دیتابیس
     contract = get_object_or_404(Contract, id=contract_id)
-    if contract.date_of_birth:
-        contract.date_of_birth = contract.date_of_birth.strftime('%Y/%m/%d')
-    if contract.contract_start_date:
-        contract.contract_start_date = contract.contract_start_date.strftime('%Y/%m/%d')
-    if contract.contract_end_date:
-        contract.contract_end_date = contract.contract_end_date.strftime('%Y/%m/%d')
-
+   
     if request.method == 'POST':
         # اگر درخواست POST بود، داده‌های جدید را پردازش کن
         print(request.POST)
@@ -144,63 +135,4 @@ def nda_view(request):
 
 def partnership_view(request):
     return render(request, 'contracts/partnership.html')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
-
-# labels = {
-#     "full_name":"نام و نام خانوادگی",
-#     "contract_type":"نوع قرارداد",
-#     "contract_number":"شماره قرارداد",
-#     "fathers_name":"نام پدر",
-#     "date_of_birth":"تاریخ تولد",
-#     "national_id":"کد ملی",
-#     "ID_number":"شماره شناسنامه",
-#     "place_of_issue":"محل صدور",
-#     "matiral_status":"وضعیت تاهل",
-#     "child_number":"تعداد فرزند",
-#     "military_status":"وضعیت نظام وظیفه",
-#     "contact_number":"شماره تماس",
-#     "Imail":"آدرس ایمیل",
-#     "refrence": "معرف",
-#     "postal_code":"تعداد فرزند",
-#     "address":"آدرس",
-#     "position":" سمت شغلی",
-#     "contract_start_date":"تاریخ شروع قرارداد",
-#     "contract_end_date":"تاریخ پایان قرارداد",
-#     "base_salary":"حقوق پایه",
-#     "housing_allowance":"حق مسکن",
-#     "food_allowance":"حق خوار و بار",
-#     "seniority_pay":"پایه سنوات",
-#     "monthly":"ماهانه",
-#     "child_allowance":"حق اولاد",
-#     "marriage_allowance":"حق تاهل",
-#     "transportation_allowance":"ایاب و ذهاب",
-#     "attraction_bonus":"فوق العاده جذب",
-#     "management_allowance":"حق مدیریت",
-#     "hourly_wage":"دستمزد ساعتی",
-#     "hourly_wage_with_accord":"دستمزد ساعتی با آکورد",
-#     "declared_salary":"حقوق ابرازی",
-#     "insurance_type":"نوع بیمه",
-#     "job_group":"گروه کاری",
-#     "account_number_salary":"شماره حساب حقوق",
-#     "IBAN_salary":"شماره شبا حقوق",
-#     "bank_name_salary":"نام بانک حقوق",
-#     "account_number_petty_cash":"شماره حساب تنخواه",
-#     "IBAN_petty_cash":"شماره شبا تنخواه",
-#     "bank_name_petty_cash":"نام بانک تنخواه",
-# }
-
 

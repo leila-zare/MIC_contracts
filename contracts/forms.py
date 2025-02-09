@@ -191,4 +191,11 @@ class ContractForm(forms.ModelForm):
         #     self.fields['date_time'] = SplitJalaliDateTimeField(label=('date time'), 
         #     widget=AdminSplitJalaliDateTime # required, for decompress DatetimeField to JalaliDateField and JalaliTimeField
         #     )
-        
+        def clean(self):
+            cleaned_data = super().clean()
+            marital_status = cleaned_data.get(marital_status)
+            child_number = cleaned_data.get(child_number)
+
+            if marital_status != "متأهل" and child_number > 0:
+                forms.ValidationError('افراد مجرد نمی توانند تعداد فرزند داشته باشند.')
+                return cleaned_data

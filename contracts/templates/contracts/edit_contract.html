@@ -1,20 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-</head>
-<body>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <button type="submit">دخیره تغییرات</button>
-    </form>
-</body>
-</html> -->
-
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -37,9 +20,6 @@
         <script>
             document.addEventListener('DOMContentLoaded', function(){
                 jalaliDatepicker.startWatch();
-                // jalaliDatepicker.show(document.getElementById('date_of_birth'));
-                // jalaliDatepicker.show(document.getElementById('contract_start_date'));
-                // jalaliDatepicker.show(document.getElementById('contract_end_date'));
             });
 
             
@@ -131,77 +111,7 @@
             gap: 20px;
             width: 90%;
             margin: 20px auto;
-        }
-        
-        /* استایل‌های بخش کارت کاربری */
-        /* .card {
-            width: 250px;
-            text-align: center;
-            border: 2px solid #006d5b;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }  */
-        /* تنظیمات کلی سایدبار */
-        /* .sidebar_card {
-            width: 50px; /* عرض پیش‌فرض */
-            /* height: 100vh; تمام ارتفاع صفحه */
-            /* position: fixed; */
-            /* border-radius: 10px; */
-            /* top: 0; */
-            /* right: 0; */
-            /* background-color: #f1ebeb;  */
-            /* رنگ پس‌زمینه */
-            /* overflow: hidden; جلوگیری از نمایش محتوای اضافی */
-            /* transition: width 0.3s ease; انیمیشن برای تغییر عرض */
-            /* z-index: 1000; */
-        /* } */ */
-        /* محتوا داخل سایدبار */
-        /* .sidebar_card .card {
-            opacity: 0; /* مخفی کردن محتوا 
-            transition: opacity 0.3s ease;  انیمیشن برای نمایش محتوا 
-            padding: 10px;
-            color: #fff;
-            height: 100%;
-            overflow-y: scroll;
-            scrollbar-width: none;
-        } */
-        /* حالت Hover روی سایدبار */
-        /* .sidebar_card:hover {
-            width: 275px;  عرض بازشده 
-        } */
-
-        /* .sidebar_card:hover .card {
-            opacity: 1; نمایش محتوا
-        }    */
-        /* .card img {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-        } */
-        /* .card .box img {
-            margin-left: 10px;
-            width: 35px;
-            height: 35px;
-            text-align: center;
-        } */
-        /* .name-box, .title-box {
-            background-color: #ffffff;
-            border-radius: 5px;
-            padding: 5px 20px;
-            color: #006d5b;
-            text-align: center;
-            margin-bottom: 10px;
-            border: #006d5b;
-            border-width: 10px;
-        } */
-
-
-
-
-
-        
+        }   
         /* استایل قسمت ساید بار */
         .card {width: 250px;
             text-align: center;
@@ -242,21 +152,21 @@
 
         /* استایل مربوط به آیکون های سمت راست */
         .box {
-                    background-color: #006d5b;
-                    color: white;
-                    width: 235px;
-                    height: 50px;
-                    margin: 7px;
-                    display: flex;
-                    align-items: center; /* Align items vertically centered */
-                    border-radius: 10px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                    transition: transform 0.3s, background-color 0.3s;
-                    font-size: 18px;
-                    position: relative; /* For better hover effects */
-                    justify-content: flex-start; /* Align content to the start (left) */
-                    padding: 0px; /* Add padding */
-                }        
+            background-color: #006d5b;
+            color: white;
+            width: 235px;
+            height: 50px;
+            margin: 7px;
+            display: flex;
+            align-items: center; /* Align items vertically centered */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background-color 0.3s;
+            font-size: 18px;
+            position: relative; /* For better hover effects */
+            justify-content: flex-start; /* Align content to the start (left) */
+            padding: 0px; /* Add padding */
+        }        
         .box:hover {
             transform: scale(1.05);
             background-color: #005b4f; /* Darker shade on hover */
@@ -351,19 +261,6 @@
             font-size: 10px;
             display: none; /* پیش‌فرض پیام‌ها مخفی */
         }
-
-/* 
-        input.error_message{
-            border: 2px solid red;
-        }
-        .error_message { 
-            color: red;
-            font-size: 10px;
-            display: none;
-            font-family: 'B Titr', sans-serif;
-            margin: 5px 0;
-            padding: 0;
-        } */
         .select_form{
             background-color: #ffffff;
             /* padding: 10px; */
@@ -382,70 +279,69 @@
 </head>
 <body>
     <div class="main-container">
-        {% if messages %}
+        <!-- {% if messages %}
         {% for message in messages %}
         <p style="color: green; font-family: B Nazanin; font-size: small;">{{ message }}</p>
         {% endfor %}
-        {% endif %}
+        {% endif %} -->
         <!-- کارت کاربری در سمت چپ -->
         <div class="sidebar_card">
-            
-        <div class="card">
-            <img src="{% static 'contracts/image/image.PNG' %}" alt="تصویر لیلا زارع">
-            <div class="name-box">
-                <h2>لیلا زارع</h2>
+            <div class="card">
+                <img src="{% static 'contracts/image/image.PNG' %}" alt="تصویر لیلا زارع">
+                <div class="name-box">
+                    <h2>لیلا زارع</h2>
+                </div>
+                <div class="title-box">
+                    <p>کارشناس منابع انسانی و نرم‌افزار</p>
+                </div>
+                <div class="colomn">
+                    <div class="box" aria-label="آیین نامه‌ها و فرآیندها">
+                        <img src="{% static 'contracts/icons/processes.png' %}" alt="Process icon">
+                        <span>آیین نامه‌ها و فرآیندها</span>
+                    </div>
+
+                    <div class="box" aria-label="روابط عمومی">
+                        <img src="{% static 'contracts/icons/public_relations.png' %}" alt="Public relations icon">
+                        <span>روابط عمومی</span>
+                    </div>
+
+                    <div class="box" aria-label="پرسنلی">
+                        <img src="{% static 'contracts/icons/personnel.png' %}" alt="Personnel icon">
+                        <span>پرسنلی</span>
+                    </div>
+
+                    <div class="box" style="transform: scale(1.05); background-color: #005b4f;"aria-label="قراردادها">
+                        <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
+                        <span>قراردادها</span>
+                    </div>
+
+                    <div class="box" aria-label="بودجه و اعتبار">
+                        <img src="{% static 'contracts/icons/budget.png' %}" alt="Budget icon">
+                        <span>بودجه و اعتبار</span>
+                    </div>
+
+                    <div class="box" aria-label="بازرگانی">
+                        <img src="{% static 'contracts/icons/commerce.png' %}" alt="Commerce icon">
+                        <span>بازرگانی</span>
+                    </div>
+
+                    <div class="box" aria-label="داشبورد مدیریت">
+                        <img src="{% static 'contracts/icons/dashboard.png' %}" alt="Dashboard icon">
+                        <span>داشبورد مدیریت</span>
+                    </div>
+
+                    <div class="box" aria-label="کنترل محصول و انبار">
+                        <img src="{% static 'contracts/icons/inventory.png' %}" alt="Inventory icon">
+                        <span>کنترل محصول و انبار</span>
+                    </div>
+
+                    <div class="box" aria-label="دبیرخانه">
+                        <img src="{% static 'contracts/icons/secretariat.png' %}" alt="Secretariat icon">
+                        <span>دبیرخانه</span>
+                    </div>
+
+                </div>
             </div>
-            <div class="title-box">
-                <p>کارشناس منابع انسانی و نرم‌افزار</p>
-            </div>
-            <div class="colomn">
-                <div class="box" aria-label="آیین نامه‌ها و فرآیندها">
-                    <img src="{% static 'contracts/icons/processes.png' %}" alt="Process icon">
-                    <span>آیین نامه‌ها و فرآیندها</span>
-                </div>
-    
-                <div class="box" aria-label="روابط عمومی">
-                    <img src="{% static 'contracts/icons/public_relations.png' %}" alt="Public relations icon">
-                    <span>روابط عمومی</span>
-                </div>
-    
-                <div class="box" aria-label="پرسنلی">
-                    <img src="{% static 'contracts/icons/personnel.png' %}" alt="Personnel icon">
-                    <span>پرسنلی</span>
-                </div>
-    
-                <div class="box" style="transform: scale(1.05); background-color: #005b4f;"aria-label="قراردادها">
-                    <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
-                    <span>قراردادها</span>
-                </div>
-    
-                <div class="box" aria-label="بودجه و اعتبار">
-                    <img src="{% static 'contracts/icons/budget.png' %}" alt="Budget icon">
-                    <span>بودجه و اعتبار</span>
-                </div>
-    
-                <div class="box" aria-label="بازرگانی">
-                    <img src="{% static 'contracts/icons/commerce.png' %}" alt="Commerce icon">
-                    <span>بازرگانی</span>
-                </div>
-    
-                <div class="box" aria-label="داشبورد مدیریت">
-                    <img src="{% static 'contracts/icons/dashboard.png' %}" alt="Dashboard icon">
-                    <span>داشبورد مدیریت</span>
-                </div>
-    
-                <div class="box" aria-label="کنترل محصول و انبار">
-                    <img src="{% static 'contracts/icons/inventory.png' %}" alt="Inventory icon">
-                    <span>کنترل محصول و انبار</span>
-                </div>
-    
-                <div class="box" aria-label="دبیرخانه">
-                    <img src="{% static 'contracts/icons/secretariat.png' %}" alt="Secretariat icon">
-                    <span>دبیرخانه</span>
-                </div>
-    
-            </div>
-        </div>
         </div>       
         <!-- اطلاعات مربوط به قرارداد در سمت راست -->
         <div class="details-container">
@@ -556,12 +452,6 @@
                             <th><label for="declared_salary">حقوق ابرازی</label></th>
                         </tr>
                         <tr>
-                            <!-- <td><select class="select_form"  
-                                name="contract_type" id="contract_type" value="{{contract.contract_type}}">
-                                <option value="معین" {% if contract.contract_type == "معین" %} selected {% endif %} >معین</option>
-                                <option value="شبه معین">شبه معین</option>
-                                <option value="ساعتی">ساعتی</option>                        
-                            </select> -->
                             <td><select class='select_form' name="contract_type" id="contract_type">
                                 <option value="معین" {% if contract.contract_type == "معین" %}selected{% endif %}>معین</option>
                                 <option value="شبه معین" {% if contract.contract_type == "شبه معین" %}selected{% endif %}>شبه معین</option>
@@ -657,7 +547,7 @@
                     </tbody></table>
                 </div>
                 <div class="submit_button">
-                    <button type="submit"> ثبت 
+                    <button type="submit" onclick="confirmSubmission()"> ثبت 
                     </button>
                     <!-- برای این قسمت حتما باید عملکردشو اضافه کنم -->
                      <a href="{% url 'contracts:contractlist' %}">
@@ -706,6 +596,36 @@
             document.getElementById('contract_end_date').value = input.value.replace(/\//g, '-');
         }
     </script>
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <!-- // پر کردن فیلدهای مخفی مربوط به تاریخ برای اینکه فر ارسل گردد. -->
+    <!-- این قسمت با قسمت صفحه ایجا قرارداد متفاوت است -->
+    <script>  
+        // هنگامی که صفحه بارگذاری می‌شود، فیلدهای مخفی را پر کنید  
+        document.addEventListener('DOMContentLoaded', function() {  
+            document.getElementById('date_of_birth_txt').value = '{{ contract.date_of_birth }}';  
+            document.getElementById('contract_start_date_txt').value = '{{ contract.contract_start_date }}';  
+            document.getElementById('contract_end_date_txt').value = '{{ contract.contract_end_date }}';  
+            
+            // رویداد تغییر روی datepickerها برای به‌روزرسانی فیلدهای مخفی  
+            document.getElementById('date_of_birth_txt').addEventListener('change', function() {  
+                document.getElementById('date_of_birth').value = this.value.replace(/\//g, '-');  
+            });  
+        
+            document.getElementById('contract_start_date_txt').addEventListener('change', function() {  
+                document.getElementById('contract_start_date').value = this.value.replace(/\//g, '-');  
+            });  
+        
+            document.getElementById('contract_end_date_txt').addEventListener('change', function() {  
+                document.getElementById('contract_end_date').value = this.value.replace(/\//g, '-');  
+            });  
+        
+            // پر کردن فیلدهای مخفی به طور خودکار  
+            document.getElementById('date_of_birth').value = '{{ contract.date_of_birth|date:"Y-m-d" }}'.replace(/\//g, '-');  
+            document.getElementById('contract_start_date').value = '{{ contract.contract_start_date|date:"Y-m-d" }}'.replace(/\//g, '-');  
+            document.getElementById('contract_end_date').value = '{{ contract.contract_end_date|date:"Y-m-d" }}'.replace(/\//g, '-');  
+        });  
+        </script>
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
     
     <!-- برای قسمت مربوط به درصد آکورد -->
     <script>
@@ -773,6 +693,7 @@
             $(".date").each(function () {
                     const value = $(this).val().trim();
                     console.log(value);
+                    console.log(typeof value);
                     const errorElement = $(this).next(".error[data-for='date']");
                     if (value === "") {
                         isValid = false;
@@ -789,6 +710,15 @@
             });
         });
     </script>
+        <!-- جهت اطمینان از ثبت تغییرات -->
+    <script>  
+        function confirmSubmission() {  
+            const confirmation = confirm("آیا از ایجاد تغییرات مطمئن هستید؟");  
+            if (confirmation) {  
+                document.getElementById("myForm").submit(); // فرم را ارسال می‌کند  
+            }  
+        }  
+        </script>  
     
 </body>
 </html>
