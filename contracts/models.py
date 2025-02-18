@@ -1,6 +1,7 @@
 from django.db import models
 from django_jalali.db import models as jmodels
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
 
 class Contract(models.Model):
     full_name = models.CharField(max_length=255,default='SOME STRING', verbose_name="نام و نام خانوادگی")
@@ -83,7 +84,6 @@ class Contract(models.Model):
     housing_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="حق مسکن")
     food_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="حق خوار و بار")
     seniority_pay = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="پایه سنوات")
-    # monthly = models.BooleanField(default=True, verbose_name="ماهانه")
     child_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="حق اولاد")
     marriage_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="حق تاهل")
     transportation_allowance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="ایاب و ذهاب")
@@ -102,6 +102,30 @@ class Contract(models.Model):
     
     def __str__(self):
         return self.full_name
+    
+    def save(self, *args , **kwargs):
+        # محاسبه حق تاهل
+        if self.marital_status == "متأهل":
+            self.marriage_allowance = 30303
+            # مقدار پیش فرض یا قابل تغییر
+        else:
+            self.marriage_allowance = 0
+        # محاسبه حق اولاد
+        self.child_allowance = self.child_number * 43455
+
+        # محاسبه دستمزد ساعتی
+        self.hourly_wage = ( self.base_salary + self.housing_allowance + self.seniority_pay +
+                             self.food_allowance + self.child_allowance + self.marriage_allowance +
+                             self.transportation_allowance + self.attraction_bonus + self.management_allowance )
+        # دستمزد ساعتی با آکورد برای قرار گرفتن در پی دی اف قرارداد
+        # self.hourly_wage_with_accord_final = ( self.hourly_wage * ((self.hourly_wage_with_accord + 100 )/100))
+
+        super().save(*args, **kwargs)
+
+    def clean(self):
+        if self.marital_status != "متأهل" and self.child_number > 0:
+            raise ValidationError('افراد مجرد نمی توانند تعداد فرزند داشته باشند.')
+        super().clean()
 
 class Outstanding_Contract(models.Model):
     pass

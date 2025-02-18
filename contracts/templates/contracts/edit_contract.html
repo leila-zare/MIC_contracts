@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-</head>
-<body>
-    <h2>ویرایش قرارداد</h2>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <button type="submit">دخیره تغییرات</button>
-    </form>
-</body>
-</html>
-
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -26,13 +8,22 @@
     <title>اصلاح قرارداد</title>
      {{ form.media }}      <!-- بارگذاری استایل ها و جاوا اسکریپت های تقویم شمسی -->
         <link rel="stylesheet" href="{% static '/contracts/jalali-input/jalalidatepicker.min.css' %}">
-        <script src="{% static '/contracts/jalali-input/jalalidatepicker.min.js' %}"></script>
-        <script>jalaliDatepicker.startWatch();</script>  
-        <script src="{% static '/contracts/js/inputmask.min.js' %}"></script>
 
         <!-- jQuery Validation JS -->
         <script src="{% static '/contracts/js/jquery-3.6.0.min.js' %}"></script>
         <script src="{% static '/contracts/js/jquery.validate.min.js' %}"></script>
+
+        <script src="{% static '/contracts/js/inputmask.min.js' %}"></script>
+
+        <script src="{% static '/contracts/jalali-input/jalalidatepicker.min.js' %}"></script>
+        <!-- <script>jalaliDatepicker.startWatch();</script> -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                jalaliDatepicker.startWatch();
+            });
+
+            
+        </script>
 
     <style>
         body {
@@ -52,15 +43,16 @@
             border-color: #ffffff;
             direction: ltr;
             margin: 5px;
-            background-color: #84ad1d;
-            border-radius: 5px;
+            background-color: #006d5b;
+            border-radius: 10px;
             padding: 5px 20px;
             color: #ffffff;
-            /* margin-bottom: 10px; */
-            border: #006d5b;
-            border-width: 25px;
+            /* border-width: 25px; */
             text-align: center;
             cursor: pointer;
+        }
+        button:hover{
+            background-color: #025345;
         }
         .submit_button{
             display: flex;
@@ -119,55 +111,21 @@
             gap: 20px;
             width: 90%;
             margin: 20px auto;
-        }
-        
-        /* استایل‌های بخش کارت کاربری */
-        .card {
-            width: 250px;
+        }   
+        /* استایل قسمت ساید بار */
+        .card {width: 250px;
             text-align: center;
-            border: 2px solid #006d5b;
+            /* border: 2px solid #006d5b; */
             border-radius: 10px;
-            padding: 20px;
+            padding: 10px;
             /* background-color: #fff; */
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        } 
-        /* تنظیمات کلی سایدبار */
-        .sidebar_card {
-            width: 50px; /* عرض پیش‌فرض */
-            height: 100vh; /* تمام ارتفاع صفحه */
-            position: fixed;
-            border-radius: 10px;
-            top: 0;
-            right: 0;
-            background-color: #f1ebeb; 
-            /* رنگ پس‌زمینه */
-            overflow: hidden; /* جلوگیری از نمایش محتوای اضافی */
-            transition: width 0.3s ease; /* انیمیشن برای تغییر عرض */
-            z-index: 1000;
-        }
-        /* محتوا داخل سایدبار */
-        .sidebar_card .card {
-            opacity: 0; /* مخفی کردن محتوا */
-            transition: opacity 0.3s ease; /* انیمیشن برای نمایش محتوا */
-            padding: 10px;
-            color: #fff;
-            height: 100%;
-            overflow-y: scroll;
-            scrollbar-width: none;
-        }
-        /* حالت Hover روی سایدبار */
-        .sidebar_card:hover {
-            width: 275px; /* عرض بازشده */
-        }
-
-        .sidebar_card:hover .card {
-            opacity: 1; /* نمایش محتوا */
-        }   
+        }        
         .card img {
             width: 250px;
             height: 250px;
             border-radius: 50%;
-            margin-bottom: 15px;
+            /* margin-bottom: 15px; */
         }
         .card .box img {
             margin-left: 10px;
@@ -177,15 +135,55 @@
         }
         .name-box, .title-box {
             background-color: #ffffff;
-            border-radius: 5px;
-            padding: 5px 20px;
+            border-radius: 15px;
+            /* border: #006d5b; */
+            /* padding: 0.01%; */
             color: #006d5b;
             text-align: center;
-            margin-bottom: 10px;
-            border: #006d5b;
+            margin-bottom: 5px;
+            /* border: #006d5b; */
             border-width: 10px;
         }
-        
+        h2{
+            font-size: medium;
+        }
+
+
+
+        /* استایل مربوط به آیکون های سمت راست */
+        .box {
+            background-color: #006d5b;
+            color: white;
+            width: 235px;
+            height: 50px;
+            margin: 7px;
+            display: flex;
+            align-items: center; /* Align items vertically centered */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background-color 0.3s;
+            font-size: 18px;
+            position: relative; /* For better hover effects */
+            justify-content: flex-start; /* Align content to the start (left) */
+            padding: 0px; /* Add padding */
+        }        
+        .box:hover {
+            transform: scale(1.05);
+            background-color: #005b4f; /* Darker shade on hover */
+        }        
+        .box img {            
+            margin-left: 10px;
+            width: 35px;
+            height: 35px;
+    
+        }
+        .box span {
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center ;
+            margin-right: px; /* Space between icon and text */
+        }
+       /* /////////////////////////////////////////////////////////////////////////////////  */
         /* استایل‌های اطلاعات هویتی و قراردادها */
         .details-container {
             flex: 1;
@@ -198,14 +196,21 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
             justify-content: center;
+            text-align: center;
+            display: flex;
         }
         h1 {
-            background-color: #006d5b;
+            background-color: #8eb10e;
             color: #fff;
-            padding: 10px;
-            text-align: center;
+            padding: 5px;
             border-radius: 10px;
             font-size: 1.5em;
+            /* size: small; */
+            width: 50vh;
+            /* height: 35px; */
+            display:flex;
+            justify-content: center;
+            align-items: center;
         }
         table {
             width: 100%;
@@ -238,14 +243,6 @@
             /* padding: 10px; */
             /* color:#006d5b; */
         }
-        textarea{
-            width: 100%;
-            font-family: 'B Titr', sans-serif;
-            border-radius: 10px;
-            background-color: #f1eded;
-            border: 1px solid #ccc;
-        }
-
         ul {
             color: red;
             font-size: 10px;
@@ -264,7 +261,6 @@
             font-size: 10px;
             display: none; /* پیش‌فرض پیام‌ها مخفی */
         }
-
         .select_form{
             background-color: #ffffff;
             /* padding: 10px; */
@@ -283,116 +279,115 @@
 </head>
 <body>
     <div class="main-container">
-        {% if messages %}
+        <!-- {% if messages %}
         {% for message in messages %}
         <p style="color: green; font-family: B Nazanin; font-size: small;">{{ message }}</p>
         {% endfor %}
-        {% endif %}
+        {% endif %} -->
         <!-- کارت کاربری در سمت چپ -->
         <div class="sidebar_card">
-            
-        <div class="card">
-            <img src="{% static 'contracts/image/image.PNG' %}" alt="تصویر لیلا زارع">
-            <div class="name-box">
-                <h2>لیلا زارع</h2>
-            </div>
-            <div class="title-box">
-                <p>کارشناس منابع انسانی و نرم‌افزار</p>
-            </div>
-            <div class="colomn">
-                <div class="box" aria-label="آیین نامه‌ها و فرآیندها">
-                    <img src="{% static 'contracts/icons/processes.png' %}" alt="Process icon">
-                    <span>آیین نامه‌ها و فرآیندها</span>
+            <div class="card">
+                <img src="{% static 'contracts/image/image.PNG' %}" alt="تصویر لیلا زارع">
+                <div class="name-box">
+                    <h2>لیلا زارع</h2>
                 </div>
-    
-                <div class="box" aria-label="روابط عمومی">
-                    <img src="{% static 'contracts/icons/public_relations.png' %}" alt="Public relations icon">
-                    <span>روابط عمومی</span>
+                <div class="title-box">
+                    <p>کارشناس منابع انسانی و نرم‌افزار</p>
                 </div>
-    
-                <div class="box" aria-label="پرسنلی">
-                    <img src="{% static 'contracts/icons/personnel.png' %}" alt="Personnel icon">
-                    <span>پرسنلی</span>
-                </div>
-    
-                <div class="box" style="transform: scale(1.05); background-color: #005b4f;"aria-label="قراردادها">
-                    <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
-                    <span>قراردادها</span>
-                </div>
-    
-                <div class="box" aria-label="بودجه و اعتبار">
-                    <img src="{% static 'contracts/icons/budget.png' %}" alt="Budget icon">
-                    <span>بودجه و اعتبار</span>
-                </div>
-    
-                <div class="box" aria-label="بازرگانی">
-                    <img src="{% static 'contracts/icons/commerce.png' %}" alt="Commerce icon">
-                    <span>بازرگانی</span>
-                </div>
-    
-                <div class="box" aria-label="داشبورد مدیریت">
-                    <img src="{% static 'contracts/icons/dashboard.png' %}" alt="Dashboard icon">
-                    <span>داشبورد مدیریت</span>
-                </div>
-    
-                <div class="box" aria-label="کنترل محصول و انبار">
-                    <img src="{% static 'contracts/icons/inventory.png' %}" alt="Inventory icon">
-                    <span>کنترل محصول و انبار</span>
-                </div>
-    
-                <div class="box" aria-label="دبیرخانه">
-                    <img src="{% static 'contracts/icons/secretariat.png' %}" alt="Secretariat icon">
-                    <span>دبیرخانه</span>
-                </div>
-    
-            </div>
-        </div>
-        </div>
+                <div class="colomn">
+                    <div class="box" aria-label="آیین نامه‌ها و فرآیندها">
+                        <img src="{% static 'contracts/icons/processes.png' %}" alt="Process icon">
+                        <span>آیین نامه‌ها و فرآیندها</span>
+                    </div>
 
-       
+                    <div class="box" aria-label="روابط عمومی">
+                        <img src="{% static 'contracts/icons/public_relations.png' %}" alt="Public relations icon">
+                        <span>روابط عمومی</span>
+                    </div>
+
+                    <div class="box" aria-label="پرسنلی">
+                        <img src="{% static 'contracts/icons/personnel.png' %}" alt="Personnel icon">
+                        <span>پرسنلی</span>
+                    </div>
+
+                    <div class="box" style="transform: scale(1.05); background-color: #005b4f;"aria-label="قراردادها">
+                        <img src="{% static 'contracts/icons/contracts.png' %}" alt="Contracts icon">
+                        <span>قراردادها</span>
+                    </div>
+
+                    <div class="box" aria-label="بودجه و اعتبار">
+                        <img src="{% static 'contracts/icons/budget.png' %}" alt="Budget icon">
+                        <span>بودجه و اعتبار</span>
+                    </div>
+
+                    <div class="box" aria-label="بازرگانی">
+                        <img src="{% static 'contracts/icons/commerce.png' %}" alt="Commerce icon">
+                        <span>بازرگانی</span>
+                    </div>
+
+                    <div class="box" aria-label="داشبورد مدیریت">
+                        <img src="{% static 'contracts/icons/dashboard.png' %}" alt="Dashboard icon">
+                        <span>داشبورد مدیریت</span>
+                    </div>
+
+                    <div class="box" aria-label="کنترل محصول و انبار">
+                        <img src="{% static 'contracts/icons/inventory.png' %}" alt="Inventory icon">
+                        <span>کنترل محصول و انبار</span>
+                    </div>
+
+                    <div class="box" aria-label="دبیرخانه">
+                        <img src="{% static 'contracts/icons/secretariat.png' %}" alt="Secretariat icon">
+                        <span>دبیرخانه</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>       
         <!-- اطلاعات مربوط به قرارداد در سمت راست -->
         <div class="details-container">
             <form id="myform" action="" method="post" >
-                <!-- {% csrf_token %} -->
+                {% csrf_token %}
+                
+                <!-- اطلاعات هویتی -->
                 <div class="container">
                     <h1>اطلاعات هویتی</h1>
+
+                    <input type="text" style="display: none;" class="date vjDateField" name="date_of_birth" id="date_of_birth">
+                    <input type="text" style="display: none;" class="date vjDateField" name="contract_start_date" id="contract_start_date">
+                    <input type="text" style="display: none;" class="date vjDateField" name="contract_end_date" id="contract_end_date">
+
+
                     <table>
                         <tr>
                             <th><label for="full_name">نام و نام خانوادگی</label></th>
                             <th><label for="national_id">کد ملی</label></th>
                             <th><label for="ID_number">شماره شناسنامه</label></th>
-                            <th><label for="date_of_birth">تاریخ تولد</label></th>
+                            <th><label for="date_of_birth_txt">تاریخ تولد</label></th>
                             <th><label for="place_of_issue">محل صدور</label></th>
                             <th><label for="fathers_name">نام پدر</label></th>
                             <th><label for="marital_status">وضعیت تاهل</label></th>
                             <th><label for="child_number">تعداد فرزند</label></th>
                         </tr>
                         <tr>
-                            <td type="text" class="text" name="full_name" id="full_name">{{form.full_name}}
-                                <div class="error" data-for="text"> وارد نام و نام خانوادگی اجباری است</div></td> 
-                                <!-- <td><input type="text" class="text" name="full_name" id="full_name" value = "{{ full_name }}" >{{ form.full_name}}
-                                    <div class="error" data-for="text"> وارد نام و نام خانوادگی اجباری است</div></td>                             -->
-                            <td type="text" class="text" name="national_id" id="national_id">{{form.national_id}}
+                            <td><input type="text" class="text" name="full_name" id="full_name" value="{{contract.full_name}}">
+                                <div class="error" data-for="text"> وارد نام و نام خانوادگی اجباری است</div></td>                            
+                            <td><input type="text" class="text" name="national_id" id="national_id" value="{{contract.national_id}}">
                                 <div class="error" data-for="text"> وارد کردن کد ملی اجباری است</div></td>
-                            <td type="text" class="text" name="ID_number" id="ID_number">{{ form.ID_number }}
+                            <td><input type="text" class="text" name="ID_number" id="ID_number" value="{{contract.ID_number}}">
                                 <div class="error" data-for="text"> وارد کردن شماره شناسنامه اجباری است</div></td>
-                            <td type="text" data-jdp-min-date="today" data-jdp style="z-index: 99999;" class="date" name="date_of_birth" id="date_of_birth" placeholder="yyyy/mm/dd" >{{ form.date_of_birth }}
+                            <td><input type="text" onchange="setBirthDate(this)" data-jdp-min-date="today" data-jdp style="z-index: 99999;" class="date" name="date_of_birth_txt" id="date_of_birth_txt" placeholder="yyyy/mm/dd" value="{{contract.date_of_birth}}">
                                 <div class="error" data-for="date"> وارد کردن تاریخ اجباری است</div></td>
-                            <td type="text" class="text" name="place_of_issue" id="place_of_issue" >{{ form.place_of_issue }}
+                            <td><input type="text" class="text" name="place_of_issue" id="place_of_issue"value="{{contract.place_of_issue}}">
                                 <div class="error" data-for="text"> وارد کردن محل صدور اجباری است</div></td>
-                            <td type="text" class="text" name="fathers_name" id="fathers_name">{{ form.fathers_name}}
+                            <td><input type="text" class="text" name="fathers_name" id="fathers_name"value="{{contract.fathers_name}}">
                                 <div class="error" data-for="text"> وارد کردن نام پدر اجباری است</div></td>
-                            <td><select class="select_form" 
-                                name="marital_status" id="marital_status" placeholder="{{ labels.marital_status}}" >
-
-                                <option selected="" value="متأهل">متأهل</option>
-                                
-                                <option value="مجرد">مجرد</option>
-                                
-                            </select></td>
-                            <td type="text" class="number_input" name="child_number" id="child_number">{{form.child_number}}
+                            <td><select class='select_form' name="marital_status" id="marital_status">
+                                <option value="متأهل" {% if contract.marital_status == "متأهل" %}selected{% endif %}>متأهل</option>
+                                <option value="مجرد" {% if contract.marital_status == "مجرد" %}selected{% endif %}>مجرد</option>
+                            </select>
+                            </td>
+                            <td><input type="number" class="number_input" name="child_number" id="child_number" value="{{contract.child_number}}">
                                 <div class="error" data-for="number_input"> وارد کردن تعداد فرزندان اجباری است</div></td> 
-
                         </tr>
                         <tr>
                             <th><label for="contact_number">شماره تماس</label></th>
@@ -400,46 +395,42 @@
                             <th><label for="postal_code">کد پستی </label></th>
                             <th><label for="address"> آدرس</label></th>
                             <th><label for="military_status">نظام وظیفه</label></th>
-                            <th><label for="reference">معرف</label></th>
                             <th><label for="degree_of_study">مدرک تحصیلی</label></th>
                             <th><label for="field_of_study">رشته تحصیلی</label></th>
-                            
+                            <th><label for="reference">معرف</label></th>
                         </tr>
-
                         <tr>
-                            <td type="text" class="text" name="contact_number" id="contact_number">{{form.contact_number}}
+                            <td><input type="text" class="text" name="contact_number" id="contact_number" value="{{contract.contact_number}}">
                                 <div class="error" data-for="text"> وارد کردن شماره تماس اجباری است</div></td>
-                            <td type="email" name="email" id="email">{{form.email}}
+                            <td><input type="email" name="email" id="email" value="{{contract.email}}">
                                 <div class="error" data-for="email"> لطفا یک ایمیل معتبر وارد کنید</div></td>
-                            <td type="text" class="text" name="postal_code" id="postal_code">{{form.postal_code}}
+                            <td><input type="text" class="text" name="postal_code" id="postal_code" value="{{contract.postal_code}}">
                                 <div class="error" data-for="text"> وارد کردن کد پستی اجباری است</div></td>
-                            <td type="text" class="text" name="address" id="address">{{form.address}}
+                            <td><input type="text" class="text" name="address" id="address" value="{{contract.address}}">
                                 <div class="error" data-for="text"> وارد کردن آدرس اجباری است</div></td>
-                            <td><select class="select_form" 
-                                name="military_status" id="military_status" placeholder="{{ labels.military_status}}" >
-                                <option selected="" value="نیاز به خدمت ندارد">نیاز به خدمت ندارد</option>
-                                <option value=" معاف شده">معاف شده</option>
-                                <option value="در حال خدمت">در حال خدمت</option>
-                                <option value="پایان خدمت">پایان خدمت</option>
-                                <option value="معافیت تحصیلی">معافیت تحصیلی</option>
-                                
-                            </select></td>
-                            <td type="text" class="text" name="reference" id="reference">{{form.reference}}
-                                <div class="error" data-for="text"> وارد کردن معرف اجباری است</div></td>
-                            <td><select class="select_form" 
-                                name="degree_of_study" id="degree_of_study" placeholder="{{ labels.degree_of_study}}" >
-                                <option selected="" value="سیکل">سیکل</option>
-                                <option value="دیپلم">دیپلم</option>
-                                <option value="فوق دیپلم">فوق دیپلم</option>
-                                <option value="کارشناسی">کارشناسی</option>
-                                <option value="کارشناسی ارشد">کارشناسی ارشد</option>
-                                <option value="دکتری">دکتری</option>
-                                <option value="فوق دکتری">فوق دکتری</option>
-                                <option value="حوزوی">حوزوی</option>
-                            </select></td>
-                            <td type="text" class="text" name="field_of_study" id="field_of_study">{{form.field_of_study}}
+                            <td><select class='select_form' name="military_status" id="military_status">
+                                <option value="نیاز به خدمت ندارد" {% if contract.military_status == "نیاز به خدمت ندارد" %}selected{% endif %}>نیاز به خدمت ندارد</option>
+                                <option value="معاف شده" {% if contract.military_status == "معاف شده" %}selected{% endif %}>معاف شده</option>
+                                <option value="در حال خدمت" {% if contract.military_status == "در حال خدمت" %}selected{% endif %}>در حال خدمت</option>
+                                <option value="پایان خدمت" {% if contract.military_status == "پایان خدمت" %}selected{% endif %}>پایان خدمت</option>
+                                <option value="معافیت تحصیلی" {% if contract.military_status == "معافیت تحصیلی" %}selected{% endif %}>معافیت تحصیلی</option>
+                            </select>
+                            </td>
+                            <td><select class='select_form' name="degree_of_study" id="degree_of_study">
+                                <option value="سیکل" {% if contract.degree_of_study == "سیکل" %}selected{% endif %}>سیکل</option>
+                                <option value="دیپلم" {% if contract.degree_of_study == "دیپلم" %}selected{% endif %}>دیپلم</option>
+                                <option value="فوق دیپلم" {% if contract.degree_of_study == "فوق دیپلم" %}selected{% endif %}>فوق دیپلم</option>
+                                <option value="کارشناسی" {% if contract.degree_of_study == "کارشناسی" %}selected{% endif %}>کارشناسی</option>
+                                <option value="کارشناسی ارشد" {% if contract.degree_of_study == "کارشناسی ارشد" %}selected{% endif %}>کارشناسی ارشد</option>
+                                <option value="دکتری" {% if contract.degree_of_study == "دکتری" %}selected{% endif %}>دکتری</option>
+                                <option value="فوق دکتری" {% if contract.degree_of_study == "فوق دکتری" %}selected{% endif %}>فوق دکتری</option>
+                                <option value="حوزوی" {% if contract.degree_of_study == "حوزوی" %}selected{% endif %}>حوزوی</option>
+                            </select>
+                            </td>
+                            <td><input type="text" class="text" name="field_of_study" id="field_of_study" value="{{contract.field_of_study}}">
                                 <div class="error" data-for="text"> وارد کردن رشته تحصیلی اجباری است</div></td>
-                
+                            <td><input type="text" class="text" name="reference" id="reference" value="{{contract.reference}}">
+                                <div class="error" data-for="text"> وارد کردن معرف اجباری است</div></td>
                         </tr>
                     </table>
 
@@ -453,63 +444,42 @@
                         <tr>
                             <th><label for="contract_type">نوع قرارداد</label></th>
                             <th><label for="contract_number">شماره قرارداد</label></th>
-                            <th><label for="contract_start_date">تاریخ شروع</label></th>
-                            <th><label for="contract_end_date">تاریخ پایان</label></th>
+                            <th><label for="contract_start_date_txt">تاریخ شروع</label></th>
+                            <th><label for="contract_end_date_txt">تاریخ پایان</label></th>
                             <th><label for="job_group">گروه کاری</label></th>
                             <th><label for="job_position">سمت شغلی</label></th>
                             <th><label for="insurance_type">نوع بیمه</label></th>
                             <th><label for="declared_salary">حقوق ابرازی</label></th>
                         </tr>
                         <tr>
-                            <td><select class="select_form"  
-                                name="contract_type" id="contract_type" placeholder="{{ labels.contract_type}}" >
-
-                                <option selected="" value="معین">معین</option>
-                                
-                                <option value="شبه معین">شبه معین</option>
-                                
-                                <option value="ساعتی">ساعتی</option>                        
-                                
+                            <td><select class='select_form' name="contract_type" id="contract_type">
+                                <option value="معین" {% if contract.contract_type == "معین" %}selected{% endif %}>معین</option>
+                                <option value="شبه معین" {% if contract.contract_type == "شبه معین" %}selected{% endif %}>شبه معین</option>
+                                <option value="ساعتی" {% if contract.contract_type == "ساعتی" %}selected{% endif %}>ساعتی</option>
                             </select>
-                            <td type="text" class="text" name="contract_number" id="contract_number">{{form.contract_number}}
+                            <td><input type="text" class="text" name="contract_number" id="contract_number" value="{{contract.contract_number}}">
                                 <div class="error" data-for="text"> وارد کردن شماره قرارداد اجباری است</div></td>
-                            <td type="text" data-jdp-min-date="today" data-jdp style="z-index: 99999;" class="date" name="contract_start_date" id="contract_start_date" placeholder="yyyy/mm/dd" >{{form.contract_start_date}}
+                            <td><input type="text" onchange="setStartDate(this)" data-jdp-min-date="today" data-jdp style="z-index: 99999;" class="date" name="contract_start_date_txt" id="contract_start_date_txt" placeholder="yyyy/mm/dd" value="{{contract.contract_start_date}}">
                                 <div class="error" data-for="date"> وارد کردن تاریخ اجباری است</div></td>
-                            <td type="text" data-jdp-min-date="today" data-jdp style="z-index: 99999;" class="date" name="contract_end_date" id="contract_end_date" placeholder="yyyy/mm/dd" >{{form.contract_end_date}}
+                            <td><input type="text" onchange="setEndDate(this)" data-jdp-min-date="today" data-jdp style="z-index: 99999;" class="date" name="contract_end_date_txt" id="contract_end_date_txt" placeholder="yyyy/mm/dd" value="{{contract.contract_end_date}}">
                                 <div class="error" data-for="date"> وارد کردن تاریخ اجباری است</div></td>   
-                            <td><select class="select_form"
-                                name="job_group" placeholder="{{ labels.job_group}}" >
-
-                                <option selected="" value="ستاد">ستاد</option>
-                                
-                                <option value="مدیریت">مدیریت</option>
-                                
-                                <option value="فنی">فنی</option>
-                                <option value="بازرگانی">بازرگانی</option>
-                                <option value="دفتر قم">دفتر قم</option>                        
-                                
+                            <td><select class='select_form' name="job_group" id="job_group">
+                                <option value="ستاد" {% if contract.job_group == "ستاد" %}selected{% endif %}>ستاد</option>
+                                <option value="مدیریت" {% if contract.job_group == "مدیریت" %}selected{% endif %}>مدیریت</option>
+                                <option value="فنی" {% if contract.job_group == "فنی" %}selected{% endif %}>فنی</option>
+                                <option value="بازرگانی" {% if contract.job_group == "بازرگانی" %}selected{% endif %}>بازرگانی</option>
+                                <option value="دفتر قم" {% if contract.job_group == "دفتر قم" %}selected{% endif %}>دفتر قم</option>
                             </select>
-                            <!-- <input type="text" name="job_group" placeholder="{{ job_group }}"></td> -->
-                            <td type="text" class="text" name="job_position" id="job_position">{{ form.job_position }}
+                            <td><input type="text" class="text" name="job_position" id="job_position" value="{{contract.job_position}}">
                                 <div class="error" data-for="text"> وارد کردن گروه کاری اجباری است</div></td>
-                            <td><select  class="select_form" 
-                                name="insurance_type" id="insurance_type" placeholder="{{ labels.insurance_type}}" >
-
-                                <option selected="" value="کارفرما">کارفرما</option>
-                                
-                                <option value="کارمند">کارمند</option>
-                     
+                            <td><select class='select_form' name="insurance_type" id="insurance_type">
+                                <option value="کارفرما" {% if contract.insurance_type == "کارفرما" %}selected{% endif %}>کارفرما</option>
+                                <option value="کارمند" {% if contract.insurance_type == "کارمند" %}selected{% endif %}>کارمند</option>
                             </select>
-                            <!-- <input type="text" name="insurance_type" placeholder="{{ insurance_type }}"></td> -->
-                            <td><select  class="select_form" 
-                                name="declared_salary" id="declared_salary" placeholder="{{ labels.declared_salary}}" >
-
-                                <option selected="" value="پایه">پایه</option>
-                                
-                                <option value="واقعی">واقعی</option>
-                     
+                            <td><select class='select_form' name="declared_salary" id="declared_salary">
+                                <option value="پایه" {% if contract.declared_salary == "پایه" %}selected{% endif %}>پایه</option>
+                                <option value="واقعی" {% if contract.declared_salary == "واقعی" %}selected{% endif %}>واقعی</option>
                             </select>
-                            <!-- <input type="text" name="declared_salary" placeholder="{{ declared_salary }}"></td> -->
                         </tr>
                         <tbody><tr>
                             <th><label for="base_salary">حق پایه</label></th>
@@ -522,21 +492,21 @@
                             <th><label for="attraction_bonus">فوق العاده جذب</label></th>
                         </tr>
                         <tbody><tr>
-                            <td type="text" inputmode="numeric" class="number_input" name="base_salary" id="base_salary">{{ form.base_salary }}
+                            <td><input type="text" inputmode="numeric" class="number_input" name="base_salary" id="base_salary" value="{{contract.base_salary}}">
                                 <div class="error" data-for="number_input"> وارد کردن حق پایه اجباری است</div></td>                
-                            <td type="text" inputmode="numeric" class="number_input" name="housing_allowance" id="housing_allowance">{{ form.housing_allowance }}
+                            <td><input type="text" inputmode="numeric" class="number_input" name="housing_allowance" id="housing_allowance" value="{{contract.housing_allowance}}">
                                 <div class="error" data-for="number_input"> وارد کردن حق مسکن اجباری است</div></td>                
-                            <td type="text" inputmode="numeric" class="number_input" name="food_allowance" id="food_allowance">{{ form.food_allowance }}
+                            <td><input type="text" inputmode="numeric" class="number_input" name="food_allowance" id="food_allowance" value="{{contract.food_allowance}}">
                                 <div class="error" data-for="number_input"> وارد کردن حق خوار و بار اجباری است</div></td>                
-                            <td type="text" inputmode="numeric" class="number_input" name="seniority_pay" id="seniority_pay">{{ form.seniority_pay }}
+                            <td><input type="text" inputmode="numeric" class="number_input" name="seniority_pay" id="seniority_pay" value="{{contract.seniority_pay}}">
                                 <div class="error" data-for="number_input"> وارد کردن پایه سنوات ماهانه اجباری است</div></td>                
-                            <td type="text" inputmode="numeric" class="number_input" name="child_allowance" id="child_allowance">{{ form.child_allowance }}
+                            <td><input type="text" inputmode="numeric" class="number_input" name="child_allowance" id="child_allowance" value="{{contract.child_allowance}}">
                                 <div class="error" data-for="number_input"> وارد کردن حق اولاد اجباری است</div></td>                
-                            <td type="text" inputmode="numeric" class="number_input" name="marriage_allowance" id="marriage_allowance">{{ form.marriage_allowance }}
+                            <td><input type="text" inputmode="numeric" class="number_input" name="marriage_allowance" id="marriage_allowance" value="{{contract.marriage_allowance}}">
                                 <div class="error" data-for="number_input"> وارد کردن حق تاهل اجباری است</div></td>                
-                            <td type="text" inputmode="numeric" class="number_input" name="transportation_allowance" id="transportation_allowance">{{ form.transportation_allowance }}
+                            <td><input type="text" inputmode="numeric" class="number_input" name="transportation_allowance" id="transportation_allowance" value="{{contract.transportation_allowance}}">
                                 <div class="error" data-for="number_input"> وارد کردن ایاب و ذهاب اجباری است</div></td>               
-                            <td type="text" inputmode="numeric" class="number_input" name="attraction_bonus" id="attraction_bonus">{{ form.attraction_bonus }}
+                            <td><input type="text" inputmode="numeric" class="number_input" name="attraction_bonus" id="attraction_bonus" value="{{contract.attraction_bonus}}">
                                 <div class="error" data-for="number_input"> وارد کردن فوق العاده جذب اجباری است</div></td>
                         </tr>
                         <tr>
@@ -546,13 +516,13 @@
                             <th><label for="insurance_number">شماره بیمه</label></th>
                         </tr>
                         <tr>
-                            <td type="text" inputmode="numeric" class="number_input" name="management_allowance" id="management_allowance">{{ form.management_allowance }}
+                            <td><input type="text" inputmode="numeric" class="number_input" name="management_allowance" id="management_allowance" value="{{contract.management_allowance}}">
                                 <div class="error" data-for="number_input"> وارد کردن حق مدیریت اجباری است</div></td>               
-                            <td type="text" inputmode="numeric" class="number_input" name="hourly_wage" id="hourly_wage">{{ form.hourly_wage }}
+                            <td><input type="text" inputmode="numeric" class="number_input" name="hourly_wage" id="hourly_wage" value="{{contract.hourly_wage}}">
                                 <div class="error" data-for="number_input"> وارد کردن دستمزد ساعتی اجباری است</div></td>                
-                            <td type="number" class="number_input" name="hourly_wage_with_accord" id="hourly_wage_with_accord" min="0" max="100">{{ form.hourly_wage_with_accord }}
-                                <div class="error" data-for="number_input"> وارد کردن دستمزد ساعتی با آکورد اجباری است</div></td>                
-                            <td type="text" inputmode="numeric" class="text" name="insurance_number" id="insurance_number">{{ form.insurance_number }}
+                            <td><input type="number" class="number_input" name="hourly_wage_with_accord" id="hourly_wage_with_accord" value="{{contract.hourly_wage_with_accord}}" min="0" max="100">
+                                <div class="error" data-for="number_input"> وارد کردن درصد آکورد اجباری است</div></td>                
+                            <td><input type="text" inputmode="numeric" class="text" name="insurance_number" id="insurance_number"value="{{contract.insurance_number}}">
                                 <div class="error" data-for="text"> وارد کردن شماره بیمه اجباری است</div></td>
                         </tr>
                     </table>
@@ -567,28 +537,28 @@
                             <th><label for="IBAN_salary">شماره شبا</label></th>
                         </tr>
                         <tbody><tr>
-                            <td type="text" class="text" name="bank_name_salary" id="bank_name_salary">{{ form.bank_name_salary }}
+                            <td><input type="text" class="text" name="bank_name_salary" id="bank_name_salary" value="{{contract.bank_name_salary}}">
                                 <div class="error" data-for="text"> وارد کردن نام بانک اجباری است</div></td> 
-                            <td type="text" class="text" name="account_number_salary" id="account_number_salary">{{ form.account_number_salary }}
+                            <td><input type="text" class="text" name="account_number_salary" id="account_number_salary" value="{{contract.account_number_salary}}">
                                 <div class="error" data-for="text"> وارد کردن شماره حساب اجباری است</div></td>               
-                            <td type="text" class="text" name="IBAN_salary" id="IBAN_salary">{{ form.IBAN_salary }}
+                            <td><input type="text" class="text" name="IBAN_salary" id="IBAN_salary" value="{{contract.IBAN_salary}}">
                                 <div class="error" data-for="text"> وارد کردن شماره شبا اجباری است</div></td>  
                         </tr>
                     </tbody></table>
                 </div>
                 <div class="submit_button">
-                    <button type="submit"> ثبت تغییرات 
+                    <button type="submit" onclick="confirmSubmission()"> ثبت 
                     </button>
                     <!-- برای این قسمت حتما باید عملکردشو اضافه کنم -->
-                    <button type="submit"> لغو 
-                    </button>
+                     <a href="{% url 'contracts:contractlist' %}">
+                        <button type="button" > لغو 
+                        </button>
+                    </a>
                 </div>
             </form>
+          
         </div>
     </div>
-
-    <script src="{% static '/contracts/jalali-input/jalalidatepicker.min.js' %}"></script>
-    <script>jalaliDatepicker.startWatch();</script>
     <script>
             // انتخاب تمام فیلدهای ورودی عددی
         const numberInputs = document.querySelectorAll('.number_input');
@@ -615,7 +585,47 @@
             input.value = input.value.replace(/,/g, ''); // حذف کاماها
         });
         });
+
+        function setBirthDate(input) {
+            document.getElementById('date_of_birth').value = input.value.replace(/\//g, '-');
+        }
+        function setStartDate(input) {
+            document.getElementById('contract_start_date').value = input.value.replace(/\//g, '-');
+        }
+        function setEndDate(input) {
+            document.getElementById('contract_end_date').value = input.value.replace(/\//g, '-');
+        }
     </script>
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <!-- // پر کردن فیلدهای مخفی مربوط به تاریخ برای اینکه فر ارسل گردد. -->
+    <!-- این قسمت با قسمت صفحه ایجا قرارداد متفاوت است -->
+    <script>  
+        // هنگامی که صفحه بارگذاری می‌شود، فیلدهای مخفی را پر کنید  
+        document.addEventListener('DOMContentLoaded', function() {  
+            document.getElementById('date_of_birth_txt').value = '{{ contract.date_of_birth }}';  
+            document.getElementById('contract_start_date_txt').value = '{{ contract.contract_start_date }}';  
+            document.getElementById('contract_end_date_txt').value = '{{ contract.contract_end_date }}';  
+            
+            // رویداد تغییر روی datepickerها برای به‌روزرسانی فیلدهای مخفی  
+            document.getElementById('date_of_birth_txt').addEventListener('change', function() {  
+                document.getElementById('date_of_birth').value = this.value.replace(/\//g, '-');  
+            });  
+        
+            document.getElementById('contract_start_date_txt').addEventListener('change', function() {  
+                document.getElementById('contract_start_date').value = this.value.replace(/\//g, '-');  
+            });  
+        
+            document.getElementById('contract_end_date_txt').addEventListener('change', function() {  
+                document.getElementById('contract_end_date').value = this.value.replace(/\//g, '-');  
+            });  
+        
+            // پر کردن فیلدهای مخفی به طور خودکار  
+            document.getElementById('date_of_birth').value = '{{ contract.date_of_birth|date:"Y-m-d" }}'.replace(/\//g, '-');  
+            document.getElementById('contract_start_date').value = '{{ contract.contract_start_date|date:"Y-m-d" }}'.replace(/\//g, '-');  
+            document.getElementById('contract_end_date').value = '{{ contract.contract_end_date|date:"Y-m-d" }}'.replace(/\//g, '-');  
+        });  
+        </script>
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
     
     <!-- برای قسمت مربوط به درصد آکورد -->
     <script>
@@ -628,8 +638,16 @@
             }
         })
     </script>
+    <script>
+        document.getElementById('child_number').addEventListener('input', function(event){
+            const value = parseInt(event.target.value,10);
+            if (value < 0 || value > 6){
+                alert('تعداد فرزندان باید عددی صحییح بین 0 تا 6 باشد');
+                event.target.value = '';
 
-    <!--بررسی خطاها -->
+            }
+        })
+    </script>
     <script>
     $(document).ready(function () {
         $("#myform").submit(function (e) {
@@ -637,9 +655,11 @@
 
             // بررسی فیلدهای عددی
             $(".number_input").each(function () {
-                const value = $(this).val().trim();
+                
+                let value = $(this).val().trim();
                 const errorElement = $(this).next(".error[data-for='number_input']");
-                if (value === "" || isNaN(value)) {
+                let numericValue = value.replace(/,/g,'').replace(/\s/g, '');
+                if (numericValue === "" || isNaN(numericValue)) {
                     isValid = false;
                     errorElement.show(); // نمایش پیام خطا
                 } else {
@@ -672,6 +692,8 @@
             // بررسی فیلدهای تاریخ
             $(".date").each(function () {
                     const value = $(this).val().trim();
+                    console.log(value);
+                    console.log(typeof value);
                     const errorElement = $(this).next(".error[data-for='date']");
                     if (value === "") {
                         isValid = false;
@@ -688,7 +710,15 @@
             });
         });
     </script>
-
-  
+        <!-- جهت اطمینان از ثبت تغییرات -->
+    <script>  
+        function confirmSubmission() {  
+            const confirmation = confirm("آیا از ایجاد تغییرات مطمئن هستید؟");  
+            if (confirmation) {  
+                document.getElementById("myForm").submit(); // فرم را ارسال می‌کند  
+            }  
+        }  
+        </script>  
+    
 </body>
 </html>
