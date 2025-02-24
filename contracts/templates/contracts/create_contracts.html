@@ -385,8 +385,8 @@
                                 <div class="error" data-for="text"> وارد کردن نام پدر اجباری است</div></td>
                             <td><select class="select_form" 
                                 name="marital_status" id="marital_status" placeholder="{{ labels.marital_status}}" >
-                                <option selected="" value="متأهل">متأهل</option>
-                                <option value="مجرد">مجرد</option>
+                                <option selected="" value="مجرد">مجرد</option>
+                                <option value="متأهل">متأهل</option>
                                 <!-- <option value="مطلقه">مطلقه</option>
                                 <option value="بیوه">بیوه</option> -->
                             </select></td>
@@ -502,21 +502,21 @@
                             <th><label for="attraction_bonus">فوق العاده جذب</label></th>
                         </tr>
                         <tbody><tr>
-                            <td><input type="text" inputmode="numeric" class="number_input" name="base_salary" id="base_salary">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="base_salary" id="base_salary" value='1,000'>
                                 <div class="error" data-for="number_input"> وارد کردن حق پایه اجباری است</div></td>                
-                            <td><input type="text" inputmode="numeric" class="number_input" name="housing_allowance" id="housing_allowance">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="housing_allowance" id="housing_allowance" value='1,000'>
                                 <div class="error" data-for="number_input"> وارد کردن حق مسکن اجباری است</div></td>                
-                            <td><input type="text" inputmode="numeric" class="number_input" name="food_allowance" id="food_allowance">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="food_allowance" id="food_allowance" value='1,000'>
                                 <div class="error" data-for="number_input"> وارد کردن حق خوار و بار اجباری است</div></td>                
-                            <td><input type="text" inputmode="numeric" class="number_input" name="seniority_pay" id="seniority_pay">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="seniority_pay" id="seniority_pay" value='1,000'>
                                 <div class="error" data-for="number_input"> وارد کردن پایه سنوات ماهانه اجباری است</div></td>                
-                            <td><input type="text" inputmode="numeric" class="number_input" name="child_allowance" id="child_allowance">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="child_allowance" id="child_allowance" value=0 readonly>
                                 <div class="error" data-for="number_input"> وارد کردن حق اولاد اجباری است</div></td>                
-                            <td><input type="text" inputmode="numeric" class="number_input" name="marriage_allowance" id="marriage_allowance">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="marriage_allowance" id="marriage_allowance" value=0 readonly>
                                 <div class="error" data-for="number_input"> وارد کردن حق تاهل اجباری است</div></td>                
-                            <td><input type="text" inputmode="numeric" class="number_input" name="transportation_allowance" id="transportation_allowance">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="transportation_allowance" id="transportation_allowance" value='1,000'>
                                 <div class="error" data-for="number_input"> وارد کردن ایاب و ذهاب اجباری است</div></td>               
-                            <td><input type="text" inputmode="numeric" class="number_input" name="attraction_bonus" id="attraction_bonus">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="attraction_bonus" id="attraction_bonus" readonly>
                                 <div class="error" data-for="number_input"> وارد کردن فوق العاده جذب اجباری است</div></td>
                         </tr>
                         <tr>
@@ -526,7 +526,7 @@
                             <th><label for="insurance_number">شماره بیمه</label></th>
                         </tr>
                         <tr>
-                            <td><input type="text" inputmode="numeric" class="number_input" name="management_allowance" id="management_allowance">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="management_allowance" id="management_allowance" value=0>
                                 <div class="error" data-for="number_input"> وارد کردن حق مدیریت اجباری است</div></td>               
                             <td><input type="text" inputmode="numeric" class="number_input" name="hourly_wage" id="hourly_wage">
                                 <div class="error" data-for="number_input"> وارد کردن دستمزد ساعتی اجباری است</div></td>                
@@ -569,6 +569,9 @@
           
         </div>
     </div>
+
+    
+    <!-- نمایش فیلدهای عددی به صورت سه رقم سه رقم -->
     <script>
             // انتخاب تمام فیلدهای ورودی عددی
         const numberInputs = document.querySelectorAll('.number_input');
@@ -618,6 +621,7 @@
             }
         })
     </script>
+    <!-- محدودیت تعداد فرزندان -->
     <script>
         document.getElementById('child_number').addEventListener('input', function(event){
             const value = parseInt(event.target.value,10);
@@ -628,6 +632,8 @@
             }
         })
     </script>
+
+    <!-- اسکریپت نمایش خطا -->
     <script>
     $(document).ready(function () {
         $("#myform").submit(function (e) {
@@ -689,18 +695,89 @@
             });
         });
     </script>
-    <!-- # غیر فعال کردن حق تاهل و تعداد فرزند برای افراد مجرد -->
+
+    <!-- محاسبه حق اولاد -->
     <script>
-        document.getElementById("marital_status").addEventListener('change', function(){
-            const maritalStatus = this.value;
-            const childField = document.getElementById('child_number');
-            if (maritalStatus === "مجرد"){
-                childField.value = 0 ; 
-                childField.ariaDisabled = true;
-            } else {
-                childField.ariaDisabled = false;
+        document.addEventListener('DOMContentLoaded', function(){
+            document.getElementById('child_number').addEventListener('input', function(){
+            const childNumber = parseInt(this.value) || 0;
+            const allowanceRate = 48484;
+            const childAllowance = childNumber * allowanceRate;
+            document.getElementById('child_allowance').value = formatNumber(childAllowance);
+        });
+        });
+        function formatNumber(num){
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
+    </script>
+    <!-- محاسبه حق تاهل -->
+    <script>
+        document.getElementById('marital_status').addEventListener('change', function(){
+            const marriageStatus = this.value;
+            const allowanceAmount = '33,000';
+            document.getElementById('marriage_allowance').value = (marriageStatus === 'متأهل' ) ? allowanceAmount : 0;
+        });
+    </script>
+
+    <!-- محاسبه فیلد فوق العداه جذب از روی پارامترهای دیگر -->
+    <script>
+        function calculateExtraBonus() {
+            function getnumericValue(inputID){
+                let rawValue = document.getElementById(inputID).value;
+                return parseInt(rawValue.replace(/,/g ,'')) || 0;
             }
-        })
+
+            // پارامترهایی که در فرانت مقدار پیش فرض براشون در نظر گرفتیم
+            let baseSalary = getnumericValue('base_salary');
+            let housingAllowance = getnumericValue('housing_allowance');
+            let foodAllowance = getnumericValue('food_allowance');
+            let yearlyBonus = getnumericValue('seniority_pay');
+            let transportation = getnumericValue('transportation_allowance');
+
+            // دریافت مقدار تمام فیلدها (به جز فوق العاده جذب و دستمزد ساعتی)
+            // const baseSalary = parseInt(document.getElementById('base_salary').value) || 0;
+            // const housingAllowance = parseInt(document.getElementById('housing_allowance').value) || 0;
+            // const foodAllowance = parseInt(document.getElementById('food_allowance').value) || 0;
+            // const yearlyBonus = parseInt(document.getElementById('seniority_pay').value) || 0;
+            // const transportation = parseInt(document.getElementById('transportation_allowance').value) || 0;
+
+            // پارامترهای حق تاهل و حق ولاد
+            let childAllowance = getnumericValue('child_allowance');
+            let maritalAllowance = getnumericValue('marriage_allowance');
+
+            // پارامترهای دستمزد ساعتی و حق مدیریت
+            let hourlyWage = getnumericValue('hourly_wage');
+            let managementAllowance = getnumericValue('management_allowance');
+
+
+            console.log(baseSalary, typeof baseSalary)
+            console.log(housingAllowance, typeof housingAllowance)
+            console.log(foodAllowance, typeof foodAllowance)
+            console.log(yearlyBonus, typeof yearlyBonus)
+            console.log(childAllowance, typeof childAllowance)
+            console.log(maritalAllowance, typeof maritalAllowance)
+            console.log(transportation, typeof transportation)
+            console.log(managementAllowance, typeof managementAllowance)
+            console.log(hourlyWage, typeof hourlyWage)
+
+            // محاسبه‌ی مجموع بقیه‌ی فیلدها
+            const totalSalary = baseSalary + housingAllowance + foodAllowance + yearlyBonus + 
+                                childAllowance + maritalAllowance + transportation + managementAllowance;
+    
+            // محاسبه‌ی فوق‌العاده جذب
+            const extraBonus =  hourlyWage - totalSalary ;
+    
+            // نمایش مقدار محاسبه‌شده در فیلد مربوطه
+            document.getElementById('attraction_bonus').value = formatNumber(extraBonus);
+        }
+        function formatNumber(num){
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    
+        // اجرای تابع هنگام تغییر مقدار دستمزد ساعتی
+        document.getElementById('hourly_wage').addEventListener('input', calculateExtraBonus);
+        document.getElementById('management_allowance').addEventListener('input', calculateExtraBonus);
     </script>
     
 </body>
