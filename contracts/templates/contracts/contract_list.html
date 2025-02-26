@@ -352,6 +352,19 @@
             text-align: center;
             justify-content: center;
         }
+        
+        /* آیکون ها */
+        svg {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+        }
+
+        svg:hover {
+        transform: scale(1.2);
+        stroke: #ff5733; /* تغییر رنگ به قرمز هنگام هاور */
+        }
 
     </style>
 </head>
@@ -447,13 +460,37 @@
                                         <td>{{ contract|get_field:field_name }}</td>
                                     {% endfor %}
                                     <td>
+                                
+                                
+
                                         <a style="display: inline;padding: 10px;" href="{% url 'contracts:edit_contract' contract.id %}" title="ویرایش">
-                                            <i>✎</i>
+                                            <!-- <i>✎</i> -->
+                                                                                    <!-- آیکون ویرایش -->
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4 20H20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M14.5 3.5L20.5 9.5L9 21H3V15L14.5 3.5Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <!-- <i class="fa-solid fa-pen-to-square"></i> -->
                                         </a>
                                         <a style="display: inline; padding: 10px;"  href="{% url 'contracts:delete_contract' contract.id %}" onclick="return confirm('آیا مطمین هستید؟ ')" title="حذف">
-                                            <i>🗑️</i>
+                                            <!-- <i>🗑️</i> -->
+                                            <!-- آیکون حذف -->
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3 6H5H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6M19 6V20C19 20.5523 18.5523 21 18 21H6C5.44772 21 5 20.5523 5 20V6H19Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <!-- <i class="fa-solid fa-trash"></i> -->
                                         </a>
-                                        <a href="{% url 'contracts:generate_pdf' contract.id %}" class="btn btn-primary">📄 دانلود PDF</a>
+                                        <a href="{% url 'contracts:generate_pdf' contract.id %}" class="btn btn-primary" title="دانلود">
+                                            <!-- 📄 دانلود PDF -->
+                                                        
+                                            <!-- آیکون دانلود PDF -->
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 3V15M12 15L16 11M12 15L8 11" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M20 15V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21H6C5.46957 21 4.96086 20.7893 4.58579 20.4142C4.21071 20.0391 4 19.5304 4 19V15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <!-- <i class="fa-solid fa-file-arrow-down"></i> -->
+                                        </a>
                                     </td>
                                 </tr>
                             {% endfor %}
