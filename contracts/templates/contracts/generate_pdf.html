@@ -166,6 +166,7 @@
         }
         .header p {
             text-align: justify;
+            direction: ltr;
             margin: 0px 0;
         }
         strong .tarikh{
@@ -206,7 +207,7 @@
             <div class="page">
                 <div class="header">
                     <p><strong>{{ contract.contract_start_date|replace_dash_with_slash }}</strong></p>
-                    <p><strong>{{ contract.contract_number}}</strong></p>
+                    <p>ق/س <strong>{{ contract.contract_number}}</strong></p>
                     <p>دارد</p>
         
                     <h1 class="God">بسم الله الرحمن الرحیم</h1>

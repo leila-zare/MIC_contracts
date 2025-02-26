@@ -1,0 +1,24 @@
+name: CI  # نام دلخواه برای workflow شما  
+
+on:  
+  push:     # انجام عملیات هنگام push کد  
+    branches:  
+      - main  # شاخه‌های مورد نظر برای فعال‌شدن workflow  
+  pull_request:  # هنگام انجام pull request  نیز اجرا می‌شود  
+    branches:  
+      - main  
+
+jobs:  
+  build:  
+    runs-on: ubuntu-latest  
+    steps:  
+    - name: Set up locale  
+      run: |  
+        sudo apt-get update  
+        sudo apt-get install -y locales  
+        sudo locale-gen en_US.UTF-8  
+        sudo update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8  
+    - name: Check locale  
+      run: locale  # بررسی تنظیمات locale  
+    - name: Run your script  
+      run: python your_script.py  # جایگزین کردن با نام اسکریپت خود
