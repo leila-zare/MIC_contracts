@@ -1,3 +1,4 @@
+{% load custom_filter_pdf %}
 <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -141,10 +142,11 @@
 
         /* استایل مربوط به جدول حقوق */
         table {  
+            display: inline-block;
             border-collapse: collapse;  
-            width: 40%;  
+            width: 45%;  
             text-justify: auto;
-            margin: 0px 0;  
+            margin: 5px 0;  
         }  
 
         th, td {  
@@ -152,6 +154,7 @@
             /* padding: 10px;   */
             text-align: center;  
             margin: 0;
+            min-width: 110px;
         }  
 
         th {  
@@ -165,6 +168,7 @@
         }
         .header p {
             text-align: justify;
+            direction: ltr;
             margin: 0px 0;
         }
         strong .tarikh{
@@ -204,11 +208,11 @@
         <div class="contract">
             <div class="page">
                 <div class="header">
-                    <p><strong>{{ contract.contract_start_date}}</strong></p>
-                    <p><strong>{{ contract.contract_number}}</strong></p>
+                    <p><strong>{{ contract.contract_start_date|replace_dash_with_slash }}</strong></p>
+                    <p>ق/س <strong>{{ contract.contract_number}}</strong></p>
                     <p>دارد</p>
         
-                    <h1 class="God">بسم الله الرحمن الرحیم</h1>
+                    <h1 class="God">باسمه تعالی</h1>
                 </div>
         
                 <h1>قرارداد همکاری <strong>{{ contract.contract_type}}</strong> </h1>
@@ -216,7 +220,7 @@
                 <div class="section">
                          <!-- <h3>مشخصات کارفرما:</h3> -->
                     <p>این قرارداد به موجب ماده 10 قانون کار جمهوری اسلامی ایران و تبصره(3) الحاقی به ماده 7 قانون کار موضوع بند 1 ماده 41 قانون رفع موانع تولید رقابت پذیر و ارتقای نظام مالی کشور مصوب 11/02/94 مجلس شورای اسلامی بین کارفرما/نماینده قانونی کارفرما و کارمند منعقد می شود. این قرارداد بین شرکت توسعه فناوری برهان رایان متین به شماره ثبت 445260 و شناسه ملی 14005891985 به نمایندگی و مدیرعاملی آقای وحیدرضا باقری به نشانی شیراز، بلوار میرزای شیرازی، میدان صنایع ، جنب شرکت صنایع الکترونیک شیراز، ساختمان پردیس شرکت های دانش بنیان، طبقه چهارم به شماره تماس 09912707543 که از این پس به عنوان کارفرما نامیده می شود از یک سو و  <strong>{{ contract.full_name }}</strong>  با مشخصات زیر که از این پس کارمند نامیده می شود از طرف دیگر منعقد می گردد.که طرفین با امضای خود، توافق مفاد آنرا تایید و پایبندی به آن را تضمین می نمایند.</p>
-                    <p>نام و نام خانوادگی: <strong>{{ contract.full_name }}</strong> کد ملی: <strong>{{ contract.national_id}}</strong>نام پدر: <strong>{{ contract.fathers_name}}</strong>تاریخ تولد: <strong>{{contract.date_of_birth}}</strong> محل صدور: <strong>{{ contract.place_of_issue}}</strong> مدرک تحصیلی: <strong>{{ contract.degree_of_study}}</strong> نظام وظیفه: <strong>{{ contract.military_status}}</strong> وضعیت تاهل: <strong>{{ contract.marital_status}}</strong> تعداد فرزند: <strong>{{ contract.child_number}}</strong> شماره تماس: <strong>{{ contract.contact_number}}</strong> نشانی محل سکونت: <strong>{{ contract.address }}</strong> کد پستی: <strong>{{ contract.postal_code}}</strong> </p>
+                    <p>نام و نام خانوادگی: <strong>{{ contract.full_name }}</strong> کد ملی: <strong>{{ contract.national_id}}</strong>نام پدر: <strong>{{ contract.fathers_name}}</strong>تاریخ تولد: <strong>{{contract.date_of_birth|replace_dash_with_slash}}</strong> محل صدور: <strong>{{ contract.place_of_issue}}</strong> مدرک تحصیلی: <strong>{{ contract.degree_of_study}}</strong> نظام وظیفه: <strong>{{ contract.military_status}}</strong> وضعیت تاهل: <strong>{{ contract.marital_status}}</strong> تعداد فرزند: <strong>{{ contract.child_number}}</strong> شماره تماس: <strong>{{ contract.contact_number}}</strong> نشانی محل سکونت: <strong>{{ contract.address }}</strong> کد پستی: <strong>{{ contract.postal_code}}</strong> </p>
                      
                     
                     <h3>ماده 1) موضوع قرارداد:</h3>
@@ -227,12 +231,7 @@
                     <h3>ماده 2) ساعت کار:</h3>
                     <p>1-2.  براساس ماده 51 قانون کار، مدت کارکرد روزانه خالص  کارمند 7 ساعت و 30 دقیقه در روز تعیین گردیده و مجموع ساعات کار در هفته 37 ساعت و 30 دقیقه می باشد و زمان شروع و اتمام کار روزانه کارمند تابع تصمیمات کارفرما و نظامات مقرر برای محل کار خواهد بود.
                         در حالت معمول ساعت حضور کارمندان در شرکت و محل کار از ساعت  8:00  الی 16:00  می باشد. مجموع ساعت موظفی حداقل کارمندان (تمامی شنبه تا چهارشنبه ها * 7/5) ساعت در ماه تعیین گردیده است.</p> 
-                    <p>تبصره 3: ساعات حضور و موظفی کارمندان ساعتی طبق توافق با کارفرما و بر اساس برنامه حضور اعلامی کارمند قابل اعمال می باشد و مفاد قوانین بر همین مبنا محاسبه خواهد شد.</p>
-                    <p>2-2. تعطیلات و مرخصی ها و سایر مزایای قانونی براساس قانون کار جمهوری اسلامی ایران و زمان مرخصی موکول به نظر کارفرما خواهد بود.</p>
-                    <p>تبصره 4: کارمندان قرارداد موقت (ساعتی) فاقد تعطیلی و مرخصی می باشند و ساعت کارکرد آنها طبق توافق با کارفرما تعیین می گردد.</p>
-                    <p>3-2. ساعت ناهار و استراحت جزو ساعت کاری کارمند نیست.</p>
-                    <p>4-2 . علاوه بر حقوق دریافتی و بر مبنای فرم ارزیابی عملکرد کارکنان تا سقف 15 درصد از مبلغ حقوق به عنوان حق آکورد محاسبه و به صورت جداگانه به صورت میانگین هر سه ماه یکبار پرداخت می‌گردد.</p>
-                  
+                 
         
                     <div class="signature" style="display: flex; justify-content: space-between; margin-bottom: 80px ;margin-top: 20px;">
                         <div style="text-align: center;">
@@ -245,7 +244,7 @@
                         </div>
                     </div>
                     <div style="display: flex; ">
-                        <div style="margin-left: 320px;margin-right: 40px;">
+                        <div style="margin-left: 250px; margin-right: 35px;">
                             <p>شیراز، بلوار دکتر حستبی، میدان صنایع، جنب صنایع الکترونیک</p>
                             <p>پارک علم و فناوری صدرا، طبقه 4، واحد 45 تا 48</p>
                             <p>کدپستی: 71888-41111  شماره تماس:09912707543</p>
@@ -260,14 +259,19 @@
             
             <div class="page">
                 <div class="header">
-                    <p><strong>{{ contract.contract_start_date}}</strong></p>
-                    <p><strong>{{ contract.contract_number}}</strong></p>
+                    <p><strong>{{ contract.contract_start_date|replace_dash_with_slash }}</strong></p>
+                    <p>ق/س <strong>{{ contract.contract_number}}</strong></p>
                     <p>دارد</p>
             
                 </div>
                 <div class="section">
+                    <p>تبصره 3: ساعات حضور و موظفی کارمندان ساعتی طبق توافق با کارفرما و بر اساس برنامه حضور اعلامی کارمند قابل اعمال می باشد و مفاد قوانین بر همین مبنا محاسبه خواهد شد.</p>
+                    <p>2-2. تعطیلات و مرخصی ها و سایر مزایای قانونی براساس قانون کار جمهوری اسلامی ایران و زمان مرخصی موکول به نظر کارفرما خواهد بود.</p>
+                    <p>تبصره 4: کارمندان قرارداد موقت (ساعتی) فاقد تعطیلی و مرخصی می باشند و ساعت کارکرد آنها طبق توافق با کارفرما تعیین می گردد.</p>
+                    <p>3-2. ساعت ناهار و استراحت جزو ساعت کاری کارمند نیست.</p>
+                    <p>4-2 . علاوه بر حقوق دریافتی و بر مبنای فرم ارزیابی عملکرد کارکنان تا سقف 15 درصد از مبلغ حقوق به عنوان حق آکورد محاسبه و به صورت جداگانه به صورت میانگین هر سه ماه یکبار پرداخت می‌گردد.</p>
                     <h3>ماده 3)  مدت قرارداد و شرایط:</h3>
-                    <p>1-3. مدت قرارداد <strong class="tarikh">{{ contract.contract_start_date}}</strong>لغایت <strong class="tarikh">{{ contract.contract_end_date}}</strong> می باشد. تمدید مدت قرارداد و تجدید نظر در مقررات آن موکل به موافقت کتبی کارفرما و کارمند خواهد بود</p>
+                    <p>1-3. مدت قرارداد <strong class="tarikh">{{ contract.contract_start_date|replace_dash_with_slash}}</strong>لغایت <strong class="tarikh">{{ contract.contract_end_date|replace_dash_with_slash}}</strong> می باشد. تمدید مدت قرارداد و تجدید نظر در مقررات آن موکل به موافقت کتبی کارفرما و کارمند خواهد بود</p>
                     <p>تبصره 5: برای کارکنان معین تعطیلات رسمی ، جمعه ها و مرخصی های استحقاقی درطول مدت قرارداد با استفاده از حق السعی بوده و جزء مدت قرارداد محسوب می گردد.</p>
                     <p>تبصره 6:  کارمند از لحاظ دریافت حقوق یا مستمری های ناشی از فوت، بازنشستگی، از کار افتادگی کلی و جزئی، بیکاری،غرامت دستمزد ایام بیماری و سایر مقررات حمایتی و شرایط مربوط به آنها تابع قانون تامین اجتماعی خواهد بود.</p>
         
@@ -277,63 +281,65 @@
                         <tbody>
                             <tr>
                                 <th>حقوق پایه</th>
-                                <td>{{ contract.base_salary}}</td>
+                                <td class="number_format">{{ contract.base_salary}}</td>
                                 <td> ریال </td>
                             </tr><tr>
                                 <th>حق مسکن</th>
-                                <td>{{ contract.housing_allowance}}</td>
+                                <td class="number_format">{{ contract.housing_allowance}}</td>
                                 <td> ریال </td>
                             </tr><tr>
                                 <th>حق خوار و بار</th>
-                                <td>{{ contract.food_allowance}}</td>
+                                <td class="number_format">{{ contract.food_allowance}}</td>
                                 <td> ریال </td>
                             </tr><tr>
                                 <th>پایه سنوات ماهانه</th>
-                                <td>{{ contract.seniority_pay}}</td>
+                                <td class="number_format">{{ contract.seniority_pay}}</td>
                                 <td> ریال </td>
                             </tr><tr>
                                 <th>حق اولاد</th>
-                                <td>{{ contract.child_allowance}}</td>
-                                <td> ریال </td>
-                            </tr><tr>
-                                <th>حق تاهل</th>
-                                <td>{{ contract.marriage_allowance}}</td>
-                                <td> ریال </td>
-                            </tr><tr>
-                                <th>ایاب و ذهاب</th>
-                                <td>{{ contract.transportation_allowance}}</td>
-                                <td> ریال </td>
-                            </tr><tr>
-                                <th>فوق العاده جذب</th>
-                                <td>{{ contract.attraction_bonus}}</td>
-                                <td> ریال </td>
-                            </tr><tr>
-                                <th>حق مدیریت</th>
-                                <td>{{ contract.management_allowance}}</td>
-                                <td> ریال </td>
-                            </tr><tr>
-                                <th>دستمزد ساعتی</th>
-                                <td>{{ contract.hourly_wage}}</td>
-                                <td> ریال </td>
-                            </tr><tr>
-                                <th>دستمزد ساعتی با آکورد 100 %</th>
-                                <td>{{ contract.hourly_wage_with_accord}}</td>
+                                <td class="number_format">{{ contract.child_allowance}}</td>
                                 <td> ریال </td>
                             </tr>
                         </tbody>
                     </table>
+                    <table>   
+                        <tbody>
+                            <tr>
+                            </tr><tr>
+                                <th>حق تاهل</th>
+                                <td class="number_format">{{ contract.marriage_allowance}}</td>
+                                <td> ریال </td>
+                            </tr><tr>
+                                <th>ایاب و ذهاب</th>
+                                <td class="number_format">{{ contract.transportation_allowance}}</td>
+                                <td> ریال </td>
+                            </tr><tr>
+                                <th>فوق العاده جذب</th>
+                                <td class="number_format">{{ contract.attraction_bonus}}</td>
+                                <td> ریال </td>
+                            </tr><tr>
+                                <th>حق مدیریت</th>
+                                <td class="number_format">{{ contract.management_allowance}}</td>
+                                <td> ریال </td>
+                            </tr><tr>
+                                <th>دستمزد ساعتی</th>
+                                <td class="number_format">{{ contract.hourly_wage}}</td>
+                                <td> ریال </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="display: inline; text-align: center; justify-content: center;align-items: center;">
+                        <tr>
+                            <th>دستمزد ساعتی با آکورد 100 %</th>
+                            <td class="number_format">{{ contract.hourly_wage | multiply:contract.hourly_wage_with_accord }}</td>
+                            <td> ریال </td>
+                        </tr>
+                    </table>
                     <p>الف: اضافه کاری و سایر پرداختی ها ( تعطیل کاری و... ) مربوط به افراد قرارداد معین مطابق  قانون وزارت کار و امور اجتماعی و کسورات مربوط به سهم کارمند اعم از حق بیمه و مالیات متعلقه از حقوق و مزایای فوق کسر و به مراجع زیربط پرداخت می گردد.</p>
                     <p>توجه: طبق پیگیری های در حال انجام مبتنی بر معافیت مالیات بر حقوق کارمندان، مبلغ مالیات از حقوق کارمندان کسر نخواهد شد، مگر اینکه با این معافیت مالیاتی از سوی اداره امور مالیات و دارایی موافقت نگردد.</p>
                     <p>ب. شیوه محاسبه کارانه به صورت ماهیانه توسط کارفرما اعلام خواهد شد و پس از اعلام از ماه بعد قابل اجراست.</p>
-                    <p>2-4. حقوق و مزایای کارمند پس از کسر کسورات قانونی به صورت ماهانه به حساب/شبا <strong>{{ contract.account_number_salary}}</strong> نزد بانک <strong>{{contract.bank_name_salary}}</strong> یا حساب معرفی شده توسط فرد و به صورت نقدی توسط کارفرما یا نماینده قانونی کارفرما پرداخت می گردد.</p>
-                    <p>3-4. مبنای  محاسباتی عیدی و پاداش سالانه بر حسب حداقل  پایه حقوقی  وزارت  کار و اموراجتماعی  مصوب هر سال می باشد.</p>
-                    <p>4-4.  برای کار کمتر از یکسال میزان عیدی و پاداش از سقف مربوط به نسبت کارکرد معادل روز بیمه محاسبه و پرداخت خواهد شد.</p>
-                    <p>5-4. کارانه تشویقی نیز به صورت میانگین هر سه ماه یکبار حداکثر 15 درصد مبلغ حقوق خواهد بود.</p>
-        
-                    <h3>ماده 5) کسر کار:</h3>
-                    <p>1-5. چنانچه کارمند مبادرت به غیبت غیر موجه نماید، دستمزد و مزایای مدت غیبت را دریافت نخواهد کرد و مطابق با قوانین اداره کار برخورد خواهد گردید.</p>
-                    
-                    <div class="signature" style="display: flex; justify-content: space-between; margin-bottom: 120px;margin-top: 20px;">
+
+                    <div class="signature" style="display: flex; justify-content: space-between; margin-bottom: 80px;margin-top: 20px;">
                         <div style="text-align: center;">
                             <p>امضای کارفرما</p>
                             <p>.........................</p>
@@ -344,7 +350,7 @@
                         </div>
                     </div>
                     <div style="display: flex; ">
-                        <div style="margin-left: 320px;margin-right: 40px;">
+                        <div style="margin-left: 250px;margin-right: 35px;">
                             <p>شیراز، بلوار دکتر حستبی، میدان صنایع، جنب صنایع الکترونیک</p>
                             <p>پارک علم و فناوری صدرا، طبقه 4، واحد 45 تا 48</p>
                             <p>کدپستی: 71888-41111  شماره تماس:09912707543</p>
@@ -361,12 +367,20 @@
             <div class="page">
     
                 <div class="header">
-                    <p><strong>{{ contract.contract_start_date}}</strong></p>
-                    <p><strong>{{ contract.contract_number}}</strong></p>
+                    <p><strong>{{ contract.contract_start_date|replace_dash_with_slash }}</strong></p>
+                    <p>ق/س <strong>{{ contract.contract_number}}</strong></p>
                     <p>دارد</p>
             
                 </div>
                 <div class="section">
+                    <p>2-4. حقوق و مزایای کارمند پس از کسر کسورات قانونی به صورت ماهانه به حساب/شبا <strong>{{ contract.account_number_salary}}</strong> نزد بانک <strong>{{contract.bank_name_salary}}</strong> یا حساب معرفی شده توسط فرد و به صورت نقدی توسط کارفرما یا نماینده قانونی کارفرما پرداخت می گردد.</p>
+                    <p>3-4. مبنای  محاسباتی عیدی و پاداش سالانه بر حسب حداقل  پایه حقوقی  وزارت  کار و اموراجتماعی  مصوب هر سال می باشد.</p>
+                    <p>4-4.  برای کار کمتر از یکسال میزان عیدی و پاداش از سقف مربوط به نسبت کارکرد معادل روز بیمه محاسبه و پرداخت خواهد شد.</p>
+                    <p>5-4. کارانه تشویقی نیز به صورت میانگین هر سه ماه یکبار حداکثر 15 درصد مبلغ حقوق خواهد بود.</p>
+        
+                    <h3>ماده 5) کسر کار:</h3>
+                    <p>1-5. چنانچه کارمند مبادرت به غیبت غیر موجه نماید، دستمزد و مزایای مدت غیبت را دریافت نخواهد کرد و مطابق با قوانین اداره کار برخورد خواهد گردید.</p>
+                    
                     <h3>ماده 6) موارد فسخ قرارداد:</h3>
                     <p>1-6. در صورت درخواست کارمند مبنی بر فسخ قرارداد این درخواست باید حداقل دو ماه قبل و به صورت کتبی به کارفرما ارایه گردد و در صورت تایید کارفرما مطابق تبصره بند "و" ماده 21 قانون کار، در صورت اعلام نیاز کارفرما ، قبل از قطع رابطه قراردادی کارهای در دست اقدام و ناتمام حوزه عملکرد خود را انجام دهد و تسویه حساب موکول به اجرای مقررات این بند است. </p>
                     <p>2-6. کارفرما می تواند به استناد هریک از دلایل زیرکتباً نسبت به فسخ قرارداد اقدام نماید. (در صورت فسخ قرارداد توسط کارفرما دو ماه قبل از تاریخ فسخ به صورت کتبی به کارمند اعلام خواهد گردید)</p>
@@ -381,6 +395,41 @@
                     <h3>ماده 7) تعهدات عدم افشای اطلاعات:</h3>
                     <p>1-7. کلیه اطلاعات و مدارک که به مناسبت انجام کار در اختیار و مورد استفاده کارمند قرار می گیرد محرمانه تلقی می گردد، افشاء و تسلیم آنها به اشخاص ثالث و یا استفاده شخصی غیر مجاز توسط کارمند بر خلاف مقررات حاکم بر اوامر کار می باشد و تخلف از این امر موجب مسئولیت های قانونی خواهد بود. متن کامل آن تحت عنوان قرارداد NDA در اختیار کارمند قرار گرفته و به صورت مجزا توسط طرفین امضا گردیده است.</p>
         
+                    <div class="signature" style="display: flex; justify-content: space-between; margin-bottom: 100px;margin-top: 20px;">
+                        <div style="text-align: center;">
+                            <p>امضای کارفرما</p>
+                            <p>.........................</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <p>امضای کارمند</p>
+                            <p>.........................</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; margin-bottom: 40px;">
+                        <div style="margin-left: 250px;margin-right: 35px;">
+                            <p>شیراز، بلوار دکتر حسابی، میدان صنایع، جنب صنایع الکترونیک</p>
+                            <p>پارک علم و فناوری صدرا، طبقه 4، واحد 45 تا 48</p>
+                            <p>کدپستی: 71888-41111  شماره تماس:09912707543</p>
+                        </div>
+                        <div>
+                            <p>info@tfbrm.co.ir</p>
+                            <p>www.tfbrm.co.ir</p>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+
+            <div class="page">
+    
+                <div class="header">
+                    <p><strong>{{ contract.contract_start_date|replace_dash_with_slash }}</strong></p>
+                    <p>ق/س <strong>{{ contract.contract_number}}</strong></p>
+                    <p>دارد</p>
+            
+                </div>
+                <div class="section">
+               
                     <h3>ماده 8) مزایای پایان کار:</h3>
                     <p>1-8. کارفرما متعهد می باشد طبق مقررات ماده 24 قانون کار، خاتمه قرارداد کار، براساس آخرین حقوق پایه دریافتی، مبلغی معادل یک ماه حقوق پایه مذکور در پایان کار یا سنوات سالیانه به کارمند پرداخت نماید.</p>
                     <p>2-8.مزایای مذکور می تواند در پایان هر سال در مدت قرارداد کارمند، پرداخت و تسویه خواهد شد و در صورت امتناع کارمند از دریافت مشمول حقوق سنوات سال بعد نخواهد گردید.</p>
@@ -395,7 +444,7 @@
         
                     <h3>ماده 11) امضای قرارداد:</h3>
                     <p>1-11. این قرارداد در 11 ماده، 7 تبصره و در ۲ نسخه  4 صفحه ای که هریک حکم واحد را دارد منعقد می گردد و امضاء آن به منزله قبول بدون قید و شرط کلیه شرایط و مسئولیت های مندرج در آن از سوی کارمند و کارفرما است.</p>       
-                    <div class="signature" style="display: flex; justify-content: space-between; margin-bottom: 50px;margin-top: 20px;">
+                    <div class="signature" style="display: flex; justify-content: space-between; margin-bottom: 80px;margin-top: 270px;">
                         <div style="text-align: center;">
                             <p>امضای کارفرما</p>
                             <p>.........................</p>
@@ -405,8 +454,8 @@
                             <p>.........................</p>
                         </div>
                     </div>
-                    <div style="display: flex; margin-bottom: 20px;">
-                        <div style="margin-left: 320px;margin-right: 40px;">
+                    <div style="display: flex; margin-bottom: 40px;">
+                        <div style="margin-left: 250px;margin-right: 35px;">
                             <p>شیراز، بلوار دکتر حسابی، میدان صنایع، جنب صنایع الکترونیک</p>
                             <p>پارک علم و فناوری صدرا، طبقه 4، واحد 45 تا 48</p>
                             <p>کدپستی: 71888-41111  شماره تماس:09912707543</p>
@@ -430,6 +479,16 @@
     </div>
     
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        document.querySelectorAll(".number_format").forEach(function(td){
+            let number = parseFloat(td.textContent.replace(/\D/g , ''));
+            if (!isNaN(number)){
+                td.textContent = number.toLocaleString("fa-IR");
+            }
+        });
+    });
+</script>
 </html>
 
 
