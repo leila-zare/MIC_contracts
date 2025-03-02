@@ -348,7 +348,7 @@
         </div>       
         <!-- اطلاعات مربوط به قرارداد در سمت راست -->
         <div class="details-container">
-            <form id="myform" action="" method="post" >
+            <form id="myform" action="" method="post" onsubmit="return handleSubmit();">
                 {% csrf_token %}
                 
                 <!-- اطلاعات هویتی -->
@@ -550,12 +550,10 @@
                     </tbody></table>
                 </div>
                 <div class="submit_button">
-                    <button type="submit" onclick="confirmSubmission()"> ثبت 
-                    </button>
+                    <button type="submit" onclick="confirmSubmission()"> ثبت </button>
                     <!-- برای این قسمت حتما باید عملکردشو اضافه کنم -->
-                     <a href="{% url 'contracts:contractlist' %}">
-                        <button type="button" > لغو 
-                        </button>
+                     <a href="{% url 'contracts:contractlist' %}" onclick="return showAlert();">
+                        <button type="button" > لغو </button>
                     </a>
                 </div>
             </form>
@@ -812,6 +810,20 @@
         // اجرای تابع هنگام تغییر مقدار دستمزد ساعتی
         document.getElementById('hourly_wage').addEventListener('input', calculateExtraBonus);
         document.getElementById('management_allowance').addEventListener('input', calculateExtraBonus);
+    </script>
+    <!-- پیام تغییرات با موفقیت ثبت شد -->
+    <script>  
+        function handleSubmit() {  
+            // فرض کنید که در اینجا کد مربوط به ثبت اطلاعات قراردادی شما وجود دارد  
+            // و پس از موفقیت در ثبت داده‌ها، به این صورت عمل می‌کنیم:  
+        
+            const isSuccess = true; // فرض کنید که ثبت موفقیت‌آمیز باشد  
+            if (isSuccess) {  
+                sessionStorage.setItem('updateSuccess', 'true'); // ذخیره وضعیت در sessionStorage  
+                window.location.href = '{% url "contracts:contractlist" %}'; // هدایت به صفحه لیست قراردادها  
+            }  
+            return false; // جلوگیری از ارسال پیش‌فرض فرم  
+        }  
     </script>
     
 </body>

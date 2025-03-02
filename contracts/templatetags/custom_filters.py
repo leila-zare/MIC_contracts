@@ -20,9 +20,6 @@ def get_item(dictionary, key):
 
 @register.filter  
 def format_number(value):
-    print(value)
-    print(type(value))
-      
     if isinstance(value, (int, float, Decimal)):  
         return f"{value:,.0f}"  # فرمت عدد با کاما  
     return value 
