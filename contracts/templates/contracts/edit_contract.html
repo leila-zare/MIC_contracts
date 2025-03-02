@@ -1,4 +1,5 @@
 {% load static %}
+ 
 
 <!DOCTYPE html>
 <html lang="fa" locale="fa">
@@ -28,6 +29,7 @@
     <style>
         body {
             font-family: 'B Titr', sans-serif;
+            /* font-size: large; */
             background-color: #f5f5f5;
             direction: ltr;
             text-align: left;
@@ -242,6 +244,7 @@
             border: 1px solid #ccc;
             /* padding: 10px; */
             /* color:#006d5b; */
+            text-align: center;
         }
         ul {
             color: red;
@@ -345,7 +348,7 @@
         </div>       
         <!-- اطلاعات مربوط به قرارداد در سمت راست -->
         <div class="details-container">
-            <form id="myform" action="" method="post" >
+            <form id="myform" action="" method="post" onsubmit="return handleSubmit();">
                 {% csrf_token %}
                 
                 <!-- اطلاعات هویتی -->
@@ -500,16 +503,16 @@
                                 <div class="error" data-for="number_input"> وارد کردن حق خوار و بار اجباری است</div></td>                
                             <td><input type="text" inputmode="numeric" class="number_input" name="seniority_pay" id="seniority_pay" value="{{contract.seniority_pay}}">
                                 <div class="error" data-for="number_input"> وارد کردن پایه سنوات ماهانه اجباری است</div></td>                
-                            <td><input type="text" inputmode="numeric" class="number_input" name="child_allowance" id="child_allowance" value="{{contract.child_allowance}}">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="child_allowance" id="child_allowance" value="{{contract.child_allowance}}" readonly>
                                 <div class="error" data-for="number_input"> وارد کردن حق اولاد اجباری است</div></td>                
-                            <td><input type="text" inputmode="numeric" class="number_input" name="marriage_allowance" id="marriage_allowance" value="{{contract.marriage_allowance}}">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="marriage_allowance" id="marriage_allowance" value="{{contract.marriage_allowance}}" readonly>
                                 <div class="error" data-for="number_input"> وارد کردن حق تاهل اجباری است</div></td>                
                             <td><input type="text" inputmode="numeric" class="number_input" name="transportation_allowance" id="transportation_allowance" value="{{contract.transportation_allowance}}">
                                 <div class="error" data-for="number_input"> وارد کردن ایاب و ذهاب اجباری است</div></td>               
-                            <td><input type="text" inputmode="numeric" class="number_input" name="attraction_bonus" id="attraction_bonus" value="{{contract.attraction_bonus}}">
+                            <td><input type="text" inputmode="numeric" class="number_input" name="attraction_bonus" id="attraction_bonus" value="{{contract.attraction_bonus}}"readonly>
                                 <div class="error" data-for="number_input"> وارد کردن فوق العاده جذب اجباری است</div></td>
                         </tr>
-                        <tr>
+                         <tr>
                             <th><label for="management_allowance">حق مدیریت</label></th>
                             <th><label for="hourly_wage">دستمزد ساعتی</label></th>
                             <th><label for="hourly_wage_with_accord">درصد آکورد</label></th>
@@ -547,12 +550,10 @@
                     </tbody></table>
                 </div>
                 <div class="submit_button">
-                    <button type="submit" onclick="confirmSubmission()"> ثبت 
-                    </button>
+                    <button type="submit" onclick="confirmSubmission()"> ثبت </button>
                     <!-- برای این قسمت حتما باید عملکردشو اضافه کنم -->
-                     <a href="{% url 'contracts:contractlist' %}">
-                        <button type="button" > لغو 
-                        </button>
+                     <a href="{% url 'contracts:contractlist' %}" onclick="return showAlert();">
+                        <button type="button" > لغو </button>
                     </a>
                 </div>
             </form>
@@ -576,15 +577,28 @@
 
             // اعمال مقدار فرمت‌شده به فیلد
             event.target.value = formattedValue;
-        });
+             });
         });
 
         // پاکسازی مقادیر قبل از ارسال فرم
         document.getElementById('myform').addEventListener('submit', function (event) {
         numberInputs.forEach(input => {
             input.value = input.value.replace(/,/g, ''); // حذف کاماها
+            });
         });
-        });
+        // تابع برای فرمت کردن فیلدهای عددی در بارگذاری صفحه  
+        function formatNumberInputs() {  
+            numberInputs.forEach(input => {  
+                let value = input.value.replace(/,/g, '').replace(/\D/g, '');  
+                if (value) {  
+                    const formattedValue = new Intl.NumberFormat('en-US').format(value);  
+                    input.value = formattedValue;  
+                }  
+            });  
+        }  
+
+        // وقتی صفحه بارگذاری شد، فیلدها فرمت می‌شوند  
+        document.addEventListener('DOMContentLoaded', formatNumberInputs); 
 
         function setBirthDate(input) {
             document.getElementById('date_of_birth').value = input.value.replace(/\//g, '-');
@@ -718,7 +732,99 @@
                 document.getElementById("myForm").submit(); // فرم را ارسال می‌کند  
             }  
         }  
-        </script>  
+    </script>
+    
+    
+    <!-- محاسبه حق اولاد -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            document.getElementById('child_number').addEventListener('input', function(){
+            const childNumber = parseInt(this.value) || 0;
+            const allowanceRate = 48484;
+            const childAllowance = childNumber * allowanceRate;
+            document.getElementById('child_allowance').value = formatNumber(childAllowance);
+        });
+        });
+        function formatNumber(num){
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
+    </script>
+    <!-- محاسبه حق تاهل -->
+    <script>
+        document.getElementById('marital_status').addEventListener('change', function(){
+            const marriageStatus = this.value;
+            const allowanceAmount = '33,000';
+            document.getElementById('marriage_allowance').value = (marriageStatus === 'متأهل' ) ? allowanceAmount : 0;
+        });
+    </script>
+        
+    <!-- محاسبه فیلد فوق العداه جذب از روی پارامترهای دیگر -->
+    <script>
+        function calculateExtraBonus() {
+            function getnumericValue(inputID){
+                let rawValue = document.getElementById(inputID).value;
+                return parseInt(rawValue.replace(/,/g ,'')) || 0;
+            }
+
+            // پارامترهایی که در فرانت مقدار پیش فرض براشون در نظر گرفتیم
+            let baseSalary = getnumericValue('base_salary');
+            let housingAllowance = getnumericValue('housing_allowance');
+            let foodAllowance = getnumericValue('food_allowance');
+            let yearlyBonus = getnumericValue('seniority_pay');
+            let transportation = getnumericValue('transportation_allowance');
+            
+            // پارامترهای حق تاهل و حق ولاد
+            let childAllowance = getnumericValue('child_allowance');
+            let maritalAllowance = getnumericValue('marriage_allowance');
+
+            // پارامترهای دستمزد ساعتی و حق مدیریت
+            let hourlyWage = getnumericValue('hourly_wage');
+            let managementAllowance = getnumericValue('management_allowance');
+
+
+            console.log(baseSalary, typeof baseSalary)
+            console.log(housingAllowance, typeof housingAllowance)
+            console.log(foodAllowance, typeof foodAllowance)
+            console.log(yearlyBonus, typeof yearlyBonus)
+            console.log(childAllowance, typeof childAllowance)
+            console.log(maritalAllowance, typeof maritalAllowance)
+            console.log(transportation, typeof transportation)
+            console.log(managementAllowance, typeof managementAllowance)
+            console.log(hourlyWage, typeof hourlyWage)
+
+            // محاسبه‌ی مجموع بقیه‌ی فیلدها
+            const totalSalary = baseSalary + housingAllowance + foodAllowance + yearlyBonus + 
+                                childAllowance + maritalAllowance + transportation + managementAllowance;
+    
+            // محاسبه‌ی فوق‌العاده جذب
+            const extraBonus =  hourlyWage - totalSalary ;
+    
+            // نمایش مقدار محاسبه‌شده در فیلد مربوطه
+            document.getElementById('attraction_bonus').value = formatNumber(extraBonus);
+        }
+        function formatNumber(num){
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    
+        // اجرای تابع هنگام تغییر مقدار دستمزد ساعتی
+        document.getElementById('hourly_wage').addEventListener('input', calculateExtraBonus);
+        document.getElementById('management_allowance').addEventListener('input', calculateExtraBonus);
+    </script>
+    <!-- پیام تغییرات با موفقیت ثبت شد -->
+    <script>  
+        function handleSubmit() {  
+            // فرض کنید که در اینجا کد مربوط به ثبت اطلاعات قراردادی شما وجود دارد  
+            // و پس از موفقیت در ثبت داده‌ها، به این صورت عمل می‌کنیم:  
+        
+            const isSuccess = true; // فرض کنید که ثبت موفقیت‌آمیز باشد  
+            if (isSuccess) {  
+                sessionStorage.setItem('updateSuccess', 'true'); // ذخیره وضعیت در sessionStorage  
+                window.location.href = '{% url "contracts:contractlist" %}'; // هدایت به صفحه لیست قراردادها  
+            }  
+            return false; // جلوگیری از ارسال پیش‌فرض فرم  
+        }  
+    </script>
     
 </body>
 </html>

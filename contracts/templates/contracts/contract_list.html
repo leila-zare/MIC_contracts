@@ -432,6 +432,7 @@
         <!-- دکمه های ثبت قرارداد جدید و ورود و جستجو -->
 
         <div class="container_list">
+            
             <div class="list_bar">
                         <ul class="options">
                             <li><a style="background-color: #718e09; transform: scale(1.05);" href="{% url 'contracts:contractlist' %}">پرسنلی</a></li>
@@ -440,8 +441,13 @@
                             <li><a href="{% url 'contracts:partnership' %}">مشارکت</a></li>
                         </ul>
             </div>
+            <div id="successPopup" style="display: none; position:fixed;font-size: medium; text-align: center; top: 50%; right: 30%; transform: translate(-50%, -50%);   
+                width: 300px; padding: 20px;background-color: #e6eadc; color: #718e09; border-radius: 10px; z-index: 1000;">
+                <div> تغییرات با موفقیت ثبت شد </div>  
+                <button onclick="closePopup()" style="margin-top: 10px;font-size: small;text-align: center; background-color: #718e09; color: white; border: none; border-radius: 5px; cursor: pointer;">بستن</button>  
+            </div style='font-size: large;'>
         </div>
-
+        
         <div class="detail_tables">
                 
                     <table id="total">
@@ -457,7 +463,7 @@
                             {% for contract in contracts_table_2 %}
                                 <tr>
                                     {% for field_name in field_lables %}
-                                        <td>{{ contract|get_field:field_name }}</td>
+                                        <td>{{ contract|get_field:field_name|format_number }}</td>
                                     {% endfor %}
                                     <td>
                                 
@@ -542,6 +548,20 @@
     //برای جدول FixedHeader  فعال کردن 
     new $.fn.DataTable.FixedHeader(table);
     });
+</script>
+<!-- پیام تغییرات با موفقیت ثبت شد برای زمانی که از صفحه اصلاح قرارداد به لیست قراردادها هدایت شد. -->
+<script>  
+    window.onload = function() {  
+        const updateSuccess = sessionStorage.getItem('updateSuccess');  
+        if (updateSuccess) {  
+            document.getElementById('successPopup').style.display = 'block'; // نمایش پاپ آپ  
+            sessionStorage.removeItem('updateSuccess'); // پاک کردن برای جلوگیری از نمایش مجدد  
+        }  
+    };  
+    
+    function closePopup() {  
+        document.getElementById('successPopup').style.display = 'none'; // پنهان کردن پاپ آپ  
+    }  
 </script>
 
 </body>

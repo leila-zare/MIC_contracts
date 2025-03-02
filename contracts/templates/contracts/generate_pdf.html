@@ -16,7 +16,7 @@
             
         body {
             font-family: 'B Nazanin', sans-serif;
-            font-size: small;
+            font-size:14px;
             direction: rtl;
             line-height: 1.8;
             margin: 0;
@@ -95,7 +95,7 @@
     }
     body {
             font-family: 'B Nazanin', sans-serif;
-            font-size: small;
+            font-size:14px;
             direction: rtl;
             line-height: 1.8;
             margin: 0;
@@ -105,14 +105,14 @@
             /* display: inline; */
             align-items: center;
         }
-        .contract {
+        /* .contract {
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
             max-width: 900px;
             margin: 0 auto;
-        }
+        } */
         h1, h2 {
             text-align: center;
             color: #333;
@@ -131,15 +131,11 @@
             text-align: justify;
             margin: 0px 0;
         }
-        
         .details {
             margin: 20px 0;
             border: 1px solid #ddd;
             padding: 10px;
         }
-
-
-
         /* استایل مربوط به جدول حقوق */
         table {  
             display: inline-block;
@@ -148,7 +144,6 @@
             text-justify: auto;
             margin: 5px 0;  
         }  
-
         th, td {  
             border: 1px solid #ccc;  
             /* padding: 10px;   */
@@ -156,7 +151,6 @@
             margin: 0;
             min-width: 110px;
         }  
-
         th {  
             /* writing-mode: vertical-rl; چرخش متن به صورت عمودی   */
             /* transform: rotate(180deg); برعکس کردن جهت متن   */
@@ -175,7 +169,13 @@
             direction: ltr;
         }
         .page{
-            padding: 5px;
+         
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin-bottom: 10px;
         }
         button{
             text-align: center;
@@ -195,6 +195,9 @@
             display: flex;
             margin-top: 20px;
         }
+        .total{
+            display: flex;
+        }
 </style>
 <script>
     function printpage(){
@@ -204,8 +207,10 @@
 
 </head>
 <body>
-    <div class="printable">
-        <div class="contract">
+    <div class="total">
+        
+        <div class="printable">
+            <!-- page 1 -->
             <div class="page">
                 <div class="header">
                     <p><strong>{{ contract.contract_start_date|replace_dash_with_slash }}</strong></p>
@@ -234,11 +239,11 @@
                  
         
                     <div class="signature" style="display: flex; justify-content: space-between; margin-bottom: 80px ;margin-top: 20px;">
-                        <div style="text-align: center;">
+                        <div style="text-align: center; margin-right: 100px;">
                             <p>امضای کارفرما</p>
                             <p>.........................</p>
                         </div>
-                        <div style="text-align: center;">
+                        <div style="text-align: center; margin-left: 100px;">
                             <p>امضای کارمند</p>
                             <p>.........................</p>
                         </div>
@@ -256,7 +261,7 @@
                     </div>
                 </div>
             </div>
-            
+            <!-- page 2 -->
             <div class="page">
                 <div class="header">
                     <p><strong>{{ contract.contract_start_date|replace_dash_with_slash }}</strong></p>
@@ -328,7 +333,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table style="display: inline; text-align: center; justify-content: center;align-items: center;">
+                    <table style="display: inline; text-align: center; justify-content: center;align-items: center;margin-right: 200px;">
                         <tr>
                             <th>دستمزد ساعتی با آکورد 100 %</th>
                             <td class="number_format">{{ contract.hourly_wage | multiply:contract.hourly_wage_with_accord }}</td>
@@ -338,13 +343,13 @@
                     <p>الف: اضافه کاری و سایر پرداختی ها ( تعطیل کاری و... ) مربوط به افراد قرارداد معین مطابق  قانون وزارت کار و امور اجتماعی و کسورات مربوط به سهم کارمند اعم از حق بیمه و مالیات متعلقه از حقوق و مزایای فوق کسر و به مراجع زیربط پرداخت می گردد.</p>
                     <p>توجه: طبق پیگیری های در حال انجام مبتنی بر معافیت مالیات بر حقوق کارمندان، مبلغ مالیات از حقوق کارمندان کسر نخواهد شد، مگر اینکه با این معافیت مالیاتی از سوی اداره امور مالیات و دارایی موافقت نگردد.</p>
                     <p>ب. شیوه محاسبه کارانه به صورت ماهیانه توسط کارفرما اعلام خواهد شد و پس از اعلام از ماه بعد قابل اجراست.</p>
-
+    
                     <div class="signature" style="display: flex; justify-content: space-between; margin-bottom: 80px;margin-top: 20px;">
-                        <div style="text-align: center;">
+                        <div style="text-align: center; margin-right: 100px;">
                             <p>امضای کارفرما</p>
                             <p>.........................</p>
                         </div>
-                        <div style="text-align: center;">
+                        <div style="text-align: center; margin-left: 100px;">
                             <p>امضای کارمند</p>
                             <p>.........................</p>
                         </div>
@@ -363,7 +368,7 @@
                     
                 </div>       
             </div>
-    
+            <!-- page 3 -->
             <div class="page">
     
                 <div class="header">
@@ -396,16 +401,16 @@
                     <p>1-7. کلیه اطلاعات و مدارک که به مناسبت انجام کار در اختیار و مورد استفاده کارمند قرار می گیرد محرمانه تلقی می گردد، افشاء و تسلیم آنها به اشخاص ثالث و یا استفاده شخصی غیر مجاز توسط کارمند بر خلاف مقررات حاکم بر اوامر کار می باشد و تخلف از این امر موجب مسئولیت های قانونی خواهد بود. متن کامل آن تحت عنوان قرارداد NDA در اختیار کارمند قرار گرفته و به صورت مجزا توسط طرفین امضا گردیده است.</p>
         
                     <div class="signature" style="display: flex; justify-content: space-between; margin-bottom: 100px;margin-top: 20px;">
-                        <div style="text-align: center;">
+                        <div style="text-align: center; margin-right: 100px;">
                             <p>امضای کارفرما</p>
                             <p>.........................</p>
                         </div>
-                        <div style="text-align: center;">
+                        <div style="text-align: center; margin-left: 100px;">
                             <p>امضای کارمند</p>
                             <p>.........................</p>
                         </div>
                     </div>
-                    <div style="display: flex; margin-bottom: 40px;">
+                    <div style="display: flex;">
                         <div style="margin-left: 250px;margin-right: 35px;">
                             <p>شیراز، بلوار دکتر حسابی، میدان صنایع، جنب صنایع الکترونیک</p>
                             <p>پارک علم و فناوری صدرا، طبقه 4، واحد 45 تا 48</p>
@@ -419,7 +424,7 @@
     
                 </div>
             </div>
-
+            <!-- page 4 -->
             <div class="page">
     
                 <div class="header">
@@ -444,17 +449,17 @@
         
                     <h3>ماده 11) امضای قرارداد:</h3>
                     <p>1-11. این قرارداد در 11 ماده، 7 تبصره و در ۲ نسخه  4 صفحه ای که هریک حکم واحد را دارد منعقد می گردد و امضاء آن به منزله قبول بدون قید و شرط کلیه شرایط و مسئولیت های مندرج در آن از سوی کارمند و کارفرما است.</p>       
-                    <div class="signature" style="display: flex; justify-content: space-between; margin-bottom: 80px;margin-top: 270px;">
-                        <div style="text-align: center;">
+                    <div class="signature" style="display: flex; justify-content: space-between; margin-bottom: 80px;margin-top: 280px;">
+                        <div style="text-align: center; margin-right: 100px;">
                             <p>امضای کارفرما</p>
                             <p>.........................</p>
                         </div>
-                        <div style="text-align: center;">
+                        <div style="text-align: center; margin-left: 100px;">
                             <p>امضای کارمند</p>
                             <p>.........................</p>
                         </div>
                     </div>
-                    <div style="display: flex; margin-bottom: 40px;">
+                    <div style="display: flex;">
                         <div style="margin-left: 250px;margin-right: 35px;">
                             <p>شیراز، بلوار دکتر حسابی، میدان صنایع، جنب صنایع الکترونیک</p>
                             <p>پارک علم و فناوری صدرا، طبقه 4، واحد 45 تا 48</p>
@@ -469,15 +474,12 @@
                 </div>
             </div>
         </div>
-
-    </div>
-    
-    <div class="non_printable">
-        <div class="button">
-            <button onclick="printpage()">چاپ</button>
+        <div class="non_printable">
+            <div class="button">
+                <button onclick="printpage()">چاپ</button>
+            </div>
         </div>
     </div>
-    
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', function(){

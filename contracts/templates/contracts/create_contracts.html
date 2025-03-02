@@ -240,6 +240,7 @@
             border: 1px solid #ccc;
             /* padding: 10px; */
             /* color:#006d5b; */
+            text-align: center;
         }
         ul {
             color: red;
@@ -270,6 +271,20 @@
             border-radius: 10px;
             background-color: #f1eded;
             border: 1px solid #ccc;
+        }
+        #popup {  
+            display: none;   
+            position: fixed;   
+            top: 50%;   
+            left: 50%;   
+            transform: translate(-50%, -50%);   
+            background-color: #8eb10e;   
+            color: rgb(255, 252, 252);   
+            padding: 20px;   
+            border-radius: 5px;   
+            z-index: 1000;   
+            font-family: 'B Titr', sans-serif;   
+            font-size: medium;  
         }
 
 
@@ -343,11 +358,12 @@
                 {% csrf_token %}
 
                 {% if messages %}
-                {% for message in messages %}
-                <div>
-                    <p style="color: rgb(5, 126, 27); font-family: B Titr; font-size:medium;">{{ message }}</p>
-                </div>
-                {% endfor %}
+                    {% for message in messages %}
+                    <div id="popup">
+                        <!-- style="color: rgb(5, 126, 27); font-family: B Titr; font-size:medium;" -->
+                        <p>{{ message }}</p>
+                    </div>
+                    {% endfor %}
                 {% endif %}
                 
                 <!-- اطلاعات هویتی -->
@@ -771,6 +787,19 @@
         // اجرای تابع هنگام تغییر مقدار دستمزد ساعتی
         document.getElementById('hourly_wage').addEventListener('input', calculateExtraBonus);
         document.getElementById('management_allowance').addEventListener('input', calculateExtraBonus);
+    </script>
+    <!-- پیام موفقیت ثبت قرارداد -->
+    <script> 
+        function showPopup() {  
+            var popup = document.getElementById("popup");  
+            popup.style.display = "block"; // نمایش پاپ آپ  
+            setTimeout(function() {  
+                popup.style.display = "none"; // پنهان کردن پاپ آپ بعد از 2 ثانیه 
+                window.location.href = "{% url 'contracts:contractlist' %}"; // تغییر به آدرس صفحه لیست قراردادها  
+            }, 3000); // زمان انتظار به میلی ثانیه  
+        }  
+        // این تابع را پس از ثبت موفق قرارداد صدا بزنید  
+        showPopup();  
     </script>
     
 </body>
